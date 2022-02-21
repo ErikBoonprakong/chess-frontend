@@ -28,6 +28,7 @@ class LogIn extends React.Component {
       this.state.username,
       this.state.password
     );
+    console.log(response);
     this.setState({ cookies: getCookieObj() });
     this.props.getNew(this.state.cookies);
     if (this.state.cookies.user) {
