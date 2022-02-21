@@ -18,6 +18,20 @@ class Networking {
     let json = await response.json();
     return { json, status: response.status };
   }
+
+  async postLogin(username, password) {
+    let response = await fetch(`${API_URL}/login`, {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    });
+    let json = await response.json();
+    return json;
+  }
 }
 
 export default Networking;
