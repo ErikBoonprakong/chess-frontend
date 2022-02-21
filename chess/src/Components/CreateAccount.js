@@ -1,5 +1,5 @@
 import React from "react";
-// import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Networking from "./Networking";
 
 class CreateAccount extends React.Component {
@@ -98,11 +98,10 @@ class CreateAccount extends React.Component {
               </div>
             </form>
 
-            {/* <Link to="/login">
+            <Link to="/login">
               <button className="register-btn">Back to Login!</button>
-            </Link> */}
+            </Link>
           </div>
-          {/* )} */}
         </div>
       </div>
     );
