@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8080";
+const API_URL = "https://chessyem.herokuapp.com";
 
 class Networking {
   async postUser(username, password, confirmation) {
