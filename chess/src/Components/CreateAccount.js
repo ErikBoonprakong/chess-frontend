@@ -1,6 +1,6 @@
 import React from "react";
 // import { Link, Redirect } from "react-router-dom";
-// import Networking from "./Networking";
+import Networking from "./Networking";
 
 class CreateAccount extends React.Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class CreateAccount extends React.Component {
       valid: true,
       redirect: false,
     };
-    // this.Networking = new Networking();
+    this.Networking = new Networking();
   }
 
   handleChange(e) {
@@ -24,19 +24,19 @@ class CreateAccount extends React.Component {
   async handleSubmit(e) {
     e.preventDefault();
 
-    // const { json, status } = await this.Networking.postUser(
-    //   this.state.username,
-    //   this.state.password,
-    //   this.state.confirm
-    // );
-    // if (status === 200) {
-    //   this.setState({ valid: true, redirect: true });
-    // } else if (status === 400) {
-    //   this.setState({
-    //     valid: false,
-    //     error: json.message,
-    //   });
-    // }
+    const { json, status } = await this.Networking.postUser(
+      this.state.username,
+      this.state.password,
+      this.state.confirm
+    );
+    if (status === 200) {
+      this.setState({ valid: true, redirect: true });
+    } else if (status === 400) {
+      this.setState({
+        valid: false,
+        error: json.message,
+      });
+    }
   }
 
   showPassword(e) {
