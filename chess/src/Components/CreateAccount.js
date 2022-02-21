@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import Networking from "./Networking";
+import Alert from "react-bootstrap/Alert";
 
 class CreateAccount extends React.Component {
   constructor(props) {
@@ -43,6 +44,10 @@ class CreateAccount extends React.Component {
     this.setState({ showPassword: !this.state.showPassword });
   }
 
+  getWarning(input) {
+    return <Alert variant="danger">{this.state.error}</Alert>;
+  }
+
   render() {
     return (
       <div className="body-div">
@@ -50,57 +55,58 @@ class CreateAccount extends React.Component {
           <button className="register-btn">Back to Login!</button>
         </Link>
         <div className="create-account">
-          {/* {this.state.redirect ? (
-            <Redirect to="/search" />
-          ) : ( */}
-          <div className="login-form">
-            <h2>Create Account!</h2>
-            <form
-              className="createAccountForm"
-              onSubmit={(e) => this.handleSubmit(e)}
-            >
-              <div id="inputWithIcon">
+          {this.state.redirect ? (
+            <Redirect to="/home" />
+          ) : (
+            <div className="login-form">
+              <h2>Create Account!</h2>
+              <form
+                className="createAccountForm"
+                onSubmit={(e) => this.handleSubmit(e)}
+              >
+                <div id="inputWithIcon">
+                  <input
+                    type="text"
+                    placeholder="Username"
+                    className="user"
+                    id="username"
+                    onChange={(e) => this.handleChange(e)}
+                  />
+                </div>
+                <div id="inputWithIcon">
+                  <input
+                    placeholder="Password"
+                    type={this.state.showPassword ? "text" : "password"}
+                    className="user"
+                    id="password"
+                    onChange={(e) => this.handleChange(e)}
+                  />
+                </div>
+                <div id="inputWithIcon">
+                  <input
+                    type={this.state.showPassword ? "text" : "password"}
+                    placeholder="Confirm"
+                    className="user"
+                    id="confirm"
+                    onChange={(e) => this.handleChange(e)}
+                  />
+                </div>
+                <br />
+                <label className="password-label">Show Password </label>
                 <input
-                  type="text"
-                  placeholder="Username"
-                  className="user"
-                  id="username"
-                  onChange={(e) => this.handleChange(e)}
-                />
-              </div>
-              <div id="inputWithIcon">
-                <input
-                  placeholder="Password"
-                  type={this.state.showPassword ? "text" : "password"}
-                  className="user"
-                  id="password"
-                  onChange={(e) => this.handleChange(e)}
-                />
-              </div>
-              <div id="inputWithIcon">
-                <input
-                  type={this.state.showPassword ? "text" : "password"}
-                  placeholder="Confirm"
-                  className="user"
-                  id="confirm"
-                  onChange={(e) => this.handleChange(e)}
-                />
-              </div>
-              <br />
-              <label className="password-label">Show Password </label>
-              <input
-                className="check"
-                type="checkbox"
-                onChange={this.showPassword.bind(this)}
-              ></input>
-              <br />
-              <br />
-              <div className="buttons">
-                <input type="submit" className="login-btn" id="submit" />
-                {!this.state.valid && this.getWarning()}
-              </div>
-            </form>
-          </div>
+                  className="check"
+                  type="checkbox"
+                  onChange={this.showPassword.bind(this)}
+                ></input>
+                <br />
+                <br />
+                <div className="buttons">
+                  <input type="submit" className="login-btn" id="submit" />
+                  {!this.state.valid && this.getWarning()}
+                </div>
+              </form>
+            </div>
+          )}
         </div>
       </div>
     );
