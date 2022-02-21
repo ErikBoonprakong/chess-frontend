@@ -46,6 +46,9 @@ class CreateAccount extends React.Component {
   render() {
     return (
       <div className="body-div">
+        <Link to="/login">
+          <button className="register-btn">Back to Login!</button>
+        </Link>
         <div className="create-account">
           {/* {this.state.redirect ? (
             <Redirect to="/search" />
@@ -97,10 +100,6 @@ class CreateAccount extends React.Component {
                 {!this.state.valid && this.getWarning()}
               </div>
             </form>
-
-            <Link to="/login">
-              <button className="register-btn">Back to Login!</button>
-            </Link>
           </div>
         </div>
       </div>

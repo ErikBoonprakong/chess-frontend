@@ -15,7 +15,7 @@ function App() {
           <Redirect to="/login" />
         </Route>
         <Route path="/login">
-          <LogIn getNew={this.getCookie.bind(this)} />
+          <LogIn />
         </Route>
         <Route path="/register">
           <CreateAccount />
