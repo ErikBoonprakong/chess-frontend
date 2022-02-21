@@ -13,13 +13,13 @@ class HomePage extends React.Component {
       <div className="bodyWrapperHome">
         <div className="buttonWrapper">
           <Link to="/playai">
-            <button>Play AI</button>
+            <button className="playButton">Play AI</button>
           </Link>
           <Link to="/playonline">
-            <button>Play Online</button>
+            <button className="playButton">Play Online</button>
           </Link>
           <Link to="/leaderboards">
-            <button>Leaderboards</button>
+            <button className="playButton">Leaderboards</button>
           </Link>
         </div>
       </div>

@@ -7,16 +7,12 @@ import HomePage from "./Components/HomePage";
 import PlayAI from "./Components/PlayAI";
 import PlayOnline from "./Components/PlayOnline";
 import Leaderboards from "./Components/PlayOnline copy";
+import Header from "./Components/Header";
 
 function App() {
   return (
     <div className="App">
-      <Link to="/register">
-        <button>Create Account</button>
-      </Link>
-      <Link to="/home">
-        <button>Test home page</button>
-      </Link>
+      <Header />
       <Switch>
         <Route exact path="/">
           <Redirect to="/login" />
