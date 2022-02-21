@@ -2,8 +2,12 @@
   display: flex;
   flex-direction: column;
   width: 20vw;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2%;
 }
 
-button {
+.playButton {
   width: 20vw;
+  margin-top: 5%;
 }
