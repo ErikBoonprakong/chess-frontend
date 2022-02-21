@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import Networking from "./Networking";
+import Alert from "react-bootstrap/Alert";
 
 class CreateAccount extends React.Component {
   constructor(props) {
@@ -41,6 +42,10 @@ class CreateAccount extends React.Component {
 
   showPassword(e) {
     this.setState({ showPassword: !this.state.showPassword });
+  }
+
+  getWarning(input) {
+    return <Alert variant="danger">{this.state.error}</Alert>;
   }
 
   render() {
