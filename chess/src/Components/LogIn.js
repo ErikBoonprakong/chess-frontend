@@ -1,7 +1,7 @@
 import React from "react";
 import Networking from "./Networking.js";
 import { Link, Redirect } from "react-router-dom";
-// import getCookieObj from "./GetCookies";
+import cookieObj from "./GetCookies";
 import Alert from "react-bootstrap/Alert";
 
 class LogIn extends React.Component {
@@ -13,7 +13,8 @@ class LogIn extends React.Component {
       error: "",
       redirect: false,
       valid: true,
-      // cookies: getCookieObj(),
+      cookies: cookieObj(),
+
     };
     this.Networking = new Networking();
   }
@@ -28,8 +29,9 @@ class LogIn extends React.Component {
       this.state.username,
       this.state.password
     );
-    // console.log(response);
-    // this.setState({ cookies: getCookieObj() });
+
+    this.setState({ cookies: cookieObj() });
+
     this.props.getNew(this.state.cookies);
     if (this.state.cookies.user) {
       this.setState({ redirect: true, valid: true });
