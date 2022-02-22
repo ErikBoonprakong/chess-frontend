@@ -10,17 +10,11 @@ class Header extends React.Component {
     this.state = { user: this.props.userData.user };
   }
 
-  logOut() {
-    console.log("Logging out...");
-  }
-
   render() {
     return (
       <div className="header">
         <div className="logo">
           <h4>CHESS YEM LOGO</h4>
-          {console.log(this.props.userData)}
-          <span>Signed in as: {this.props.userData.user}</span>
         </div>
         <Link to="/home">
           {" "}

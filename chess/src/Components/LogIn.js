@@ -30,7 +30,7 @@ class LogIn extends React.Component {
     );
 
     this.setState({ cookies: cookieObj() });
-
+    console.log(this.state);
     this.props.newCookie(this.state.cookies);
     if (this.state.cookies.user) {
       this.setState({ redirect: true, valid: true });
