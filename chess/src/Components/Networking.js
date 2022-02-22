@@ -34,7 +34,13 @@ class Networking {
   }
 
   async logOut() {
-    let response = await fetch(`${API_URL}/`);
+    let response = await fetch(`${API_URL}/sessions`, {
+      method: "DELETE",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+    });
+    let json = await response.json();
+    return json;
   }
 }
 
