@@ -1,5 +1,6 @@
 // const API_URL = process.env.REACT_APP_API_URL;
 const API_URL = "https://chessyem.herokuapp.com";
+// const API_URL = "http://localhost:8080";
 
 class Networking {
   async postUser(username, password, confirmation) {
