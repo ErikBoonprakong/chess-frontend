@@ -8,6 +8,7 @@ class Networking {
       credentials: true,
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Credentials": true,
       },
       body: JSON.stringify({
         username: username,
@@ -24,7 +25,10 @@ class Networking {
     let response = await fetch(`${API_URL}/sessions`, {
       method: "POST",
       credentials: true,
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "tent-Type": "application/json",
+        "Access-Control-Allow-Credentials": true,
+      },
       body: JSON.stringify({
         username: username,
         password: password,
@@ -38,7 +42,10 @@ class Networking {
     let response = await fetch(`${API_URL}/sessions`, {
       method: "DELETE",
       credentials: true,
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Credentials": true,
+      },
     });
     let json = await response.json();
     return json;
