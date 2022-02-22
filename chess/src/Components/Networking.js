@@ -1,6 +1,6 @@
-// const API_URL = process.env.REACT_APP_API_URL;
 const API_URL = "https://chessyem.herokuapp.com";
 // const API_URL = "http://localhost:8080";
+// const API_URL = process.env.REACT_APP_API_URL;
 
 class Networking {
   async postUser(username, password, confirmation) {
@@ -9,6 +9,7 @@ class Networking {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Credentials": true,
       },
       body: JSON.stringify({
         username: username,
@@ -25,7 +26,10 @@ class Networking {
     let response = await fetch(`${API_URL}/sessions`, {
       method: "POST",
       credentials: "include",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "tent-Type": "application/json",
+        "Access-Control-Allow-Credentials": true,
+      },
       body: JSON.stringify({
         username: username,
         password: password,
@@ -39,7 +43,10 @@ class Networking {
     let response = await fetch(`${API_URL}/sessions`, {
       method: "DELETE",
       credentials: "include",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Credentials": true,
+      },
     });
     let json = await response.json();
     return json;
