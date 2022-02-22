@@ -1,4 +1,5 @@
 const API_URL = "https://chessyem.herokuapp.com";
+// const API_URL = "http://localhost:8080";
 // const API_URL = process.env.REACT_APP_API_URL;
 
 class Networking {
@@ -8,8 +9,6 @@ class Networking {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": true,
-        "Access-Control-Allow-Credentials": true,
       },
       body: JSON.stringify({
         username: username,
@@ -27,9 +26,8 @@ class Networking {
       method: "POST",
       credentials: "include",
       headers: {
-        "tent-Type": "application/json",
-        "Access-Control-Allow-Origin": true,
-        "Access-Control-Allow-Credentials": true,
+        "Content-Type": "application/json",
+
       },
       body: JSON.stringify({
         username: username,
@@ -46,8 +44,7 @@ class Networking {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": true,
-        "Access-Control-Allow-Credentials": true,
+
       },
     });
     let json = await response.json();

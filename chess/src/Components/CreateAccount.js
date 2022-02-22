@@ -59,7 +59,7 @@ class CreateAccount extends React.Component {
         </Link>
         <div className="create-account">
           {this.state.redirect ? (
-            <Redirect to="/home" />
+            <Redirect to="/login" />
           ) : (
             <div className="login-form">
               <h2>Create Account!</h2>
