@@ -2,6 +2,7 @@ import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import Networking from "./Networking";
 import Alert from "react-bootstrap/Alert";
+import cookieObj from "./GetCookies";
 
 class CreateAccount extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class CreateAccount extends React.Component {
       error: "",
       valid: true,
       redirect: false,
+      cookies: cookieObj(),
     };
     this.Networking = new Networking();
   }
@@ -32,6 +34,7 @@ class CreateAccount extends React.Component {
     );
     if (status === 200) {
       this.setState({ valid: true, redirect: true });
+      this.props.newCookie(this.state.cookies);
     } else if (status === 400) {
       this.setState({
         valid: false,
