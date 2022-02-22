@@ -1,6 +1,6 @@
 import React from "react";
-import Networking from "./Networking.js";
-import { Link, Redirect } from "react-router-dom";
+// import Networking from "./Networking.js";
+// import { Link, Redirect } from "react-router-dom";
 import "./home.css";
 
 class Leaderboards extends React.Component {

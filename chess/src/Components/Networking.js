@@ -32,6 +32,10 @@ class Networking {
     let json = await response.json();
     return json;
   }
+
+  async logOut() {
+    let response = await fetch(`${API_URL}/`);
+  }
 }
 
 export default Networking;
