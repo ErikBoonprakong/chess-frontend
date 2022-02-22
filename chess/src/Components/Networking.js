@@ -5,7 +5,7 @@ class Networking {
   async postUser(username, password, confirmation) {
     let response = await fetch(`${API_URL}/users`, {
       method: "POST",
-      credentials: true,
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Credentials": true,
@@ -24,7 +24,7 @@ class Networking {
   async postLogin(username, password) {
     let response = await fetch(`${API_URL}/sessions`, {
       method: "POST",
-      credentials: true,
+      credentials: "include",
       headers: {
         "tent-Type": "application/json",
         "Access-Control-Allow-Credentials": true,
@@ -41,7 +41,7 @@ class Networking {
   async logOut() {
     let response = await fetch(`${API_URL}/sessions`, {
       method: "DELETE",
-      credentials: true,
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Credentials": true,
