@@ -1,11 +1,10 @@
-// const API_URL = process.env.REACT_APP_API_URL;
 const API_URL = "https://chessyem.herokuapp.com";
 
 class Networking {
   async postUser(username, password, confirmation) {
     let response = await fetch(`${API_URL}/users`, {
       method: "POST",
-      credentials: "include",
+      credentials: true,
       headers: {
         "Content-Type": "application/json",
       },
@@ -23,7 +22,7 @@ class Networking {
   async postLogin(username, password) {
     let response = await fetch(`${API_URL}/sessions`, {
       method: "POST",
-      credentials: "include",
+      credentials: true,
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         username: username,
@@ -37,7 +36,7 @@ class Networking {
   async logOut() {
     let response = await fetch(`${API_URL}/sessions`, {
       method: "DELETE",
-      credentials: "include",
+      credentials: true,
       headers: { "Content-Type": "application/json" },
     });
     let json = await response.json();

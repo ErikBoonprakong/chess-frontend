@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Networking from "./Networking";
 import cookieObj from "./GetCookies";
 
@@ -11,8 +11,11 @@ class Header extends React.Component {
   }
 
   render() {
+    if (!this.props.userData.user) return <h2>Logo</h2>;
     return (
       <div className="header">
+        {console.log(this.props.userData)}
+
         <div className="logo">
           <h4>CHESS YEM LOGO</h4>
         </div>
@@ -20,6 +23,9 @@ class Header extends React.Component {
           {" "}
           <button>Home</button>
         </Link>
+        <span>
+          Signed in as: <p>{this.props.userData.user}</p>
+        </span>
         <Link to="/login">
           <button
             onClick={async () => {
@@ -27,7 +33,7 @@ class Header extends React.Component {
               this.props.newCookie(cookieObj());
             }}
           >
-            Log Out
+            Logout
           </button>
         </Link>
         <hr />
