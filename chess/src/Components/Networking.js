@@ -8,6 +8,7 @@ class Networking {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": true,
         "Access-Control-Allow-Credentials": true,
       },
       body: JSON.stringify({
@@ -27,6 +28,7 @@ class Networking {
       credentials: "include",
       headers: {
         "tent-Type": "application/json",
+        "Access-Control-Allow-Origin": true,
         "Access-Control-Allow-Credentials": true,
       },
       body: JSON.stringify({
@@ -44,6 +46,7 @@ class Networking {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": true,
         "Access-Control-Allow-Credentials": true,
       },
     });
