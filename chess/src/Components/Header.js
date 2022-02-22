@@ -11,18 +11,15 @@ class Header extends React.Component {
   }
 
   render() {
-    if (!this.props.userData.user) return <h2>Logo</h2>;
+    // if (!this.props.userData.user) return <h2>Logo</h2>;
     return (
       <div className="header">
         {console.log(this.props.userData)}
 
         <div className="logo">
-          <h4>CHESS YEM LOGO</h4>
+          <img src="chessLogo.png"></img>
         </div>
-        <Link to="/home">
-          {" "}
-          <button>Home</button>
-        </Link>
+
         <span>
           Signed in as: <p>{this.props.userData.user}</p>
         </span>
@@ -35,6 +32,10 @@ class Header extends React.Component {
           >
             Logout
           </button>
+        </Link>
+        <Link to="/home">
+          {" "}
+          <button>Home</button>
         </Link>
         <hr />
       </div>

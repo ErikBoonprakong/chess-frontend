@@ -9,7 +9,7 @@ class Networking {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Credentials": true,
+        // "Access-Control-Allow-Credentials": true,
       },
       body: JSON.stringify({
         username: username,
@@ -27,8 +27,8 @@ class Networking {
       method: "POST",
       credentials: "include",
       headers: {
-        "tent-Type": "application/json",
-        "Access-Control-Allow-Credentials": true,
+        "Content-Type": "application/json",
+        // "Access-Control-Allow-Credentials": true,
       },
       body: JSON.stringify({
         username: username,
@@ -45,7 +45,7 @@ class Networking {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Credentials": true,
+        // "Access-Control-Allow-Credentials": true,
       },
     });
     let json = await response.json();
