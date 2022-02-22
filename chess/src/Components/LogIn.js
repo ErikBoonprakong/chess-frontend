@@ -14,7 +14,6 @@ class LogIn extends React.Component {
       redirect: false,
       valid: true,
       cookies: cookieObj(),
-
     };
     this.Networking = new Networking();
   }
@@ -33,7 +32,7 @@ class LogIn extends React.Component {
     this.setState({ cookies: cookieObj() });
 
     this.props.getNew(this.state.cookies);
-    if (this.state.cookies.user) {
+    if (this.state.cookies) {
       this.setState({ redirect: true, valid: true });
     } else {
       this.setState({ valid: false, error: response.msg });

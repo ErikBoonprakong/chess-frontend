@@ -6,6 +6,7 @@ function cookieObj() {
     const [name, value] = cookie.split("=");
     cookiesObj[name] = value;
   });
+  console.log(cookiesObj);
   return cookiesObj;
 }
 
