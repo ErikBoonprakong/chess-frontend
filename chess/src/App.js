@@ -41,9 +41,7 @@ class App extends React.Component {
           <Route path="/home">
             <HomePage />
           </Route>
-          {/* <Route path="/playai">
-            <PlayAI />
-          </Route> */}
+
           <Route path="/options">
             <ChooseDifficulty />
           </Route>

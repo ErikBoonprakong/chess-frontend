@@ -9,7 +9,7 @@ import { Chessboard } from "react-chessboard";
 
 export default function PlayVsPlay(savedFen) {
   const chessboardRef = useRef();
-  // const gameInit = savedFen ? new Chess(savedFen) : new Chess();
+
   const [game, setGame] = useState(new Chess());
   const boardWidth = 400;
 

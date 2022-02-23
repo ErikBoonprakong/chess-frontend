@@ -67,7 +67,7 @@ export default function PlayVsRandom(props) {
     if (move === null) return false;
 
     // store timeout so it can be cleared on undo/reset so computer doesn't execute move
-    // const newTimeout = setTimeout(makeRandomMove, 200);
+
     const newTimeout = setTimeout(makeMove, 200);
     setCurrentTimeout(newTimeout);
     return true;
@@ -88,7 +88,6 @@ export default function PlayVsRandom(props) {
 
   return (
     <div className="play">
-      {/* {gameInCheck()} */}
       <Chessboard
         id="PlayVsRandom"
         animationDuration={200}
