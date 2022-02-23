@@ -141,7 +141,11 @@ export default function PlayVsRandom(props) {
         >
           undo
         </button>
-        <button className="rc-button" onClick={getOptimalMoves}>
+        <button
+          className="rc-button"
+          disabled={!options.optimalMove}
+          onClick={getOptimalMoves}
+        >
           Get Hints
         </button>
         <div>

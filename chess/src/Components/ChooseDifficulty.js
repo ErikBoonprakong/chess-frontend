@@ -74,7 +74,7 @@ class ChooseDifficulty extends React.Component {
                   id="optimalMove"
                   name="optimalMove"
                 ></input>
-                <label htmlFor="optimalMove"> Show me optimal moves.</label>
+                <label htmlFor="optimalMove"> Show me hints.</label>
               </div>
               <button
                 id="submit"
