@@ -21,7 +21,7 @@ export default function PlayVsRandom(props) {
   const [turn, addToTurn] = useState(0);
 
   const options = props.location.state.state;
-
+  console.log(options.difficulty);
   function safeGameMutate(modify) {
     setGame((g) => {
       const update = { ...g };
@@ -43,7 +43,7 @@ export default function PlayVsRandom(props) {
   //   });
   // }
 
-  function makeGoodMoves() {
+  function makeMove() {
     const possibleMoves = game.moves();
 
     // exit if the game is over
@@ -51,25 +51,20 @@ export default function PlayVsRandom(props) {
       return;
     }
 
-    const bestMove = minimax(game, 2, true, 0, "b")[0];
+    const nextMove = moveToPlay(possibleMoves);
     safeGameMutate((game) => {
-      game.move(bestMove);
+      game.move(nextMove);
     });
   }
-  // function makeRandomMove() {
-  //   const possibleMoves = game.moves();
+  function moveToPlay(possibleMoves) {
+    if (options.difficulty === "easy") {
+      const randomIndex = Math.floor(Math.random() * possibleMoves.length);
+      return possibleMoves[randomIndex];
+    } else if (options.difficulty === "hard") {
+      return minimax(game, 2, true, 0, "b")[0];
+    }
+  }
 
-  //   // exit if the game is over
-  //   if (game.game_over() || game.in_draw() || possibleMoves.length === 0) {
-  //     return;
-  //   }
-
-  //   const randomIndex = Math.floor(Math.random() * possibleMoves.length);
-  //   safeGameMutate((game) => {
-  //     game.move(possibleMoves[randomIndex]);
-  //   });
-  // }
-  // console.log(game.moves({ verbose: true }));
   function onDrop(sourceSquare, targetSquare) {
     addToTurn(turn + 1);
     const gameCopy = { ...game };
@@ -86,7 +81,7 @@ export default function PlayVsRandom(props) {
 
     // store timeout so it can be cleared on undo/reset so computer doesn't execute move
     // const newTimeout = setTimeout(makeRandomMove, 200);
-    const newTimeout = setTimeout(makeGoodMoves, 200);
+    const newTimeout = setTimeout(makeMove, 200);
     setCurrentTimeout(newTimeout);
     return true;
   }

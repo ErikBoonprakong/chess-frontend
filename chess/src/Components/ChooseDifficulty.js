@@ -10,6 +10,7 @@ class ChooseDifficulty extends React.Component {
       reset: false,
       undo: false,
       inCheck: false,
+      difficulty: "",
       submit: false,
     };
     this.Networking = new Networking();
@@ -19,7 +20,9 @@ class ChooseDifficulty extends React.Component {
     const newState = this.state[e.target.id] ? false : true;
     await this.setState({ [e.target.id]: newState });
   }
-
+  handleSubmit(e) {
+    this.setState({ difficulty: e.target.name, submit: true });
+  }
   render() {
     return (
       <div>
@@ -63,8 +66,19 @@ class ChooseDifficulty extends React.Component {
                 ></input>
                 <label htmlFor="vehicle3"> Let me reset the board.</label>
               </div>
-              <button id="submit" onClick={(e) => this.handleOptions(e)}>
-                Play!
+              <button
+                id="submit"
+                name="easy"
+                onClick={(e) => this.handleSubmit(e)}
+              >
+                Easy!
+              </button>
+              <button
+                id="submit"
+                name="hard"
+                onClick={(e) => this.handleSubmit(e)}
+              >
+                Hard!
               </button>
             </div>
           </div>
