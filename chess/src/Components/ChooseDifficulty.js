@@ -10,6 +10,8 @@ class ChooseDifficulty extends React.Component {
       reset: false,
       undo: false,
       inCheck: false,
+      hints: false,
+      optimalMove: false,
       difficulty: "",
       submit: false,
     };
@@ -50,21 +52,35 @@ class ChooseDifficulty extends React.Component {
                   id="inCheck"
                   name="check_hint"
                 ></input>
-                <label htmlFor="vehicle1"> Let me know when im in check.</label>
+                <label htmlFor="undo"> Let me know when im in check.</label>
                 <input
                   onClick={(e) => this.handleOptions(e)}
                   type="checkbox"
                   id="undo"
                   name="undo"
                 ></input>
-                <label htmlFor="vehicle2"> Let me undo my last move.</label>
+                <label htmlFor="undo"> Let me undo my last move.</label>
                 <input
                   onClick={(e) => this.handleOptions(e)}
                   type="checkbox"
                   id="reset"
                   name="reset"
                 ></input>
-                <label htmlFor="vehicle3"> Let me reset the board.</label>
+                <label htmlFor="reset"> Let me reset the board.</label>
+                <input
+                  onClick={(e) => this.handleOptions(e)}
+                  type="checkbox"
+                  id="hints"
+                  name="hints"
+                ></input>
+                <label htmlFor="hints"> Show me hints.</label>
+                <input
+                  onClick={(e) => this.handleOptions(e)}
+                  type="checkbox"
+                  id="optimalMove"
+                  name="optimalMove"
+                ></input>
+                <label htmlFor="optimalMove"> Show me optimal moves.</label>
               </div>
               <button
                 id="submit"

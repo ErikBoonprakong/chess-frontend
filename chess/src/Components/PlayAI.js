@@ -21,7 +21,7 @@ export default function PlayVsRandom(props) {
   const [turn, addToTurn] = useState(0);
 
   const options = props.location.state.state;
-  console.log(options.difficulty);
+  console.log(options);
   function safeGameMutate(modify) {
     setGame((g) => {
       const update = { ...g };
@@ -29,19 +29,6 @@ export default function PlayVsRandom(props) {
       return update;
     });
   }
-  // function makeSLightlyLessRandomMove() {
-  //   const possibleMoves = game.moves();
-  //   console.log("less random");
-  //   // exit if the game is over
-  //   if (game.game_over() || game.in_draw() || possibleMoves.length === 0) {
-  //     return;
-  //   }
-
-  //   const move = getOptimalMoves();
-  //   safeGameMutate((game) => {
-  //     game.move(move);
-  //   });
-  // }
 
   function makeMove() {
     const possibleMoves = game.moves();
@@ -90,60 +77,6 @@ export default function PlayVsRandom(props) {
     e.target.value === "plus"
       ? setBoardWidth(boardWidth + 100)
       : setBoardWidth(boardWidth - 100);
-  }
-  //// good moves are in random order. order them in importance
-  // 'n' - a non-capture
-  // 'b' - a pawn push of two squares
-  // 'e' - an en passant capture
-  // 'c' - a standard capture
-  // 'p' - a promotion
-  // 'k' - kingside castling
-  // 'q' - queenside castling
-  function getOptimalMoves() {
-    //moves shows all possible moves a white piece can take
-    const currentGame = game.moves({ verbose: true });
-
-    const orderedMoves = sort(currentGame);
-
-    const topMoves = assessPotentialOpponentMoves(orderedMoves);
-    setArrows([
-      [topMoves[0].from, topMoves[0].to],
-      [topMoves[1].from, topMoves[1].to],
-    ]);
-  }
-
-  function assessPotentialOpponentMoves(movesArray) {
-    const movesWithoutCapture = [];
-
-    movesArray.forEach((move) => {
-      game.move(move);
-      const opponentMoveArray = game.moves({ verbose: true });
-      const doesArrayContainCapture = opponentMoveArray.some((move) => {
-        const flags = move.flags;
-        return flags !== "c";
-      });
-      if (doesArrayContainCapture) {
-        movesWithoutCapture.push(move);
-      }
-
-      game.undo();
-    });
-    return [movesWithoutCapture[0], movesWithoutCapture[1]];
-  }
-
-  function sort(currentGame) {
-    // const moves = currentGame.moves({ verbose: true });
-    const sortBy = { q: 0, p: 1, k: 2, c: 3, e: 4, b: 5, n: 6 };
-    return currentGame.sort((a, b) => {
-      var A = a.flags,
-        B = b.flags;
-      if (sortBy[A] > sortBy[B]) {
-        return 1;
-      } else {
-        return -1;
-      }
-    });
-    //need to add an additional filter that filters out the moves where you're captured after
   }
 
   return (
