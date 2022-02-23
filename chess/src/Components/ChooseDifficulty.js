@@ -10,7 +10,7 @@ class ChooseDifficulty extends React.Component {
       reset: false,
       undo: false,
       inCheck: false,
-      hints: false,
+
       optimalMove: false,
       difficulty: "",
       submit: false,
@@ -67,13 +67,7 @@ class ChooseDifficulty extends React.Component {
                   name="reset"
                 ></input>
                 <label htmlFor="reset"> Let me reset the board.</label>
-                <input
-                  onClick={(e) => this.handleOptions(e)}
-                  type="checkbox"
-                  id="hints"
-                  name="hints"
-                ></input>
-                <label htmlFor="hints"> Show me hints.</label>
+
                 <input
                   onClick={(e) => this.handleOptions(e)}
                   type="checkbox"

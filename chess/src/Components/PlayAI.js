@@ -21,7 +21,7 @@ export default function PlayVsRandom(props) {
   const [turn, addToTurn] = useState(0);
 
   const options = props.location.state.state;
-  console.log(options);
+
   function safeGameMutate(modify) {
     setGame((g) => {
       const update = { ...g };
@@ -77,6 +77,13 @@ export default function PlayVsRandom(props) {
     e.target.value === "plus"
       ? setBoardWidth(boardWidth + 100)
       : setBoardWidth(boardWidth - 100);
+  }
+
+  function getOptimalMoves() {
+    //moves shows all possible moves a white piece can take
+
+    const bestMove = minimax(game, 2, true, 0, "w")[0];
+    setArrows([[bestMove.from, bestMove.to]]);
   }
 
   return (
