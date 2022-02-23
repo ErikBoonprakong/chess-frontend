@@ -3,13 +3,17 @@ import Chess from "chess.js";
 import "./play.css";
 import { Chessboard } from "react-chessboard";
 
-export default function PlayVsRandom() {
+export default function PlayVsRandom(props) {
   const chessboardRef = useRef();
   const [game, setGame] = useState(new Chess());
   const [arrows, setArrows] = useState([]);
   const [boardOrientation, setBoardOrientation] = useState("white");
   const [currentTimeout, setCurrentTimeout] = useState(undefined);
   const [boardWidth, setBoardWidth] = useState(400);
+  const [turn, addToTurn] = useState(0);
+
+  const options = props.location.state.state;
+
   function safeGameMutate(modify) {
     setGame((g) => {
       const update = { ...g };
@@ -22,22 +26,25 @@ export default function PlayVsRandom() {
     const possibleMoves = game.moves();
 
     // exit if the game is over
-    if (game.game_over() || game.in_draw() || possibleMoves.length === 0)
+    if (game.game_over() || game.in_draw() || possibleMoves.length === 0) {
       return;
+    }
 
     const randomIndex = Math.floor(Math.random() * possibleMoves.length);
     safeGameMutate((game) => {
       game.move(possibleMoves[randomIndex]);
     });
   }
-
+  // console.log(game.moves({ verbose: true }));
   function onDrop(sourceSquare, targetSquare) {
+    addToTurn(turn + 1);
     const gameCopy = { ...game };
     const move = gameCopy.move({
       from: sourceSquare,
       to: targetSquare,
       promotion: "q", // always promote to a queen for example simplicity
     });
+
     setGame(gameCopy);
 
     // illegal move
@@ -50,15 +57,74 @@ export default function PlayVsRandom() {
   }
 
   function setBoardWidthButton(e) {
-    console.log(e.target.value);
-
     e.target.value === "plus"
       ? setBoardWidth(boardWidth + 100)
       : setBoardWidth(boardWidth - 100);
   }
+  //// good moves are in random order. order them in importance
+  // 'n' - a non-capture
+  // 'b' - a pawn push of two squares
+  // 'e' - an en passant capture
+  // 'c' - a standard capture
+  // 'p' - a promotion
+  // 'k' - kingside castling
+  // 'q' - queenside castling
+  function getOptimalMoves() {
+    //moves shows all possible moves a white piece can take
+    const currentGame = game.moves({ verbose: true });
+    const orderedMoves = sort(currentGame);
+    // const testGame = game;
+    // for (let i in orderedMoves) {
+    //   testGame.move(`'${orderedMoves[i].from}${orderedMoves[i].to}`);
+    // if (turn > 3) {
+    //   setArrows();
+    // }
+    const topMoves = assessPotentialOpponentMoves(orderedMoves);
+    return topMoves[Math.random() * 4];
+  }
+
+  function assessPotentialOpponentMoves(movesArray) {
+    const movesWithoutCapture = [];
+    console.log("break");
+    movesArray.forEach((move) => {
+      game.move(move);
+      const opponentMoveArray = game.moves({ verbose: true });
+      const doesArrayContainCapture = opponentMoveArray.some((move) => {
+        const flags = move.flags;
+        return flags !== "c";
+      });
+      if (doesArrayContainCapture) {
+        movesWithoutCapture.push(move);
+      }
+
+      game.undo();
+    });
+    return [
+      movesWithoutCapture[0],
+      movesWithoutCapture[1],
+      movesWithoutCapture[2],
+      movesWithoutCapture[3],
+    ];
+  }
+
+  function sort(currentGame) {
+    // const moves = currentGame.moves({ verbose: true });
+    const sortBy = { q: 0, p: 1, k: 2, c: 3, e: 4, b: 5, n: 6 };
+    return currentGame.sort((a, b) => {
+      var A = a.flags,
+        B = b.flags;
+      if (sortBy[A] > sortBy[B]) {
+        return 1;
+      } else {
+        return -1;
+      }
+    });
+    //need to add an additional filter that filters out the moves where you're captured after
+  }
 
   return (
     <div className="play">
+      {/* {gameInCheck()} */}
       <Chessboard
         id="PlayVsRandom"
         animationDuration={200}
@@ -75,6 +141,7 @@ export default function PlayVsRandom() {
       />
       <div className="buttons">
         <button
+          disabled={!options.reset}
           className="rc-button"
           onClick={() => {
             safeGameMutate((game) => {
@@ -97,6 +164,7 @@ export default function PlayVsRandom() {
           flip board
         </button>
         <button
+          disabled={!options.undo}
           className="rc-button"
           onClick={() => {
             safeGameMutate((game) => {
@@ -108,15 +176,7 @@ export default function PlayVsRandom() {
         >
           undo
         </button>
-        <button
-          className="rc-button"
-          onClick={() => {
-            setArrows([
-              ["a3", "a5"],
-              ["g1", "f3"],
-            ]);
-          }}
-        >
+        <button className="rc-button" onClick={getOptimalMoves()}>
           Set Custom Arrows
         </button>
         <div>
@@ -137,7 +197,7 @@ export default function PlayVsRandom() {
         </div>
         <div className="chat-wrapper">
           <ul className="events"></ul>
-          <div classNAme="chat-from-wrapper">
+          <div className="chat-from-wrapper">
             <form>
               <input className="chat" autoComplete="off" title="chat" />
               <button className="chat-button">Send</button>

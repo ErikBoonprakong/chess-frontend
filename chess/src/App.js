@@ -9,6 +9,7 @@ import Leaderboards from "./Components/Leaderboard";
 import Header from "./Components/Header";
 import React from "react";
 import cookieObj from "./Components/GetCookies";
+import ChooseDifficulty from "./Components/ChooseDifficulty";
 
 class App extends React.Component {
   constructor() {
@@ -40,9 +41,13 @@ class App extends React.Component {
           <Route path="/home">
             <HomePage />
           </Route>
-          <Route path="/playai">
+          {/* <Route path="/playai">
             <PlayAI />
+          </Route> */}
+          <Route path="/options">
+            <ChooseDifficulty />
           </Route>
+          <Route path="/playai">{(props) => <PlayAI {...props} />}</Route>
           <Route path="/playonline">
             <PlayOnline />
           </Route>

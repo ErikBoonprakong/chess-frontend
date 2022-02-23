@@ -12,7 +12,7 @@ class HomePage extends React.Component {
     return (
       <div className="bodyWrapperHome">
         <div className="buttonWrapper">
-          <Link to="/playai">
+          <Link to="/options">
             <button className="playButton">Play AI</button>
           </Link>
           <Link to="/playonline">
