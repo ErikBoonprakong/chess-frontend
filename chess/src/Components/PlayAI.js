@@ -104,9 +104,12 @@ export default function PlayVsRandom(props) {
     const currentGame = game.moves({ verbose: true });
 
     const orderedMoves = sort(currentGame);
+
     const topMoves = assessPotentialOpponentMoves(orderedMoves);
-    console.log(topMoves[Math.random() * 4]);
-    return topMoves[Math.random() * 4];
+    setArrows([
+      [topMoves[0].from, topMoves[0].to],
+      [topMoves[1].from, topMoves[1].to],
+    ]);
   }
 
   function assessPotentialOpponentMoves(movesArray) {
@@ -125,12 +128,7 @@ export default function PlayVsRandom(props) {
 
       game.undo();
     });
-    return [
-      movesWithoutCapture[0],
-      movesWithoutCapture[1],
-      movesWithoutCapture[2],
-      movesWithoutCapture[3],
-    ];
+    return [movesWithoutCapture[0], movesWithoutCapture[1]];
   }
 
   function sort(currentGame) {
@@ -204,7 +202,7 @@ export default function PlayVsRandom(props) {
           undo
         </button>
         <button className="rc-button" onClick={getOptimalMoves}>
-          Set Custom Arrows
+          Get Hints
         </button>
         <div>
           <button
