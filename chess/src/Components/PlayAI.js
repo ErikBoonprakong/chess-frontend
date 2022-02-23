@@ -2,6 +2,14 @@ import { useRef, useState } from "react";
 import Chess from "chess.js";
 import "./play.css";
 import { Chessboard } from "react-chessboard";
+import {
+  weights,
+  pst_w,
+  pst_b,
+  pst_opponent,
+  pst_self,
+} from "./ChessMLAlgorithm.js";
+import { evaluateBoard, minimax } from "./ChessMLAlgorithm";
 
 export default function PlayVsRandom(props) {
   const chessboardRef = useRef();
@@ -21,8 +29,21 @@ export default function PlayVsRandom(props) {
       return update;
     });
   }
+  // function makeSLightlyLessRandomMove() {
+  //   const possibleMoves = game.moves();
+  //   console.log("less random");
+  //   // exit if the game is over
+  //   if (game.game_over() || game.in_draw() || possibleMoves.length === 0) {
+  //     return;
+  //   }
 
-  function makeRandomMove() {
+  //   const move = getOptimalMoves();
+  //   safeGameMutate((game) => {
+  //     game.move(move);
+  //   });
+  // }
+
+  function makeGoodMoves() {
     const possibleMoves = game.moves();
 
     // exit if the game is over
@@ -30,11 +51,24 @@ export default function PlayVsRandom(props) {
       return;
     }
 
-    const randomIndex = Math.floor(Math.random() * possibleMoves.length);
+    const bestMove = minimax(game, 2, true, 0, "b")[0];
     safeGameMutate((game) => {
-      game.move(possibleMoves[randomIndex]);
+      game.move(bestMove);
     });
   }
+  // function makeRandomMove() {
+  //   const possibleMoves = game.moves();
+
+  //   // exit if the game is over
+  //   if (game.game_over() || game.in_draw() || possibleMoves.length === 0) {
+  //     return;
+  //   }
+
+  //   const randomIndex = Math.floor(Math.random() * possibleMoves.length);
+  //   safeGameMutate((game) => {
+  //     game.move(possibleMoves[randomIndex]);
+  //   });
+  // }
   // console.log(game.moves({ verbose: true }));
   function onDrop(sourceSquare, targetSquare) {
     addToTurn(turn + 1);
@@ -51,7 +85,8 @@ export default function PlayVsRandom(props) {
     if (move === null) return false;
 
     // store timeout so it can be cleared on undo/reset so computer doesn't execute move
-    const newTimeout = setTimeout(makeRandomMove, 200);
+    // const newTimeout = setTimeout(makeRandomMove, 200);
+    const newTimeout = setTimeout(makeGoodMoves, 200);
     setCurrentTimeout(newTimeout);
     return true;
   }
@@ -72,20 +107,16 @@ export default function PlayVsRandom(props) {
   function getOptimalMoves() {
     //moves shows all possible moves a white piece can take
     const currentGame = game.moves({ verbose: true });
+
     const orderedMoves = sort(currentGame);
-    // const testGame = game;
-    // for (let i in orderedMoves) {
-    //   testGame.move(`'${orderedMoves[i].from}${orderedMoves[i].to}`);
-    // if (turn > 3) {
-    //   setArrows();
-    // }
     const topMoves = assessPotentialOpponentMoves(orderedMoves);
+    console.log(topMoves[Math.random() * 4]);
     return topMoves[Math.random() * 4];
   }
 
   function assessPotentialOpponentMoves(movesArray) {
     const movesWithoutCapture = [];
-    console.log("break");
+
     movesArray.forEach((move) => {
       game.move(move);
       const opponentMoveArray = game.moves({ verbose: true });
@@ -169,6 +200,7 @@ export default function PlayVsRandom(props) {
           onClick={() => {
             safeGameMutate((game) => {
               game.undo();
+              game.undo();
             });
             // stop any current timeouts
             clearTimeout(currentTimeout);
@@ -176,7 +208,7 @@ export default function PlayVsRandom(props) {
         >
           undo
         </button>
-        <button className="rc-button" onClick={getOptimalMoves()}>
+        <button className="rc-button" onClick={getOptimalMoves}>
           Set Custom Arrows
         </button>
         <div>
