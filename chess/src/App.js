@@ -54,7 +54,7 @@ class App extends React.Component {
             <Leaderboards />
           </Route>
           <Route path="/chat">
-            <Chat />
+            <Chat userData={this.state.cookie} />
           </Route>
         </Switch>
       </div>
