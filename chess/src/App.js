@@ -11,6 +11,7 @@ import Chat from "./Components/Chat";
 import React from "react";
 import cookieObj from "./Components/GetCookies";
 import ChooseDifficulty from "./Components/ChooseDifficulty";
+import SavedGames from "./Components/SavedGames";
 
 class App extends React.Component {
   constructor() {
@@ -52,6 +53,10 @@ class App extends React.Component {
           </Route>
           <Route path="/leaderboards">
             <Leaderboards />
+          </Route>
+
+          <Route path="/savedgames">
+            <SavedGames />
           </Route>
           <Route path="/chat">
             <Chat />

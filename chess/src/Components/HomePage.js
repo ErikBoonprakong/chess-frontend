@@ -21,6 +21,9 @@ class HomePage extends React.Component {
           <Link to="/leaderboards">
             <button className="playButton">Leaderboards</button>
           </Link>
+          <Link to="/savedgames">
+            <button className="playButton">Saved Games</button>
+          </Link>
         </div>
       </div>
     );

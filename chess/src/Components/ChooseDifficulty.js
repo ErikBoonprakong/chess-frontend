@@ -7,34 +7,35 @@ class ChooseDifficulty extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reset: false,
-      undo: false,
-      inCheck: false,
+      reset: 0,
+      undo: 0,
+      inCheck: 0,
 
-      optimalMove: false,
-      difficulty: "",
-      submit: false,
+      optimalMove: 0,
+      difficulty: 0,
+      submit: 0,
     };
     this.Networking = new Networking();
   }
 
   async handleOptions(e) {
-    const newState = this.state[e.target.id] ? false : true;
+    const newState = this.state[e.target.id] ? 0 : 1;
     await this.setState({ [e.target.id]: newState });
   }
   handleSubmit(e) {
-    this.setState({ difficulty: e.target.name, submit: true });
+    console.log(e.target.value);
+    this.setState({ difficulty: e.target.value, submit: true });
   }
   render() {
     return (
       <div>
         {this.state.submit ? (
-          //   <Redirect to="/playai" />
           <Redirect
             to={{
               pathname: "/playai",
               state: {
                 state: this.state,
+                fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
               },
             }}
           />
@@ -79,16 +80,34 @@ class ChooseDifficulty extends React.Component {
               <button
                 id="submit"
                 name="easy"
+                value="easy"
                 onClick={(e) => this.handleSubmit(e)}
               >
                 Easy!
               </button>
               <button
                 id="submit"
+                name="medium"
+                value="2"
+                onClick={(e) => this.handleSubmit(e)}
+              >
+                Medium!
+              </button>
+              <button
+                id="submit"
                 name="hard"
+                value="3"
                 onClick={(e) => this.handleSubmit(e)}
               >
                 Hard!
+              </button>
+              <button
+                id="submit"
+                name="really_hard"
+                value="4"
+                onClick={(e) => this.handleSubmit(e)}
+              >
+                Really hard!
               </button>
             </div>
           </div>
