@@ -1,5 +1,5 @@
-const API_URL = "https://chessyem.herokuapp.com";
-// const API_URL = "http://localhost:8080";
+// const API_URL = "https://chessyem.herokuapp.com";
+const API_URL = "http://localhost:8080";
 // const API_URL = process.env.REACT_APP_API_URL;
 
 class Networking {
@@ -27,7 +27,6 @@ class Networking {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
-
       },
       body: JSON.stringify({
         username: username,
@@ -44,7 +43,6 @@ class Networking {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
-
       },
     });
     let json = await response.json();

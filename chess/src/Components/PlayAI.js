@@ -137,7 +137,7 @@ export default function PlayVsRandom() {
         </div>
         <div className="chat-wrapper">
           <ul className="events"></ul>
-          <div classNAme="chat-from-wrapper">
+          <div className="chat-from-wrapper">
             <form>
               <input className="chat" autoComplete="off" title="chat" />
               <button className="chat-button">Send</button>
