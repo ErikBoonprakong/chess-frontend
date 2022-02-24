@@ -10,6 +10,7 @@ import Header from "./Components/Header";
 import Chat from "./Components/Chat";
 import React from "react";
 import cookieObj from "./Components/GetCookies";
+import ChooseDifficulty from "./Components/ChooseDifficulty";
 
 class App extends React.Component {
   constructor() {
@@ -41,9 +42,11 @@ class App extends React.Component {
           <Route path="/home">
             <HomePage />
           </Route>
-          <Route path="/playai">
-            <PlayAI />
+
+          <Route path="/options">
+            <ChooseDifficulty />
           </Route>
+          <Route path="/playai">{(props) => <PlayAI {...props} />}</Route>
           <Route path="/playonline">
             <PlayOnline />
           </Route>
