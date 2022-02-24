@@ -24,6 +24,9 @@ class HomePage extends React.Component {
           <Link to="/savedgames">
             <button className="playButton">Saved Games</button>
           </Link>
+          <Link to="/playonline">
+            <button>Play Online</button>
+          </Link>
         </div>
       </div>
     );
