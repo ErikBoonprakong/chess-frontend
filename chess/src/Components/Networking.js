@@ -1,5 +1,5 @@
-const API_URL = "https://chessyem.herokuapp.com";
-// const API_URL = "http://localhost:8080";
+// const API_URL = "https://chessyem.herokuapp.com";
+const API_URL = "http://localhost:8080";
 // const API_URL = process.env.REACT_APP_API_URL;
 
 class Networking {
@@ -27,7 +27,6 @@ class Networking {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
-
       },
       body: JSON.stringify({
         username: username,
@@ -44,10 +43,48 @@ class Networking {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
-
       },
     });
     let json = await response.json();
+    return json;
+  }
+
+  async saveGame(
+    user_id,
+    reset,
+    undo,
+
+    optimalMove,
+    difficulty,
+    game_fen
+  ) {
+    let response = await fetch(`${API_URL}/savegames`, {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user_id: user_id,
+        reset: reset,
+        undo: undo,
+
+        optimal_move: optimalMove,
+        difficulty: difficulty,
+        game_fen: game_fen,
+      }),
+    });
+    let json = await response.json();
+
+    return json;
+  }
+
+  async getSavedGamesById(user_id) {
+    const response = await fetch(`${API_URL}/savedgames/${user_id}`, {
+      method: "GET",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+    });
+    let json = await response.json();
+
     return json;
   }
 }
