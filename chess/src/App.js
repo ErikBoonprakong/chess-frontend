@@ -7,6 +7,7 @@ import PlayAI from "./Components/PlayAI";
 import PlayOnline from "./Components/PlayOnline";
 import Leaderboards from "./Components/Leaderboard";
 import Header from "./Components/Header";
+import Chat from "./Components/Chat";
 import React from "react";
 import cookieObj from "./Components/GetCookies";
 import ChooseDifficulty from "./Components/ChooseDifficulty";
@@ -53,8 +54,12 @@ class App extends React.Component {
           <Route path="/leaderboards">
             <Leaderboards />
           </Route>
+
           <Route path="/savedgames">
             <SavedGames />
+          </Route>
+          <Route path="/chat">
+            <Chat />
           </Route>
         </Switch>
       </div>
