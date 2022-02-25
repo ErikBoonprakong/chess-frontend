@@ -2,6 +2,10 @@ import React from "react";
 import io from "socket.io-client";
 import { Chessboard } from "react-chessboard";
 import * as Chess from "chess.js";
+import cookieObj from "./GetCookies";
+
+import Networking from "./Networking";
+
 
 class PlayOnline extends React.Component {
   constructor(props) {
@@ -12,7 +16,11 @@ class PlayOnline extends React.Component {
       game: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
       checkMate: "",
       CurrentTimeout: undefined,
+      endOfGame: false,
+      message: "",
     };
+    this.currentUser = cookieObj();
+    this.networking = new Networking();
   }
 
   componentDidMount() {
@@ -22,7 +30,6 @@ class PlayOnline extends React.Component {
     });
 
     this.socket.on("new move", (move) => {
-      console.log(move);
       this.setState({ game: move });
     });
   }
@@ -34,11 +41,13 @@ class PlayOnline extends React.Component {
 
   sendMessage(e) {
     e.preventDefault();
-    this.socket.emit("new message", this.state.chatMessage);
+    let messageString =
+      this.props.userData.user + ": " + this.state.chatMessage;
+    this.socket.emit("new message", messageString);
     this.setState({ chatMessage: "" });
   }
 
-  onDrop(sourceSquare, targetSquare) {
+  async onDrop(sourceSquare, targetSquare) {
     const newGame = new Chess(this.state.game);
     const gameCopy = { ...newGame };
     const move = gameCopy.move({
@@ -48,12 +57,37 @@ class PlayOnline extends React.Component {
     });
     if (move === null) return false;
     const newGameFen = gameCopy.fen();
-    console.log(this.newGame);
 
+    if (!this.state.endOfGame && gameCopy.in_checkmate()) {
+      this.setState({ endOfGame: true, message: "You are the winner!" });
+      const json = await this.sendResults(1, 0, 0);
+      return json;
+    } else if (this.state.endOfGame && gameCopy.in_checkmate()) {
+      this.setState({ message: "You are the loser!" });
+      const json = await this.sendResults(0, 1, 0);
+      return json;
+    } else if (gameCopy.in_draw()) {
+      this.setState({ message: "Draw!" });
+      const json = await this.sendResults(0, 0, 1);
+      return json;
+      ////game is a draw
+    }
     this.socket.emit("new move", newGameFen);
     this.setState({ game: newGameFen });
 
     return move;
+  }
+
+  async sendResults(won, lost, draw) {
+    const response = await this.networking.postResult(
+      this.currentUser.user_id,
+      this.currentUser.username,
+      won,
+      lost,
+      draw
+    );
+
+    return response;
   }
 
   render() {
@@ -71,19 +105,17 @@ class PlayOnline extends React.Component {
           </form>
           <div className="messageDisplay">{messageList}</div>
         </div>
-
+        {this.state.message}
         <Chessboard
           id="PlayVsPlay"
           animationDuration={200}
           boardWidth={400}
           position={this.state.game}
-          // position={this.game.fen()}
           onPieceDrop={this.onDrop.bind(this)}
           customBoardStyle={{
             borderRadius: "4px",
             boxShadow: "0 5px 15px rgba(0, 0, 0, 0.5)",
           }}
-          // ref={chessboardRef}
         />
       </div>
     );
