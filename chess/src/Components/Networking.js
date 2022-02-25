@@ -77,13 +77,13 @@ class Networking {
     return json;
   }
 
-  async postResult(user_id, username, won, lost, draw, score) {
+  async postResult(username, won, lost, draw, score) {
     let response = await fetch(`${API_URL}/leaderboard`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        user_id: user_id,
+        // user_id: user_id,
         username: username,
         won: won,
         lost: lost,
