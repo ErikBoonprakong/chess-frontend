@@ -14,7 +14,6 @@ class PlayOnline extends React.Component {
       checkMate: "",
       CurrentTimeout: undefined,
     };
-    this.newGame = new Chess();
   }
 
   componentDidMount() {
@@ -43,7 +42,8 @@ class PlayOnline extends React.Component {
   }
 
   onDrop(sourceSquare, targetSquare) {
-    const gameCopy = { ...this.newGame };
+    const newGame = new Chess(this.state.game);
+    const gameCopy = { ...newGame };
     const move = gameCopy.move({
       from: sourceSquare,
       to: targetSquare,
@@ -52,6 +52,7 @@ class PlayOnline extends React.Component {
     if (move === null) return false;
     const newGameFen = gameCopy.fen();
     console.log(this.newGame);
+
     this.socket.emit("new move", newGameFen);
     this.setState({ game: newGameFen });
 
