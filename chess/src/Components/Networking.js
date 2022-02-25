@@ -95,6 +95,12 @@ class Networking {
     return json;
   }
 
+  async getScores() {
+    const response = await fetch(`${API_URL}/scores`);
+    let scores = await response.json();
+    return scores;
+  }
+
   async getSavedGamesById(user_id) {
     const response = await fetch(`${API_URL}/savedgames/${user_id}`, {
       method: "GET",
