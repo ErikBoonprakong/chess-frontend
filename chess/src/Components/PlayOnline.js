@@ -2,6 +2,8 @@ import React from "react";
 import io from "socket.io-client";
 import { Chessboard } from "react-chessboard";
 import * as Chess from "chess.js";
+import cookieObj from "./GetCookies";
+import Networking from "./Networking";
 
 class PlayOnline extends React.Component {
   constructor(props) {
@@ -12,7 +14,11 @@ class PlayOnline extends React.Component {
       game: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
       checkMate: "",
       CurrentTimeout: undefined,
+      winner: { user_id: "", colour: "" },
+      loser: { user_id: "", colour: "" },
     };
+    this.currentUser = cookieObj();
+    this.networking = new Networking();
   }
 
   componentDidMount() {
@@ -22,7 +28,7 @@ class PlayOnline extends React.Component {
     });
 
     this.socket.on("new move", (move) => {
-      console.log(move);
+      // console.log(move);
       this.setState({ game: move });
     });
   }
@@ -38,7 +44,7 @@ class PlayOnline extends React.Component {
     this.setState({ chatMessage: "" });
   }
 
-  onDrop(sourceSquare, targetSquare) {
+  async onDrop(sourceSquare, targetSquare) {
     const newGame = new Chess(this.state.game);
     const gameCopy = { ...newGame };
     const move = gameCopy.move({
@@ -48,12 +54,43 @@ class PlayOnline extends React.Component {
     });
     if (move === null) return false;
     const newGameFen = gameCopy.fen();
-    console.log(this.newGame);
+    console.log(
+      this.state.game,
+      "...",
+      this.currentUser.user_id,
+      "...",
 
+      move,
+      "...",
+      gameCopy.in_checkmate()
+    );
+    if (this.state.winner === "" && gameCopy.in_checkmate) {
+      const json = await this.sendResults(true, false, false);
+      return json;
+    } else if (this.state.winner !== "" && gameCopy.in_checkmate) {
+      const json = await this.sendResults(false, true, false);
+      return json;
+    } else if (gameCopy.in_draw()) {
+      const json = await this.sendResults(false, false, true);
+      return json;
+      ////game is a draw
+    }
     this.socket.emit("new move", newGameFen);
     this.setState({ game: newGameFen });
 
     return move;
+  }
+
+  async sendResults(won, lost, draw) {
+    const response = await this.networking.postResult(
+      this.currentUser.user_id,
+      this.currentUser.username,
+      won,
+      lost,
+      draw
+    );
+    const json = await response.json;
+    return response;
   }
 
   render() {
