@@ -2,6 +2,7 @@ import React from "react";
 import io from "socket.io-client";
 import { Chessboard } from "react-chessboard";
 import * as Chess from "chess.js";
+import cookieObj from "./GetCookies";
 
 class PlayOnline extends React.Component {
   constructor(props) {
@@ -35,7 +36,9 @@ class PlayOnline extends React.Component {
 
   sendMessage(e) {
     e.preventDefault();
-    this.socket.emit("new message", this.state.chatMessage);
+    let messageString =
+      this.props.userData.user + ": " + this.state.chatMessage;
+    this.socket.emit("new message", messageString);
     this.setState({ chatMessage: "" });
   }
 

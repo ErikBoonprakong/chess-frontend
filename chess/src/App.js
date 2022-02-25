@@ -5,7 +5,7 @@ import { Switch, Route, Redirect, Link } from "react-router-dom";
 import HomePage from "./Components/HomePage";
 import PlayAI from "./Components/PlayAI";
 import PlayOnline from "./Components/PlayOnline";
-import Leaderboards from "./Components/Leaderboard";
+import Leaderboard from "./Components/Leaderboard";
 import Header from "./Components/Header";
 
 import React from "react";
@@ -49,10 +49,10 @@ class App extends React.Component {
           </Route>
           <Route path="/playai">{(props) => <PlayAI {...props} />}</Route>
           <Route path="/playonline">
-            <PlayOnline />
+            <PlayOnline userData={this.state.cookie} />
           </Route>
-          <Route path="/leaderboards">
-            <Leaderboards />
+          <Route path="/leaderboard">
+            <Leaderboard />
           </Route>
 
           <Route path="/savedgames">

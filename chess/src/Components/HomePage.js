@@ -18,7 +18,7 @@ class HomePage extends React.Component {
           <Link to="/playonline">
             <button className="playButton">Play Online</button>
           </Link>
-          <Link to="/leaderboards">
+          <Link to="/leaderboard">
             <button className="playButton">Leaderboards</button>
           </Link>
           <Link to="/savedgames">
