@@ -36,9 +36,7 @@ class Header extends React.Component {
         <Link to="/home">
           <button>Home</button>
         </Link>
-        <Link to="/chat">
-          <button>Chat</button>
-        </Link>
+
         <hr />
       </div>
     );

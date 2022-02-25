@@ -1,81 +1,92 @@
-import { useEffect, useRef, useState } from "react";
-import Chess from "chess.js";
-import "./play.css";
-
+import React from "react";
+import io from "socket.io-client";
 import { Chessboard } from "react-chessboard";
-// import { w3cwebsocket as W3CWebSocket } from "websocket";
+import * as Chess from "chess.js";
 
-// const client = new W3CWebSocket("ws://127.0.0.1:8000");
+class PlayOnline extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      chatMessage: "",
+      messageList: [],
+      game: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      checkMate: "",
+      CurrentTimeout: undefined,
+    };
+    this.newGame = new Chess();
+  }
 
-export default function PlayVsPlay(savedFen) {
-  const chessboardRef = useRef();
-  const [game, setGame] = useState(new Chess());
-  const boardWidth = 400;
+  componentDidMount() {
+    this.socket = io("http://localhost:4000");
+    this.socket.on("new message", (msg) => {
+      this.setState({ messageList: [...this.state.messageList, msg] });
+    });
 
-  function safeGameMutate(modify) {
-    setGame((g) => {
-      const update = { ...g };
-      modify(update);
-      return update;
+    this.socket.on("new move", (move) => {
+      console.log(move);
+      this.setState({ game: move });
     });
   }
 
-  // useEffect(() => {
-  //   client.onopen = () => {
-  //     console.log("WebSocket Client Connected");
-  //   };
-  //   client.onmessage = (message) => {
-  //     console.log(message);
-  //   };
-  // });
+  handleChange(e) {
+    e.preventDefault();
+    this.setState({ chatMessage: e.target.value });
+  }
 
-  function onDrop(sourceSquare, targetSquare) {
-    const gameCopy = { ...game };
+  sendMessage(e) {
+    e.preventDefault();
+    this.socket.emit("new message", this.state.chatMessage);
+    this.setState({ chatMessage: "" });
+  }
+
+  onDrop(sourceSquare, targetSquare) {
+    const gameCopy = { ...this.newGame };
     const move = gameCopy.move({
       from: sourceSquare,
       to: targetSquare,
       promotion: "q", // always promote to a queen for example simplicity
     });
-    setGame(gameCopy);
+    if (move === null) return false;
+    const newGameFen = gameCopy.fen();
+    console.log(this.newGame);
+    this.socket.emit("new move", newGameFen);
+    this.setState({ game: newGameFen });
+
     return move;
   }
 
-  return (
-    <div className="play">
-      <Chessboard
-        id="PlayVsPlay"
-        animationDuration={200}
-        boardWidth={boardWidth}
-        position={game.fen()}
-        onPieceDrop={onDrop}
-        customBoardStyle={{
-          borderRadius: "4px",
-          boxShadow: "0 5px 15px rgba(0, 0, 0, 0.5)",
-        }}
-        ref={chessboardRef}
-      />
-      <button
-        className="rc-button"
-        onClick={() => {
-          safeGameMutate((game) => {
-            game.reset();
-          });
-          chessboardRef.current.clearPremoves();
-        }}
-      >
-        reset
-      </button>
-      <button
-        className="rc-button"
-        onClick={() => {
-          safeGameMutate((game) => {
-            game.undo();
-          });
-          chessboardRef.current.clearPremoves();
-        }}
-      >
-        undo
-      </button>
-    </div>
-  );
+  render() {
+    const messageList = this.state.messageList.map((msg) => <div>{msg}</div>);
+    return (
+      <div>
+        <div className="chat">
+          <form onSubmit={(e) => this.sendMessage(e)}>
+            <input
+              type="textarea"
+              onChange={(e) => this.handleChange(e)}
+              value={this.state.chatMessage}
+            />
+            <input type="submit" value="Send Message" />
+          </form>
+          <div className="messageDisplay">{messageList}</div>
+        </div>
+
+        <Chessboard
+          id="PlayVsPlay"
+          animationDuration={200}
+          boardWidth={400}
+          position={this.state.game}
+          // position={this.game.fen()}
+          onPieceDrop={this.onDrop.bind(this)}
+          customBoardStyle={{
+            borderRadius: "4px",
+            boxShadow: "0 5px 15px rgba(0, 0, 0, 0.5)",
+          }}
+          // ref={chessboardRef}
+        />
+      </div>
+    );
+  }
 }
+
+export default PlayOnline;
