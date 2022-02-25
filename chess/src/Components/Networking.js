@@ -77,6 +77,24 @@ class Networking {
     return json;
   }
 
+  async postResult(user_id, username, won, lost, draw, score) {
+    let response = await fetch(`${API_URL}/leaderboard`, {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user_id: user_id,
+        username: username,
+        won: won,
+        lost: lost,
+        draw: draw,
+        score: score,
+      }),
+    });
+    let json = await response.json();
+    return json;
+  }
+
   async getSavedGamesById(user_id) {
     const response = await fetch(`${API_URL}/savedgames/${user_id}`, {
       method: "GET",
