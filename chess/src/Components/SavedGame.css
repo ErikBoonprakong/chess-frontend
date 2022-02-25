@@ -1,0 +1,8 @@
+.previous-game {
+  display: flex;
+  flex-direction: row;
+}
+.chessboard-snapshot {
+  position: absolute;
+  right: 0;
+}
