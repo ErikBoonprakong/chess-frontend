@@ -14,8 +14,8 @@ class PlayOnline extends React.Component {
       game: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
       checkMate: "",
       CurrentTimeout: undefined,
-      winner: { user_id: "", colour: "" },
-      loser: { user_id: "", colour: "" },
+      endOfGame: false,
+      message: "",
     };
     this.currentUser = cookieObj();
     this.networking = new Networking();
@@ -54,13 +54,16 @@ class PlayOnline extends React.Component {
     if (move === null) return false;
     const newGameFen = gameCopy.fen();
 
-    if (this.state.winner === "" && gameCopy.in_checkmate()) {
+    if (!this.state.endOfGame && gameCopy.in_checkmate()) {
+      this.setState({ endOfGame: true, message: "You are the winner!" });
       const json = await this.sendResults(1, 0, 0);
       return json;
-    } else if (this.state.winner !== "" && gameCopy.in_checkmate()) {
+    } else if (this.state.endOfGame && gameCopy.in_checkmate()) {
+      this.setState({ message: "You are the loser!" });
       const json = await this.sendResults(0, 1, 0);
       return json;
     } else if (gameCopy.in_draw()) {
+      this.setState({ message: "Draw!" });
       const json = await this.sendResults(0, 0, 1);
       return json;
       ////game is a draw
@@ -79,7 +82,7 @@ class PlayOnline extends React.Component {
       lost,
       draw
     );
-    const json = await response.json;
+
     return response;
   }
 
@@ -98,19 +101,17 @@ class PlayOnline extends React.Component {
           </form>
           <div className="messageDisplay">{messageList}</div>
         </div>
-
+        {this.state.message}
         <Chessboard
           id="PlayVsPlay"
           animationDuration={200}
           boardWidth={400}
           position={this.state.game}
-          // position={this.game.fen()}
           onPieceDrop={this.onDrop.bind(this)}
           customBoardStyle={{
             borderRadius: "4px",
             boxShadow: "0 5px 15px rgba(0, 0, 0, 0.5)",
           }}
-          // ref={chessboardRef}
         />
       </div>
     );
