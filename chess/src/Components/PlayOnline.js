@@ -82,7 +82,7 @@ class PlayOnline extends React.Component {
       lost,
       draw
     );
-    const json = await response.json;
+
     return response;
   }
 
@@ -107,13 +107,11 @@ class PlayOnline extends React.Component {
           animationDuration={200}
           boardWidth={400}
           position={this.state.game}
-          // position={this.game.fen()}
           onPieceDrop={this.onDrop.bind(this)}
           customBoardStyle={{
             borderRadius: "4px",
             boxShadow: "0 5px 15px rgba(0, 0, 0, 0.5)",
           }}
-          // ref={chessboardRef}
         />
       </div>
     );
