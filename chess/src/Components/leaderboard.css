@@ -1,0 +1,4 @@
+.leaderboard {
+  display: flex;
+  flex-direction: column;
+}

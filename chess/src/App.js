@@ -43,7 +43,6 @@ class App extends React.Component {
           <Route path="/home">
             <HomePage />
           </Route>
-
           <Route path="/options">
             <ChooseDifficulty />
           </Route>
@@ -54,7 +53,6 @@ class App extends React.Component {
           <Route path="/leaderboard">
             <Leaderboard />
           </Route>
-
           <Route path="/savedgames">
             <SavedGames />
           </Route>
