@@ -1,6 +1,4 @@
 import React from "react";
-// import Networking from "./Networking.js";
-// import { Link, Redirect } from "react-router-dom";
 import "./leaderboard.css";
 import Networking from "./Networking";
 

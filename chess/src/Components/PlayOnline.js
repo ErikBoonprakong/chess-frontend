@@ -38,30 +38,7 @@ class PlayOnline extends React.Component {
     this.socket.on("leave room", (playerList) => {
       this.setState({ players: playerList });
     });
-    // if (this.state.players.length < 2) {
-    //   console.log("no players");
-    //   this.socket.emit(
-    //     "new move",
-    //     "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-    //   );
-    //   this.setState({
-    //     game: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
-    //   });
-    // }
   }
-
-  // componentDidUpdate() {
-  //   if (this.state.players.length < 2) {
-  //     console.log("no players");
-  //     this.socket.emit(
-  //       "new move",
-  //       "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-  //     );
-  //     this.setState({
-  //       game: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
-  //     });
-  //   }
-  // }
 
   componentWillUnmount() {
     this.socket.emit("leave room", this.props.userData.user);
@@ -115,17 +92,6 @@ class PlayOnline extends React.Component {
       promotion: "q", // always promote to a queen for example simplicity
     });
 
-    // else if (this.state.endOfGame && gameCopy.in_checkmate()) {
-    //   this.setState({ message: "You are the loser!" });
-    //   await this.sendResults(0, 1, 0);
-    //   // return json;
-    // } else if (gameCopy.in_draw()) {
-    //   this.setState({ message: "Draw!" });
-    //   await this.sendResults(0, 0, 1);
-    //   // return json;
-    //   ////game is a draw
-    // }
-
     if (move === null) return false;
     const newGameFen = gameCopy.fen();
 
@@ -138,7 +104,6 @@ class PlayOnline extends React.Component {
       await this.sendResults(this.props.userData.user, 1, 0, 0);
       await this.sendResults(opponentName, 0, 1, 0);
       this.socket.emit("new message", `${this.props.userData.user} Wins`);
-      // return json;
     }
 
     return move;
