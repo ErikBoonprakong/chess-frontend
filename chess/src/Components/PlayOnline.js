@@ -28,7 +28,6 @@ class PlayOnline extends React.Component {
     });
 
     this.socket.on("new move", (move) => {
-      // console.log(move);
       this.setState({ game: move });
     });
   }
@@ -54,16 +53,7 @@ class PlayOnline extends React.Component {
     });
     if (move === null) return false;
     const newGameFen = gameCopy.fen();
-    console.log(
-      this.state.game,
-      "...",
-      this.currentUser.user_id,
-      "...",
 
-      move,
-      "...",
-      gameCopy.in_checkmate()
-    );
     if (this.state.winner === "" && gameCopy.in_checkmate()) {
       const json = await this.sendResults(1, 0, 0);
       return json;
