@@ -64,10 +64,10 @@ class PlayOnline extends React.Component {
       "...",
       gameCopy.in_checkmate()
     );
-    if (this.state.winner === "" && gameCopy.in_checkmate) {
+    if (this.state.winner === "" && gameCopy.in_checkmate()) {
       const json = await this.sendResults(true, false, false);
       return json;
-    } else if (this.state.winner !== "" && gameCopy.in_checkmate) {
+    } else if (this.state.winner !== "" && gameCopy.in_checkmate()) {
       const json = await this.sendResults(false, true, false);
       return json;
     } else if (gameCopy.in_draw()) {
