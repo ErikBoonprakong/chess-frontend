@@ -104,8 +104,13 @@ class CreateAccount extends React.Component {
                 <br />
                 <br />
                 <div className="buttons">
-                  <input type="submit" className="login-btn" id="submit" />
-                  {!this.state.valid && this.getWarning()}
+                  <input
+                    type="submit"
+                    data-testid="register-input"
+                    className="login-btn"
+                    id="submit"
+                  />
+                  <h4>{!this.state.valid && this.getWarning()}</h4>
                 </div>
               </form>
             </div>
