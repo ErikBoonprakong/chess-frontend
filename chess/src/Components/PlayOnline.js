@@ -126,6 +126,14 @@ class PlayOnline extends React.Component {
         await this.sendResults(opponentName, 0, 1, 0);
         this.socket.emit("new message", `${this.props.userData.user} Wins`);
       }
+      if (
+        gameCopy.in_draw() ||
+        gameCopy.in_stalemate() ||
+        gameCopy.in_threefold_repetition()
+      ) {
+        await this.sendResults(this.state.players[0], 0, 0, 1);
+        await this.sendResults(this.state.players[1], 0, 0, 1);
+      }
     } else {
       if (
         this.props.userData.user !==
