@@ -4,6 +4,12 @@ import { BrowserRouter } from "react-router-dom";
 import "@testing-library/jest-dom/extend-expect";
 import App from "../App";
 import Header from "../Components/Header.js";
+import HomePage from "../Components/HomePage";
+import Leaderboard from "../Components/Leaderboard";
+import {
+  getRowByFirstCellText,
+  getAllCells,
+} from "testing-library-table-queries";
 
 describe("Login Page", () => {
   test("App loads login page by default", () => {
@@ -14,16 +20,58 @@ describe("Login Page", () => {
     );
     expect(window.location.href).toBe("http://localhost/login");
   });
+});
 
-  //   test("Header contains logout button", async () => {
-  //     render(
-  //       <BrowserRouter>
-  //         <Header />
-  //       </BrowserRouter>
-  //     );
-  //     const logoutBtn = await screen.findByRole("button");
-  //     expect(logoutBtn.innerHTML).toMatch(/Log Out/);
-  //     expect(logoutBtn).toBeInTheDocument();
-  //   });
-  // });
+describe("Create Account Page", () => {
+  test("Login page redirects to the Create Account page", () => {
+    render(
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    );
+    const button = screen.getByRole("link");
+    fireEvent(
+      button,
+      new MouseEvent("click", {
+        bubbles: true,
+      })
+    );
+    expect(window.location.href).toBe("http://localhost/register");
+  });
+});
+
+describe("HomePage", () => {
+  test("HomePage contains PlayAI button and contains link to options page", async () => {
+    render(
+      <BrowserRouter>
+        <HomePage />
+      </BrowserRouter>
+    );
+
+    const buttons = screen.getAllByRole("link");
+    for (let button of buttons) {
+      expect(button).toBeInTheDocument();
+    }
+
+    expect(buttons[0].href).toBe("http://localhost/options");
+  });
+});
+
+describe("Leaderboard", () => {
+  test("Leaderboard page is rendered with a table", () => {
+    const { container } = render(<Leaderboard />);
+    expect(getRowByFirstCellText(container, "Position")).toBeVisible();
+    // const cells = getAllCells(getRowByFirstCellText(container, "John Smith"));
+  });
+
+  test("Correct title of leader board", () => {
+    render(
+      <BrowserRouter>
+        <Leaderboard />
+      </BrowserRouter>
+    );
+
+    const element = screen.getByTestId("table-title");
+    expect(element).toHaveTextContent("Leaderboard");
+  });
 });

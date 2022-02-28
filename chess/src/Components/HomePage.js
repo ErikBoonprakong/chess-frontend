@@ -13,16 +13,16 @@ class HomePage extends React.Component {
       <div className="bodyWrapperHome">
         <div className="buttonWrapper">
           <Link to="/options">
-            <button className="playButton">Play AI</button>
+            <button className="home-btn">Play AI</button>
           </Link>
           <Link to="/playonline">
-            <button className="playButton">Play Online</button>
+            <button className="home-btn">Play Online</button>
           </Link>
           <Link to="/leaderboard">
-            <button className="playButton">Leaderboards</button>
+            <button className="home-btn">Leaderboards</button>
           </Link>
           <Link to="/savedgames">
-            <button className="playButton">Saved Games</button>
+            <button className="home-btn">Saved Games</button>
           </Link>
         </div>
       </div>

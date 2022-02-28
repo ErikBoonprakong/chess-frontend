@@ -3,6 +3,7 @@ import Networking from "./Networking.js";
 import { Link, Redirect } from "react-router-dom";
 import cookieObj from "./GetCookies";
 import Alert from "react-bootstrap/Alert";
+import "./Login.css";
 
 class LogIn extends React.Component {
   constructor(props) {
@@ -52,22 +53,27 @@ class LogIn extends React.Component {
           <div className="login-form">
             <h2>Login</h2>{" "}
             <form onSubmit={this.handleSubmit}>
-              <label>Username </label>
-              <input
-                type="text"
-                id="username"
-                value={this.state.username}
-                onChange={this.handleChange}
-              ></input>
-              <br />
-              <br />
-              <label>Password </label>
-              <input
-                type="password"
-                id="password"
-                value={this.state.password}
-                onChange={this.handleChange}
-              ></input>
+              <div id="inputWithIcon">
+                <input
+                  type="text"
+                  placeholder="Username"
+                  className="user"
+                  id="username"
+                  value={this.state.username}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div id="inputWithIcon">
+                <input
+                  data-testid="password"
+                  placeholder="Password"
+                  type={this.state.showPassword ? "text" : "password"}
+                  className="user"
+                  id="password"
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                />
+              </div>
               <br />
               <br />
 
@@ -78,7 +84,9 @@ class LogIn extends React.Component {
                   value="Login"
                 ></input>
                 <Link to="/register">
-                  <button className="register-btn">Create Account</button>
+                  <button data-testid="register-btn" className="register-btn">
+                    Create Account
+                  </button>
                 </Link>
                 <h4 className="error-message">
                   {" "}

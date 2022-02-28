@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Networking from "./Networking";
 import cookieObj from "./GetCookies";
+import "./header.css";
 
 class Header extends React.Component {
   constructor(props) {
@@ -11,13 +12,13 @@ class Header extends React.Component {
   }
 
   render() {
-    // if (!this.props.userData.user) return <h2>Logo</h2>;
+    if (!this.props.userData.user) return <h2>Logo</h2>;
     return (
       <div className="header">
         {console.log(this.props.userData)}
 
         <div className="logo">
-          <img src="chessLogo.png"></img>
+          <img src="chessLogo.png" alt="chess"></img>
         </div>
 
         <span>
@@ -25,6 +26,7 @@ class Header extends React.Component {
         </span>
         <Link to="/login">
           <button
+            className="header-btn"
             onClick={async () => {
               await this.Networking.logOut();
               this.props.newCookie(cookieObj());
@@ -34,7 +36,7 @@ class Header extends React.Component {
           </button>
         </Link>
         <Link to="/home">
-          <button>Home</button>
+          <button className="header-btn">Home</button>
         </Link>
 
         <hr />

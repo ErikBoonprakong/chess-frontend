@@ -12,6 +12,8 @@ import React from "react";
 import cookieObj from "./Components/GetCookies";
 import ChooseDifficulty from "./Components/ChooseDifficulty";
 import SavedGames from "./Components/SavedGames";
+// import { urlencoded } from "express";
+// import background from "./woodpic.jpg";
 
 class App extends React.Component {
   constructor() {
