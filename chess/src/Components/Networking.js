@@ -35,6 +35,7 @@ class Networking {
       }),
     });
     let json = await response.json();
+    console.log(document.cookie);
     return json;
   }
 
