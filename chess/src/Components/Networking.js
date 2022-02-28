@@ -1,5 +1,5 @@
-// const API_URL = "https://chessyem.herokuapp.com";
-const API_URL = "http://localhost:8080";
+const API_URL = "https://chessyem.herokuapp.com";
+// const API_URL = "http://localhost:8080";
 // const API_URL = process.env.REACT_APP_API_URL;
 
 class Networking {
@@ -25,6 +25,7 @@ class Networking {
     let response = await fetch(`${API_URL}/sessions`, {
       method: "POST",
       credentials: "include",
+      sameSite: "None",
       headers: {
         "Content-Type": "application/json",
       },
@@ -34,6 +35,11 @@ class Networking {
       }),
     });
     let json = await response.json();
+    if (json.message === "Success") {
+      document.cookie = `sessionId=${json.sessionId}`;
+      document.cookie = `user=${json.user}`;
+      document.cookie = `user_id=${json.user_id}`;
+    }
     return json;
   }
 
@@ -46,6 +52,9 @@ class Networking {
       },
     });
     let json = await response.json();
+    document.cookie = `sessionId=`;
+    document.cookie = `user=`;
+    document.cookie = `user_id=`;
     return json;
   }
 
