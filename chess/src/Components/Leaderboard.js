@@ -7,22 +7,20 @@ class Leaderboard extends React.Component {
     super(props);
     this.Networking = new Networking();
     this.state = {
-      data: {
-        leaderboard: [
-          { userId: 1, name: "Erik", points: 30, wins: 10, lose: 0, draw: 0 },
-        ],
-      },
+      data: [
+        { userId: 1, name: "Erik", points: 30, wins: 10, lose: 0, draw: 0 },
+      ],
     };
   }
 
   async componentDidMount() {
     const scores = await this.Networking.getScores();
-    this.setState({ data: scores });
+    await this.setState({ data: scores });
   }
 
   render() {
     console.log(this.state.data);
-    const leaderboard = this.state.data.leaderboard.map((person, i) => {
+    const leaderboard = this.state.data.map((person, i) => {
       return (
         <tr key={i}>
           <td>{i + 1}</td>
