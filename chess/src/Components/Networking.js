@@ -25,6 +25,7 @@ class Networking {
     let response = await fetch(`${API_URL}/sessions`, {
       method: "POST",
       credentials: "include",
+      sameSite: "None",
       headers: {
         "Content-Type": "application/json",
       },
@@ -34,6 +35,7 @@ class Networking {
       }),
     });
     let json = await response.json();
+    console.log(document.cookie);
     return json;
   }
 
