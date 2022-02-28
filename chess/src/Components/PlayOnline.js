@@ -46,7 +46,7 @@ class PlayOnline extends React.Component {
     this.socket.on("leave room", (playerList) => {
       this.setState({ players: playerList, white: "", black: "" });
     });
-    console.log(this.state.players);
+
     this.setState({
       white: this.state.players[0],
       black: this.state.players[1],
