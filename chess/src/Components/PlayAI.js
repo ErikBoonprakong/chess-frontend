@@ -52,7 +52,7 @@ export default function PlayVsRandom(props) {
     }
   }
   function moveToPlay(possibleMoves) {
-    if (options.difficulty === "easy") {
+    if (options.difficulty === 0) {
       const randomIndex = Math.floor(Math.random() * possibleMoves.length);
       return possibleMoves[randomIndex];
     } else if (options.difficulty > 0) {
