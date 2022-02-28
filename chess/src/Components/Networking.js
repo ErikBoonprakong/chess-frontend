@@ -35,7 +35,10 @@ class Networking {
       }),
     });
     let json = await response.json();
-    console.log(document.cookie);
+    console.log(json);
+    document.cookie = `sessionId=${json.sessionId}`;
+    document.cookie = `user=${json.user}`;
+    document.cookie = `user_id=${json.user_id}`;
     return json;
   }
 
