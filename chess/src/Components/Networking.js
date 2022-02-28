@@ -52,9 +52,9 @@ class Networking {
       },
     });
     let json = await response.json();
-    document.cookie = `sessionId=''`;
-    document.cookie = `user=''`;
-    document.cookie = `user_id=''`;
+    document.cookie = `sessionId=`;
+    document.cookie = `user=`;
+    document.cookie = `user_id=`;
     return json;
   }
 
