@@ -52,10 +52,10 @@ export default function PlayVsRandom(props) {
     }
   }
   function moveToPlay(possibleMoves) {
-    if (options.difficulty === 0) {
+    if (options.difficulty === 1) {
       const randomIndex = Math.floor(Math.random() * possibleMoves.length);
       return possibleMoves[randomIndex];
-    } else if (options.difficulty > 0) {
+    } else if (options.difficulty > 1) {
       return minimax(game, depth, true, 0, "b")[0];
     }
   }
