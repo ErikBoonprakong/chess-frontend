@@ -107,6 +107,7 @@ class Networking {
   async getScores() {
     const response = await fetch(`${API_URL}/scores`);
     let scores = await response.json();
+    console.log(scores);
     return scores;
   }
 
