@@ -35,10 +35,11 @@ class Networking {
       }),
     });
     let json = await response.json();
-    console.log(json);
-    document.cookie = `sessionId=${json.sessionId}`;
-    document.cookie = `user=${json.user}`;
-    document.cookie = `user_id=${json.user_id}`;
+    if (json.message === "Success") {
+      document.cookie = `sessionId=${json.sessionId}`;
+      document.cookie = `user=${json.user}`;
+      document.cookie = `user_id=${json.user_id}`;
+    }
     return json;
   }
 
@@ -51,6 +52,9 @@ class Networking {
       },
     });
     let json = await response.json();
+    document.cookie = `sessionId=''`;
+    document.cookie = `user=''`;
+    document.cookie = `user_id=''`;
     return json;
   }
 
