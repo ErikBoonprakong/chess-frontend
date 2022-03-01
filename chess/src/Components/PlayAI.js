@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Chess from "chess.js";
 import "./play.css";
 import { Chessboard } from "react-chessboard";
@@ -60,7 +60,7 @@ export default function PlayVsRandom(props) {
       return possibleMoves[randomIndex];
     } else if (depth === "1" || depth === "2" || depth === "3") {
       const depthInt = parseInt(depth);
-      return minimax(game, depthInt, true, 0, "b")[0];
+      return minimax(game, depthInt, true, 0, aiColour)[0];
     }
   }
 
@@ -106,60 +106,33 @@ export default function PlayVsRandom(props) {
       options.undo,
       options.optimalMove,
       options.difficulty,
+      userColour,
       game.fen()
     );
 
     changeMessage(response.response);
     changeRedirect(true);
   }
-  const pieces = [
-    "wP",
-    "wN",
-    "wB",
-    "wR",
-    "wQ",
-    "wK",
-    "bP",
-    "bN",
-    "bB",
-    "bR",
-    "bQ",
-    "bK",
-  ];
-
-  function customPieces() {
-    const returnPieces = {};
-    pieces.map((p) => {
-      returnPieces[p] = ({ squareWidth }) => (
-        <div
-          style={{
-            width: squareWidth,
-            height: squareWidth,
-            backgroundImage: `url(/media/${p}.png)`,
-            backgroundSize: "100%",
-          }}
-        />
-      );
-      return null;
-    });
-    return returnPieces;
-  }
 
   async function changeUserColour(e) {
     let choice;
-    if (e.target.id !== "r") {
-      choice = e.target.id;
-      await changeColour(choice);
-    } else {
-      const colours = ["w", "b"];
-      choice = colours[Math.floor(Math.random() * 2)];
-      await changeColour(choice);
-    }
-    const orientation = choice === "w" ? "white" : "black";
-    setBoardOrientation(orientation);
-    if (choice === "b") {
-      setTimeout(makeMove, 200);
-      return;
+    if (!options.userColour) {
+      if (e.target.id !== "r") {
+        choice = e.target.id;
+        await changeColour(choice);
+      } else {
+        const colours = ["w", "b"];
+        choice = colours[Math.floor(Math.random() * 2)];
+        await changeColour(choice);
+      }
+      const orientation = choice === "w" ? "white" : "black";
+      setBoardOrientation(orientation);
+      if (choice === "b") {
+        setTimeout(makeMove, 200);
+        return;
+      }
+    } else if (options.userColour) {
+      await changeColour(options.userColour);
     }
   }
 
@@ -201,9 +174,10 @@ export default function PlayVsRandom(props) {
                   borderRadius: "4px",
                   boxShadow: "0 5px 15px rgba(0, 0, 0, 0.5)",
                 }}
-                customDarkSquareStyle={{ backgroundColor: "green" }}
-                customLightSquareStyle={{ backgroundColor: "cream" }}
-                customPieces={customPieces}
+                // customDarkSquareStyle={{ backgroundColor: "green" }}
+                // customLightSquareStyle={{ backgroundColor: "cream" }}
+                /// this code will be useful if we ever get to customisation
+
                 ref={chessboardRef}
               />
               <div className="buttons">

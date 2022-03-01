@@ -13,6 +13,7 @@ class ChooseDifficulty extends React.Component {
 
       optimalMove: 0,
       difficulty: 0,
+      userColour: null,
       submit: 0,
     };
     this.Networking = new Networking();
