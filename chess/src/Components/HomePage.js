@@ -11,18 +11,26 @@ class HomePage extends React.Component {
   render() {
     return (
       <div className="bodyWrapperHome">
-        <div className="buttonWrapper">
+        <div className="buttonWrapper middle">
           <Link to="/options">
-            <button className="home-btn">Play AI</button>
+            <button className="home-btn">
+              <span>Play AI</span>
+            </button>
           </Link>
           <Link to="/playonline">
-            <button className="home-btn">Play Online</button>
+            <button className="home-btn">
+              <span>Play Online</span>
+            </button>
           </Link>
           <Link to="/leaderboard">
-            <button className="home-btn">Leaderboards</button>
+            <button className="home-btn">
+              <span>Leaderboards</span>
+            </button>
           </Link>
           <Link to="/savedgames">
-            <button className="home-btn">Saved Games</button>
+            <button className="home-btn">
+              <span>Saved Games</span>
+            </button>
           </Link>
         </div>
       </div>

@@ -35,7 +35,7 @@ class Leaderboard extends React.Component {
       );
     });
     return (
-      <div className="leaderboard">
+      <div className="leaderboard" id="gamers">
         <h1 data-testid="table-title">Leaderboard</h1>
         <table>
           <thead>

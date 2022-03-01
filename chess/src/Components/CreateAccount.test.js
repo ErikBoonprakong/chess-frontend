@@ -4,10 +4,9 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import CreateAccount from "./CreateAccount";
 import { shallow } from "enzyme";
-import cookieObj from "./GetCookies";
-
 import { configure } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
+import LogIn from "./LogIn";
 configure({ adapter: new Adapter() });
 
 describe("Create account page form should include all elements", () => {
@@ -50,14 +49,3 @@ test("Register button must load", () => {
 //   beforeEach(() => {
 //     wrapper = shallow(<CreateAccount newCookie={this.getCookie.bind(this)} />);
 //   });
-
-describe("handleChangeTest", () => {
-  let wrapper;
-
-  it("Updates the state", () => {
-    const wrapper = shallow(<CreateAccount />);
-    const input = wrapper.find("input");
-    input.simulate("change", { target: { id: "hello" } }); // 'value' instead of 'num'
-    expect(wrapper.state().username).toEqual("hello"); // SUCCESS
-  });
-});
