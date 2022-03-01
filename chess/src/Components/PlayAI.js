@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Chess from "chess.js";
 import "./play.css";
 import { Chessboard } from "react-chessboard";
@@ -9,7 +9,7 @@ import { Redirect } from "react-router";
 
 export default function PlayVsRandom(props) {
   const options = props.location.state.state;
-  const depth = parseInt(options.difficulty);
+  const depth = options.difficulty;
   const fen = props.location.state.fen;
 
   const cookieObject = cookieObj();
@@ -19,19 +19,15 @@ export default function PlayVsRandom(props) {
   const chessboardRef = useRef();
   const [game, setGame] = useState(new Chess(fen));
   const [arrows, setArrows] = useState([]);
-  const [boardOrientation, setBoardOrientation] = useState(
-    options.usercolour === "w" ? "white" : "black"
-  );
+  const [boardOrientation, setBoardOrientation] = useState("white");
   const [currentTimeout, setCurrentTimeout] = useState(undefined);
   const [boardWidth, setBoardWidth] = useState(400);
 
   const [inCheckMate, checkMate] = useState("");
   const [message, changeMessage] = useState("");
   const [redirect, changeRedirect] = useState(false);
-  const [userColour, changeColour] = useState(options.usercolour);
-
+  const [userColour, changeColour] = useState(undefined);
   const aiColour = userColour === "w" ? "b" : "w";
-  console.log(options.usercolour, userColour, boardOrientation, aiColour);
   function safeGameMutate(modify) {
     setGame((g) => {
       const update = { ...g };
@@ -42,14 +38,14 @@ export default function PlayVsRandom(props) {
 
   async function makeMove() {
     const possibleMoves = game.moves({ verbose: true });
-    console.log("in make move", options.difficulty);
+
     // exit if the game is over
     if (game.game_over() || game.in_draw() || possibleMoves.length === 0) {
       return;
     }
 
     const nextMove = moveToPlay(possibleMoves);
-    console.log(nextMove);
+
     safeGameMutate((game) => {
       game.move(nextMove);
     });
@@ -58,19 +54,17 @@ export default function PlayVsRandom(props) {
     }
   }
   function moveToPlay(possibleMoves) {
-    console.log(depth);
-
-    if (depth === 0) {
+    if (depth === "0") {
       const randomIndex = Math.floor(Math.random() * possibleMoves.length);
 
       return possibleMoves[randomIndex];
-    } else if (depth > 0) {
-      return minimax(game, depth, true, 0, aiColour)[0];
+    } else if (depth === "1" || depth === "2" || depth === "3") {
+      const depthInt = parseInt(depth);
+      return minimax(game, depthInt, true, 0, "b")[0];
     }
   }
 
   async function onDrop(sourceSquare, targetSquare) {
-    console.log("in on drop");
     const gameCopy = { ...game };
     const move = gameCopy.move({
       from: sourceSquare,
@@ -106,19 +100,49 @@ export default function PlayVsRandom(props) {
   }
 
   async function handleSaveGame() {
-    console.log(cookieObject);
     const response = await networking.saveGame(
       cookieObject.user_id,
       options.reset,
       options.undo,
       options.optimalMove,
       options.difficulty,
-      userColour,
       game.fen()
     );
 
     changeMessage(response.response);
     changeRedirect(true);
+  }
+  const pieces = [
+    "wP",
+    "wN",
+    "wB",
+    "wR",
+    "wQ",
+    "wK",
+    "bP",
+    "bN",
+    "bB",
+    "bR",
+    "bQ",
+    "bK",
+  ];
+
+  function customPieces() {
+    const returnPieces = {};
+    pieces.map((p) => {
+      returnPieces[p] = ({ squareWidth }) => (
+        <div
+          style={{
+            width: squareWidth,
+            height: squareWidth,
+            backgroundImage: `url(/media/${p}.png)`,
+            backgroundSize: "100%",
+          }}
+        />
+      );
+      return null;
+    });
+    return returnPieces;
   }
 
   async function changeUserColour(e) {
@@ -131,11 +155,8 @@ export default function PlayVsRandom(props) {
       choice = colours[Math.floor(Math.random() * 2)];
       await changeColour(choice);
     }
-
     const orientation = choice === "w" ? "white" : "black";
-
     setBoardOrientation(orientation);
-
     if (choice === "b") {
       setTimeout(makeMove, 200);
       return;
@@ -163,9 +184,8 @@ export default function PlayVsRandom(props) {
           {message}
           {game.in_checkmate() ? (
             <div> {`Checkmate! The winner is ${inCheckMate}!`}</div>
-          ) : (
-            <div> {`Stalemate!`}</div>
-          )}
+          ) : null}
+          {game.in_stalemate() ? <div> {`Stalemate!`}</div> : null}
           {redirect ? (
             <Redirect to="/home" />
           ) : (
@@ -182,10 +202,9 @@ export default function PlayVsRandom(props) {
                   borderRadius: "4px",
                   boxShadow: "0 5px 15px rgba(0, 0, 0, 0.5)",
                 }}
-                // customDarkSquareStyle={{ backgroundColor: "green" }}
-                // customLightSquareStyle={{ backgroundColor: "cream" }}
-                /// this code will be useful if we ever get to customisation
-
+                customDarkSquareStyle={{ backgroundColor: "green" }}
+                customLightSquareStyle={{ backgroundColor: "cream" }}
+                customPieces={customPieces}
                 ref={chessboardRef}
               />
               <div className="buttons">
