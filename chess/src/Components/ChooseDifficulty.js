@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import Networking from "./Networking";
-import Alert from "react-bootstrap/Alert";
 
 class ChooseDifficulty extends React.Component {
   constructor(props) {
