@@ -21,7 +21,7 @@ class SavedGame extends React.Component {
     this.networking = new Networking();
     this.cookies = cookieObj();
     this.orientation =
-      this.props.options.userColour === "w" ? "white" : "black";
+      this.props.options.usercolour === "w" ? "white" : "black";
   }
   showDifficulty(rating) {
     switch (rating) {
@@ -39,7 +39,6 @@ class SavedGame extends React.Component {
   }
 
   render() {
-    console.log(this.props.options.userColour);
     return (
       <div className="previous-games">
         <ListItem alignItems="flex-start">
