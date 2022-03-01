@@ -24,7 +24,6 @@ class ChooseDifficulty extends React.Component {
     await this.setState({ [e.target.id]: newState });
   }
   handleSubmit(e) {
-    console.log(e.target.value);
     this.setState({ difficulty: e.target.value, submit: true });
   }
   render() {
