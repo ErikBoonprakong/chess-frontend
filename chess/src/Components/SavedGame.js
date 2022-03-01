@@ -4,6 +4,13 @@ import { Link, Redirect } from "react-router-dom";
 import cookieObj from "./GetCookies";
 import Alert from "react-bootstrap/Alert";
 import { Chessboard } from "react-chessboard";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import Divider from "@mui/material/Divider";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import Typography from "@mui/material/Typography";
 
 class SavedGame extends React.Component {
   constructor(props) {
@@ -13,6 +20,8 @@ class SavedGame extends React.Component {
     };
     this.networking = new Networking();
     this.cookies = cookieObj();
+    this.orientation =
+      this.props.options.usercolour === "w" ? "white" : "black";
   }
   showDifficulty(rating) {
     switch (rating) {
@@ -30,32 +39,49 @@ class SavedGame extends React.Component {
   }
 
   render() {
-    console.log(this.props.options.difficulty);
     return (
       <div className="previous-games">
-        <div>
-          <h5>{this.props.options.id}</h5>
-          <h3>
-            Difficulty:
-            {this.showDifficulty(this.props.options.difficulty)}
-          </h3>
-          <h3>Last played: {this.props.options.created_at}</h3>
-          <h4>Show hints: {this.props.options.hints ? "yes" : "no"}</h4>
-          <h4>Reset board: {this.props.options.reset ? "yes" : "no"}</h4>
-          <h4>Undo last move: {this.props.options.undo ? "yes" : "no"}</h4>
-        </div>
-
-        <Chessboard
-          className="chessboard-snapshot"
-          id="PlayVsRandom"
-          boardOrientation={"white"}
-          boardWidth={200}
-          position={this.props.options.game_fen}
-          customBoardStyle={{
-            borderRadius: "4px",
-            boxShadow: "0 5px 15px rgba(0, 0, 0, 0.5)",
-          }}
-        />
+        <ListItem alignItems="flex-start">
+          <ListItemAvatar>
+            {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /> */}
+            <Chessboard
+              className="chessboard-snapshot"
+              id="PlayVsRandom"
+              boardOrientation={this.orientation}
+              boardWidth={200}
+              position={this.props.options.game_fen}
+              customBoardStyle={{
+                borderRadius: "4px",
+                boxShadow: "0 5px 15px rgba(0, 0, 0, 0.5)",
+              }}
+            />
+          </ListItemAvatar>
+          <ListItemText
+            primary={`Difficulty:
+            ${this.showDifficulty(this.props.options.difficulty)}`}
+            secondary={
+              <React.Fragment>
+                <Typography
+                  sx={{ display: "inline" }}
+                  component="span"
+                  variant="body2"
+                  color="text.primary"
+                ></Typography>
+                {/* {" — I'll be in your neighborhood doing errands this…"} */}
+                <ul>
+                  <li>Last played: {this.props.options.created_at}</li>
+                  <li>Show hints: {this.props.options.hints ? "yes" : "no"}</li>
+                  <li>
+                    Reset board: {this.props.options.reset ? "yes" : "no"}
+                  </li>
+                  <li>
+                    Undo last move: {this.props.options.undo ? "yes" : "no"}
+                  </li>
+                </ul>
+              </React.Fragment>
+            }
+          />
+        </ListItem>
         <Link
           to={{
             pathname: "/playai",
@@ -67,6 +93,7 @@ class SavedGame extends React.Component {
         >
           <button id="play"> Play</button>
         </Link>
+        <Divider variant="inset" />
       </div>
     );
   }

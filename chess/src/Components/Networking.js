@@ -62,9 +62,9 @@ class Networking {
     user_id,
     reset,
     undo,
-
     optimalMove,
     difficulty,
+    userColour,
     game_fen
   ) {
     let response = await fetch(`${API_URL}/savegames`, {
@@ -78,6 +78,7 @@ class Networking {
 
         optimal_move: optimalMove,
         difficulty: difficulty,
+        userColour: userColour,
         game_fen: game_fen,
       }),
     });

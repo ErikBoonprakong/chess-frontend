@@ -1,6 +1,8 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import Networking from "./Networking";
+import Alert from "react-bootstrap/Alert";
+import "./Login.css";
 
 class ChooseDifficulty extends React.Component {
   constructor(props) {
@@ -12,6 +14,7 @@ class ChooseDifficulty extends React.Component {
 
       optimalMove: 0,
       difficulty: 0,
+      userColour: null,
       submit: 0,
     };
     this.Networking = new Networking();
@@ -22,7 +25,6 @@ class ChooseDifficulty extends React.Component {
     await this.setState({ [e.target.id]: newState });
   }
   handleSubmit(e) {
-    console.log(e.target.value);
     this.setState({ difficulty: e.target.value, submit: true });
   }
   render() {
@@ -45,38 +47,54 @@ class ChooseDifficulty extends React.Component {
             </Link>
             <div className="create-account">
               <div className="login-form">
-                <h2>Choose difficulty</h2>
-                <input
-                  onClick={(e) => this.handleOptions(e)}
-                  type="checkbox"
-                  id="inCheck"
-                  name="check_hint"
-                ></input>
-                <label htmlFor="undo"> Let me know when im in check.</label>
-                <input
-                  onClick={(e) => this.handleOptions(e)}
-                  type="checkbox"
-                  id="undo"
-                  name="undo"
-                ></input>
-                <label htmlFor="undo"> Let me undo my last move.</label>
-                <input
-                  onClick={(e) => this.handleOptions(e)}
-                  type="checkbox"
-                  id="reset"
-                  name="reset"
-                ></input>
-                <label htmlFor="reset"> Let me reset the board.</label>
-
-                <input
-                  onClick={(e) => this.handleOptions(e)}
-                  type="checkbox"
-                  id="optimalMove"
-                  name="optimalMove"
-                ></input>
-                <label htmlFor="optimalMove"> Show me hints.</label>
+                <ul>
+                  <h2>Choose difficulty</h2>
+                  <ul className="difficulty-options">
+                    <li>
+                      <input
+                        onClick={(e) => this.handleOptions(e)}
+                        type="checkbox"
+                        id="inCheck"
+                        name="check_hint"
+                      ></input>
+                      <label htmlFor="undo">
+                        {" "}
+                        Let me know when im in check.
+                      </label>
+                    </li>
+                    <li>
+                      {" "}
+                      <input
+                        onClick={(e) => this.handleOptions(e)}
+                        type="checkbox"
+                        id="undo"
+                        name="undo"
+                      ></input>
+                      <label htmlFor="undo"> Let me undo my last move.</label>
+                    </li>
+                    <li>
+                      <input
+                        onClick={(e) => this.handleOptions(e)}
+                        type="checkbox"
+                        id="reset"
+                        name="reset"
+                      ></input>
+                      <label htmlFor="reset"> Let me reset the board.</label>
+                    </li>
+                    <li>
+                      <input
+                        onClick={(e) => this.handleOptions(e)}
+                        type="checkbox"
+                        id="optimalMove"
+                        name="optimalMove"
+                      ></input>
+                      <label htmlFor="optimalMove"> Show me hints.</label>
+                    </li>
+                  </ul>
+                </ul>
               </div>
               <button
+                className="btn"
                 id="submit"
                 name="easy"
                 value="0"
@@ -85,6 +103,7 @@ class ChooseDifficulty extends React.Component {
                 Easy!
               </button>
               <button
+                className="btn"
                 id="submit"
                 name="medium"
                 value="1"
@@ -93,6 +112,7 @@ class ChooseDifficulty extends React.Component {
                 Medium!
               </button>
               <button
+                className="btn"
                 id="submit"
                 name="hard"
                 value="2"
@@ -101,6 +121,7 @@ class ChooseDifficulty extends React.Component {
                 Hard!
               </button>
               <button
+                className="btn"
                 id="submit"
                 name="really_hard"
                 value="3"
