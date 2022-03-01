@@ -24,7 +24,8 @@ class PlayOnline extends React.Component {
   }
 
   componentDidMount() {
-    this.socket = io("http://localhost:4000");
+    // this.socket = io("http://localhost:4000");
+    this.socket = io("https://chessyem-websocket.herokuapp.com");
     this.socket.on("new message", (msg) => {
       this.setState({ messageList: [...this.state.messageList, msg] });
     });
