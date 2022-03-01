@@ -22,7 +22,7 @@ export default function PlayVsRandom(props) {
   const [boardOrientation, setBoardOrientation] = useState("white");
   const [currentTimeout, setCurrentTimeout] = useState(undefined);
   const [boardWidth, setBoardWidth] = useState(400);
-  const [turn, addToTurn] = useState(0);
+
   const [inCheckMate, checkMate] = useState("");
   const [message, changeMessage] = useState("");
   const [redirect, changeRedirect] = useState(false);
@@ -36,7 +36,7 @@ export default function PlayVsRandom(props) {
   }
 
   async function makeMove() {
-    const possibleMoves = game.moves();
+    const possibleMoves = game.moves({ verbose: true });
 
     // exit if the game is over
     if (game.game_over() || game.in_draw() || possibleMoves.length === 0) {
@@ -44,6 +44,7 @@ export default function PlayVsRandom(props) {
     }
 
     const nextMove = moveToPlay(possibleMoves);
+
     safeGameMutate((game) => {
       game.move(nextMove);
     });
@@ -52,16 +53,17 @@ export default function PlayVsRandom(props) {
     }
   }
   function moveToPlay(possibleMoves) {
-    if (depth === 1) {
+    if (depth === "0") {
       const randomIndex = Math.floor(Math.random() * possibleMoves.length);
+
       return possibleMoves[randomIndex];
-    } else if (depth > 1) {
-      return minimax(game, depth, true, 0, "b")[0];
+    } else if (depth === "1" || depth === "2" || depth === "3") {
+      const depthInt = parseInt(depth);
+      return minimax(game, depthInt, true, 0, "b")[0];
     }
   }
 
   async function onDrop(sourceSquare, targetSquare) {
-    addToTurn(turn + 1);
     const gameCopy = { ...game };
     const move = gameCopy.move({
       from: sourceSquare,
@@ -105,7 +107,7 @@ export default function PlayVsRandom(props) {
       options.difficulty,
       game.fen()
     );
-    console.log(response);
+
     changeMessage(response.response);
     changeRedirect(true);
   }
