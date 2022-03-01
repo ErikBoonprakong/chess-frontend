@@ -62,7 +62,6 @@ class Networking {
     user_id,
     reset,
     undo,
-
     optimalMove,
     difficulty,
     userColour,
@@ -79,7 +78,7 @@ class Networking {
 
         optimal_move: optimalMove,
         difficulty: difficulty,
-        user_colour: userColour,
+        userColour: userColour,
         game_fen: game_fen,
       }),
     });

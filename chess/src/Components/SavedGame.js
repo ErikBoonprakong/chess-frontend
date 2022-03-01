@@ -20,6 +20,8 @@ class SavedGame extends React.Component {
     };
     this.networking = new Networking();
     this.cookies = cookieObj();
+    this.orientation =
+      this.props.options.userColour === "w" ? "white" : "black";
   }
   showDifficulty(rating) {
     switch (rating) {
@@ -37,7 +39,7 @@ class SavedGame extends React.Component {
   }
 
   render() {
-    console.log(this.props.options.difficulty);
+    console.log(this.props.options.userColour);
     return (
       <div className="previous-games">
         <ListItem alignItems="flex-start">
@@ -46,7 +48,7 @@ class SavedGame extends React.Component {
             <Chessboard
               className="chessboard-snapshot"
               id="PlayVsRandom"
-              boardOrientation={"white"}
+              boardOrientation={this.orientation}
               boardWidth={200}
               position={this.props.options.game_fen}
               customBoardStyle={{
@@ -67,12 +69,16 @@ class SavedGame extends React.Component {
                   color="text.primary"
                 ></Typography>
                 {/* {" — I'll be in your neighborhood doing errands this…"} */}
-                <h4>Last played: {this.props.options.created_at}</h4>
-                <h4>Show hints: {this.props.options.hints ? "yes" : "no"}</h4>
-                <h4>Reset board: {this.props.options.reset ? "yes" : "no"}</h4>
-                <h4>
-                  Undo last move: {this.props.options.undo ? "yes" : "no"}
-                </h4>
+                <ul>
+                  <li>Last played: {this.props.options.created_at}</li>
+                  <li>Show hints: {this.props.options.hints ? "yes" : "no"}</li>
+                  <li>
+                    Reset board: {this.props.options.reset ? "yes" : "no"}
+                  </li>
+                  <li>
+                    Undo last move: {this.props.options.undo ? "yes" : "no"}
+                  </li>
+                </ul>
               </React.Fragment>
             }
           />
