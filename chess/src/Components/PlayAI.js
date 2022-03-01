@@ -163,7 +163,9 @@ export default function PlayVsRandom(props) {
           {message}
           {game.in_checkmate() ? (
             <div> {`Checkmate! The winner is ${inCheckMate}!`}</div>
-          ) : null}
+          ) : (
+            <div> {`Stalemate!`}</div>
+          )}
           {redirect ? (
             <Redirect to="/home" />
           ) : (

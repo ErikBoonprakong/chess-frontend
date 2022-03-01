@@ -136,7 +136,9 @@ class PlayOnline extends React.Component {
         this.setState({ endOfGame: true });
         await this.sendResults(this.state.players[0], 0, 0, 1);
         await this.sendResults(this.state.players[1], 0, 0, 1);
+
         this.socket.emit("new message", "Draw");
+
         return false;
       }
     } else {

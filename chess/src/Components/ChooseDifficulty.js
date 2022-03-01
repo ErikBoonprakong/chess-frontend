@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import Networking from "./Networking";
 import Alert from "react-bootstrap/Alert";
 import "./Login.css";
+
 class ChooseDifficulty extends React.Component {
   constructor(props) {
     super(props);
