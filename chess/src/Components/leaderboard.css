@@ -2,3 +2,31 @@
   display: flex;
   flex-direction: column;
 }
+
+#gamers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#gamers td,
+#gamers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#gamers tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#gamers tr:hover {
+  background-color: #ddd;
+}
+
+#gamers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #9c8f41f2;
+  color: white;
+}
