@@ -125,7 +125,6 @@ class PlayOnline extends React.Component {
         await this.sendResults(this.props.userData.user, 1, 0, 0);
         await this.sendResults(opponentName, 0, 1, 0);
         this.socket.emit("new message", `${this.props.userData.user} Wins`);
-        return false;
       }
       if (
         !this.endOfGame &&
@@ -138,8 +137,6 @@ class PlayOnline extends React.Component {
         await this.sendResults(this.state.players[1], 0, 0, 1);
 
         this.socket.emit("new message", "Draw");
-
-        return false;
       }
     } else {
       if (
