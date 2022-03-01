@@ -28,10 +28,10 @@ export default function PlayVsRandom(props) {
   const [inCheckMate, checkMate] = useState("");
   const [message, changeMessage] = useState("");
   const [redirect, changeRedirect] = useState(false);
-  const [userColour, changeColour] = useState(options.userColour);
+  const [userColour, changeColour] = useState(options.usercolour);
 
   const aiColour = userColour === "w" ? "b" : "w";
-  console.log(userColour, boardOrientation, aiColour);
+  console.log(options.usercolour, userColour, boardOrientation, aiColour);
   function safeGameMutate(modify) {
     setGame((g) => {
       const update = { ...g };
