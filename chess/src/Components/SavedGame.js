@@ -16,29 +16,30 @@ class SavedGame extends React.Component {
   }
   showDifficulty(rating) {
     switch (rating) {
-      case "easy":
-        return "easy";
+      case 0:
+        return " easy";
+      case 1:
+        return " medium";
       case 2:
-        return "medium";
+        return " hard";
       case 3:
-        return "hard";
-      case 4:
-        return "really hard";
+        return " really hard";
       default:
         return "//";
     }
   }
 
   render() {
-    console.log(this.props.options);
+    console.log(this.props.options.difficulty);
     return (
       <div className="previous-games">
         <div>
           <h5>{this.props.options.id}</h5>
+          <h3>
+            Difficulty:
+            {this.showDifficulty(this.props.options.difficulty)}
+          </h3>
           <h3>Last played: {this.props.options.created_at}</h3>
-          <h2>
-            Difficulty: {this.showDifficulty(this.props.options.difficulty)}
-          </h2>
           <h4>Show hints: {this.props.options.hints ? "yes" : "no"}</h4>
           <h4>Reset board: {this.props.options.reset ? "yes" : "no"}</h4>
           <h4>Undo last move: {this.props.options.undo ? "yes" : "no"}</h4>

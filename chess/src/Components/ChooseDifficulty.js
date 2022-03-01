@@ -80,7 +80,7 @@ class ChooseDifficulty extends React.Component {
               <button
                 id="submit"
                 name="easy"
-                value="1"
+                value="0"
                 onClick={(e) => this.handleSubmit(e)}
               >
                 Easy!
@@ -88,7 +88,7 @@ class ChooseDifficulty extends React.Component {
               <button
                 id="submit"
                 name="medium"
-                value="2"
+                value="1"
                 onClick={(e) => this.handleSubmit(e)}
               >
                 Medium!
@@ -96,7 +96,7 @@ class ChooseDifficulty extends React.Component {
               <button
                 id="submit"
                 name="hard"
-                value="3"
+                value="2"
                 onClick={(e) => this.handleSubmit(e)}
               >
                 Hard!
@@ -104,7 +104,7 @@ class ChooseDifficulty extends React.Component {
               <button
                 id="submit"
                 name="really_hard"
-                value="4"
+                value="3"
                 onClick={(e) => this.handleSubmit(e)}
               >
                 Really hard!
