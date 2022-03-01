@@ -31,7 +31,7 @@ export default function PlayVsRandom(props) {
   const [userColour, changeColour] = useState(options.usercolour);
 
   const aiColour = userColour === "w" ? "b" : "w";
-  console.log(options.usercolour, userColour, boardOrientation, aiColour);
+
   function safeGameMutate(modify) {
     setGame((g) => {
       const update = { ...g };
@@ -42,7 +42,7 @@ export default function PlayVsRandom(props) {
 
   async function makeMove() {
     const possibleMoves = game.moves({ verbose: true });
-    console.log("in make move", options.difficulty);
+
     // exit if the game is over
     if (game.game_over() || game.in_draw() || possibleMoves.length === 0) {
       return;
@@ -58,8 +58,6 @@ export default function PlayVsRandom(props) {
     }
   }
   function moveToPlay(possibleMoves) {
-    console.log(depth);
-
     if (depth === 0) {
       const randomIndex = Math.floor(Math.random() * possibleMoves.length);
 
@@ -70,7 +68,6 @@ export default function PlayVsRandom(props) {
   }
 
   async function onDrop(sourceSquare, targetSquare) {
-    console.log("in on drop");
     const gameCopy = { ...game };
     const move = gameCopy.move({
       from: sourceSquare,
@@ -163,9 +160,8 @@ export default function PlayVsRandom(props) {
           {message}
           {game.in_checkmate() ? (
             <div> {`Checkmate! The winner is ${inCheckMate}!`}</div>
-          ) : (
-            <div> {`Stalemate!`}</div>
-          )}
+          ) : null}
+          {game.in_stalemate() ? <div> {`Stalemate!`}</div> : null}
           {redirect ? (
             <Redirect to="/home" />
           ) : (
