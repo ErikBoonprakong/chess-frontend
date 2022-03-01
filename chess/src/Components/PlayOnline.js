@@ -6,7 +6,7 @@ import cookieObj from "./GetCookies";
 import Networking from "./Networking";
 import theme from "./Theme.js";
 import { CircularProgress, ThemeProvider } from "@mui/material";
-
+import "./play.css";
 class PlayOnline extends React.Component {
   constructor(props) {
     super(props);
@@ -28,7 +28,6 @@ class PlayOnline extends React.Component {
   }
 
   componentDidMount() {
-    // this.socket = io("http://localhost:4000");
     this.socket = io("https://chessyem-websocket.herokuapp.com");
     this.socket.on("new message", (msg) => {
       this.setState({ messageList: [...this.state.messageList, msg] });
@@ -129,12 +128,17 @@ class PlayOnline extends React.Component {
         return false;
       }
       if (
-        gameCopy.in_draw() ||
-        gameCopy.in_stalemate() ||
-        gameCopy.in_threefold_repetition()
+        !this.endOfGame &&
+        (gameCopy.in_draw() ||
+          gameCopy.in_stalemate() ||
+          gameCopy.in_threefold_repetition())
       ) {
+        this.setState({ endOfGame: true });
         await this.sendResults(this.state.players[0], 0, 0, 1);
         await this.sendResults(this.state.players[1], 0, 0, 1);
+
+        this.socket.emit("new message", "Draw");
+
         return false;
       }
     } else {
@@ -160,7 +164,7 @@ class PlayOnline extends React.Component {
   displayPlayers() {
     if (this.state.players.length === 2) {
       return (
-        <div>
+        <div className="play">
           <div>{`${this.state.players[0]} plays white, ${this.state.players[1]} plays black. `}</div>
 
           <Chessboard

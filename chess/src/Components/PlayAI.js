@@ -142,26 +142,6 @@ export default function PlayVsRandom(props) {
     }
   }
 
-  // function handleNoUserColourFromSaved() {
-  //   return (
-  //     <div>
-  //       <button id="w" onClick={changeUserColour}>
-  //         Play white
-  //       </button>
-  //       <button id="b" onClick={changeUserColour}>
-  //         Play black
-  //       </button>
-  //       <button id="r" onClick={changeUserColour}>
-  //         Random
-  //       </button>
-  //     </div>
-  //   );
-  // }
-
-  // function handleUserColourFromSaved() {
-  //   changeColour(options.userColour);
-  // }
-
   return (
     <div className="play">
       {" "}
