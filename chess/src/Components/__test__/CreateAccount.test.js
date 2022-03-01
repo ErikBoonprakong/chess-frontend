@@ -2,11 +2,11 @@ import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import CreateAccount from "./CreateAccount";
+import CreateAccount from "../CreateAccount";
 import { shallow } from "enzyme";
 import { configure } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
-import LogIn from "./LogIn";
+import LogIn from "../LogIn";
 configure({ adapter: new Adapter() });
 
 describe("Create account page form should include all elements", () => {

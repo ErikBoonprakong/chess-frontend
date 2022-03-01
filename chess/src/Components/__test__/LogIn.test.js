@@ -7,7 +7,7 @@ import {
   waitForElement,
 } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import LogIn from "./LogIn";
+import LogIn from "../LogIn";
 import ReactDOM from "react-dom";
 
 describe("Login page form should include all elements", () => {

@@ -98,7 +98,6 @@ class Networking {
         won: won,
         lost: lost,
         draw: draw,
-        score: score,
       }),
     });
     let json = await response.json();
