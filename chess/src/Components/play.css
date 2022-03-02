@@ -11,9 +11,19 @@
   /* justify-items: center; */
 }
 
+
+.App {
+  background-color: bisque;
+}
+
+
+
 .full-page-ai {
+
   display: flex;
   justify-content: center;
+  background-color: bisque;
+  margin-top: 100px;
 }
 .chat-wrapper {
   border: 4px solid black;
