@@ -4,32 +4,40 @@
   /* background-color: #4f6367; */
   position: absolute;
   place-content: center;
-  background-image: url("chessbackground.jpeg");
+  /* background-image: url("chessbackground.jpeg"); */
+  background-color: white;
   position: absolute;
   background-position: center;
   /* background-repeat: no-repeat; */
   background-size: cover;
   overflow-x: hidden;
+  margin-top: 100px;
 }
 
 .buttonWrapper {
   display: flex;
   flex-direction: column;
   margin-top: px;
+  /* align-items: center; */
+}
+button.buttonWrapper {
+  width: 800px;
 }
 
-.home-btn {
+.home-btn,
+.difficulty-btn {
   width: 30%;
   background-color: white;
   border: 1px white solid;
   margin: 15px;
 }
 
-.home-btn:hover {
+.home-btn:hover,
+.difficulty-btn:hover {
   background-color: hsl(210, 4%, 55%);
 }
 
-.home-btn {
+/* .home-btn {
   color: #272727;
   font-weight: 900;
   font-size: 24px;
@@ -41,4 +49,30 @@
   box-sizing: border-box;
   background-color: hsla(120, 3%, 35%, 0.589);
   margin-right: 10px;
+} */
+
+.home-btn,
+.difficulty-btn {
+  width: 30%;
+  background-color: #9da3a3;
+  font-weight: 900;
+  font-size: 24px;
+  color: white;
+  padding: 8px 10px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.home-btn:hover,
+.difficulty-btn:hover {
+  width: 30%;
+  background-color: #459699;
+  color: white;
+  padding: 8px 10px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }

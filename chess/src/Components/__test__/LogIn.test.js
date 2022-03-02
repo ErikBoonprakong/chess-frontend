@@ -11,7 +11,8 @@ import { shallow } from "enzyme";
 import { configure } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import LogIn from "../LogIn";
-import ReactDOM from "react-dom";
+import cookieObj from "../GetCookies";
+
 configure({ adapter: new Adapter() });
 
 describe("Login page form should include all elements", () => {
@@ -83,6 +84,17 @@ describe("Log In", () => {
       wrapper.instance().handleChange(mockPassword);
       expect(wrapper.state().username).toEqual(expected.username);
       expect(wrapper.state().password).toEqual(expected.password);
+    });
+  });
+
+  describe("handleSubmitTest", () => {
+    it("prevent default should be called when submitted", () => {
+      const mockPreventDefault = jest.fn();
+      const mockEvent = {
+        preventDefault: mockPreventDefault,
+      };
+      wrapper.instance().handleSubmit(mockEvent);
+      expect(mockPreventDefault).toHaveBeenCalled();
     });
   });
 });

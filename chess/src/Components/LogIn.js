@@ -52,7 +52,7 @@ class LogIn extends React.Component {
         ) : (
           <div className="login-form">
             <h2>Login</h2>{" "}
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} data-testid="form">
               <div id="inputWithIcon">
                 <input
                   name="username"

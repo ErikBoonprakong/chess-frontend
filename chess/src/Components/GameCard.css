@@ -1,4 +1,4 @@
-.previous-game {
+/* .previous-game {
   display: flex;
   flex-direction: row;
 }
@@ -51,4 +51,22 @@ body {
 
 .leaderboard {
   box-shadow: 0 0 40px -10px rgba(0, 0, 0, 0.4);
+} */
+
+.play {
+  width: 30%;
+  align-items: center;
+  background-color: #7a9e9f;
+  color: white;
+  padding: 8px 10px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
 }
