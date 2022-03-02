@@ -186,7 +186,7 @@ class PlayOnline extends React.Component {
       return (
         <div>
           {" "}
-          <ThemeProvider theme={theme}>
+          <ThemeProvider id="loading" theme={theme}>
             <div className="graphs" style={{ marginTop: "30vh" }}>
               <CircularProgress size={100} />
             </div>

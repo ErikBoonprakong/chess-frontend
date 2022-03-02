@@ -11,7 +11,7 @@ class HomePage extends React.Component {
   render() {
     return (
       <div className="body-div">
-        <div className="buttonWrapper middle">
+        <div className="buttonWrapper">
           <Link to="/options">
             <button className="home-btn">
               <span>Play AI</span>

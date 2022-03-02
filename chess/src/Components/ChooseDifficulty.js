@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import Networking from "./Networking";
 import Alert from "react-bootstrap/Alert";
 import "./Login.css";
+import "./ChooseDifficulty.css";
 
 class ChooseDifficulty extends React.Component {
   constructor(props) {
@@ -42,13 +43,10 @@ class ChooseDifficulty extends React.Component {
           />
         ) : (
           <div className="body-div">
-            <Link to="/home">
-              <button className="home-btn">Back to home</button>
-            </Link>
+            <h1 className="choose-difficulty">Choose difficulty</h1>
             <div className="create-account">
               <div className="login-form">
                 <ul>
-                  <h2>Choose difficulty</h2>
                   <ul className="difficulty-options">
                     <li>
                       <input
@@ -93,42 +91,44 @@ class ChooseDifficulty extends React.Component {
                   </ul>
                 </ul>
               </div>
-              <button
-                className="home-btn"
-                id="submit"
-                name="easy"
-                value="0"
-                onClick={(e) => this.handleSubmit(e)}
-              >
-                Easy!
-              </button>
-              <button
-                className="home-btn"
-                id="submit"
-                name="medium"
-                value="1"
-                onClick={(e) => this.handleSubmit(e)}
-              >
-                Medium!
-              </button>
-              <button
-                className="home-btn"
-                id="submit"
-                name="hard"
-                value="2"
-                onClick={(e) => this.handleSubmit(e)}
-              >
-                Hard!
-              </button>
-              <button
-                className="home-btn"
-                id="submit"
-                name="really_hard"
-                value="3"
-                onClick={(e) => this.handleSubmit(e)}
-              >
-                Really hard!
-              </button>
+              <div id="buttonWrapper">
+                <button
+                  className="decision-btn"
+                  id="submit"
+                  name="easy"
+                  value="0"
+                  onClick={(e) => this.handleSubmit(e)}
+                >
+                  Easy!
+                </button>
+                <button
+                  className="decision-btn"
+                  id="submit"
+                  name="medium"
+                  value="1"
+                  onClick={(e) => this.handleSubmit(e)}
+                >
+                  Medium!
+                </button>
+                <button
+                  className="decision-btn"
+                  id="submit"
+                  name="hard"
+                  value="2"
+                  onClick={(e) => this.handleSubmit(e)}
+                >
+                  Hard!
+                </button>
+                <button
+                  className="decision-btn"
+                  id="submit"
+                  name="really_hard"
+                  value="3"
+                  onClick={(e) => this.handleSubmit(e)}
+                >
+                  Really hard!
+                </button>
+              </div>
             </div>
           </div>
         )}

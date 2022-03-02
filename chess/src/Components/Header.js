@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Networking from "./Networking";
 import cookieObj from "./GetCookies";
 import "./header.css";
+import logo from "./ChessYEM.jpeg";
 
 class Header extends React.Component {
   constructor(props) {
@@ -18,27 +19,26 @@ class Header extends React.Component {
         <nav className="navMenu">
           {console.log(this.props.userData)}
 
-          {/* <div className="logo">
-            <img src="chessLogo.png" alt="chess"></img>
-          </div> */}
-
-          <span className="user-position">
-            Signed in as: <p>{this.props.userData.user}</p>
-          </span>
-          <Link to="/login">
-            <button
-              className="header-btn"
-              onClick={async () => {
-                await this.Networking.logOut();
-                this.props.newCookie(cookieObj());
-              }}
-            >
-              Logout
-            </button>
-          </Link>
-          <Link to="/home">
-            <button className="header-btn">Home</button>
-          </Link>
+          <div className="logo">
+            <img src={logo} alt="chess"></img>
+            <span className="user-position">
+              <p>{this.props.userData.user}</p>
+            </span>
+            <Link to="/login">
+              <button
+                className="header-btn"
+                onClick={async () => {
+                  await this.Networking.logOut();
+                  this.props.newCookie(cookieObj());
+                }}
+              >
+                Logout
+              </button>
+            </Link>
+            <Link to="/home">
+              <button className="header-btn">Home</button>
+            </Link>
+          </div>
 
           {/* <hr /> */}
           <div className="dot"></div>
