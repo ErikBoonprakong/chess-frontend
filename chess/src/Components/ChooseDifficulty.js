@@ -43,7 +43,7 @@ class ChooseDifficulty extends React.Component {
         ) : (
           <div className="body-div">
             <Link to="/home">
-              <button className="register-btn">Back to home</button>
+              <button className="home-btn">Back to home</button>
             </Link>
             <div className="create-account">
               <div className="login-form">
@@ -59,7 +59,7 @@ class ChooseDifficulty extends React.Component {
                       ></input>
                       <label htmlFor="undo">
                         {" "}
-                        Let me know when im in check.
+                        Let me know when I am in check.
                       </label>
                     </li>
                     <li>
@@ -94,7 +94,7 @@ class ChooseDifficulty extends React.Component {
                 </ul>
               </div>
               <button
-                className="btn"
+                className="home-btn"
                 id="submit"
                 name="easy"
                 value="0"
@@ -103,7 +103,7 @@ class ChooseDifficulty extends React.Component {
                 Easy!
               </button>
               <button
-                className="btn"
+                className="home-btn"
                 id="submit"
                 name="medium"
                 value="1"
@@ -112,7 +112,7 @@ class ChooseDifficulty extends React.Component {
                 Medium!
               </button>
               <button
-                className="btn"
+                className="home-btn"
                 id="submit"
                 name="hard"
                 value="2"
@@ -121,7 +121,7 @@ class ChooseDifficulty extends React.Component {
                 Hard!
               </button>
               <button
-                className="btn"
+                className="home-btn"
                 id="submit"
                 name="really_hard"
                 value="3"

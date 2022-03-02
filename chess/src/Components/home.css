@@ -1,3 +1,17 @@
+.body-div {
+  height: 95vh;
+  width: 100vw;
+  /* background-color: #4f6367; */
+  position: absolute;
+  place-content: center;
+  background-image: url("chessbackground.jpeg");
+  position: absolute;
+  background-position: center;
+  /* background-repeat: no-repeat; */
+  background-size: cover;
+  overflow-x: hidden;
+}
+
 .buttonWrapper {
   display: flex;
   flex-direction: column;
@@ -8,7 +22,7 @@
   width: 30%;
   background-color: white;
   border: 1px white solid;
-  margin: 4px;
+  margin: 15px;
 }
 
 .home-btn:hover {
@@ -16,13 +30,15 @@
 }
 
 .home-btn {
-  color: rgb(255, 255, 255);
+  color: #272727;
+  font-weight: 900;
+  font-size: 24px;
   width: 50%;
   border: 2px solid #272727;
   border-radius: 10px;
-  /* outline: none; */
+  outline: none;
   padding: 8px;
   box-sizing: border-box;
-  background-color: #272727;
+  background-color: hsla(120, 3%, 35%, 0.589);
   margin-right: 10px;
 }
