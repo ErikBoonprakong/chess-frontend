@@ -11,7 +11,8 @@ import { shallow } from "enzyme";
 import { configure } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import LogIn from "../LogIn";
-import ReactDOM from "react-dom";
+import cookieObj from "../GetCookies";
+
 configure({ adapter: new Adapter() });
 
 describe("Login page form should include all elements", () => {

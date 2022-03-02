@@ -97,6 +97,7 @@ class CreateAccount extends React.Component {
                 <br />
                 <label className="password-label">Show Password </label>
                 <input
+                  data-testid="unchecked"
                   className="check"
                   type="checkbox"
                   onChange={this.showPassword.bind(this)}
