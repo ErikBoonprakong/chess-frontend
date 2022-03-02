@@ -263,7 +263,7 @@ export default function PlayVsRandom(props) {
   //   );
   // }
   return (
-    <div className="full-page">
+    <div className="full-page-ai">
       {" "}
       {!userColour ? (
         <div>
