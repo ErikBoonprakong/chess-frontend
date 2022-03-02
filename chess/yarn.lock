@@ -8135,7 +8135,6 @@
     "hoist-non-react-statics" "^3.3.2"
 
 "react-dom@*", "react-dom@^16.13", "react-dom@^16.14.0 || ^17.0.2", "react-dom@^17.0.0", "react-dom@^17.0.0-0", "react-dom@^17.0.2", "react-dom@>= 16.9.0", "react-dom@>=16.14.0", "react-dom@>=16.6.0":
-
   "integrity" "sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz"
   "version" "17.0.2"
@@ -8906,7 +8905,6 @@
     "amdefine" ">=0.0.4"
 
 "source-map@^0.5.0", "source-map@^0.5.7", "source-map@~0.5.0":
-
   "integrity" "sha1-igOdLRAh0i0eoUyA2OpGi6LvP8w="
   "resolved" "https://registry.npmjs.org/source-map/-/source-map-0.5.7.tgz"
   "version" "0.5.7"

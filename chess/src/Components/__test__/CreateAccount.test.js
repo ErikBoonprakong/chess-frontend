@@ -40,12 +40,50 @@ test("Register button must load", () => {
   expect(button).toBeInTheDocument();
 });
 
-// describe("CreateAccount", () => {
-//   let wrapper;
-//   //   let sessionCookie;
-//   //   function getCookie(newCookie) {
-//   //     sessionCookie = newCookie;
-//   //   }
-//   beforeEach(() => {
-//     wrapper = shallow(<CreateAccount newCookie={this.getCookie.bind(this)} />);
-//   });
+describe("CreateAccount", () => {
+  let wrapper;
+  let sessionCookie;
+  function getCookie(newCookie) {
+    sessionCookie = newCookie;
+  }
+  beforeEach(() => {
+    wrapper = shallow(
+      <CreateAccount newCookie={(newCookie) => getCookie(newCookie)} />
+    );
+  });
+
+  it("should match the snapshot", () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  describe("handleChangeTest", () => {
+    it("should call setState on username", () => {
+      const mockUsername = {
+        target: {
+          id: "username",
+          value: "test",
+        },
+      };
+      const mockPassword = {
+        target: {
+          id: "password",
+          value: "testtest",
+        },
+      };
+      const expected = {
+        username: "test",
+        password: "testtest",
+        confirm: "",
+        showPassword: false,
+        error: "",
+        valid: true,
+        redirect: false,
+        cookies: sessionCookie,
+      };
+      wrapper.instance().handleChange(mockUsername);
+      wrapper.instance().handleChange(mockPassword);
+      expect(wrapper.state().username).toEqual(expected.username);
+      expect(wrapper.state().password).toEqual(expected.password);
+    });
+  });
+});
