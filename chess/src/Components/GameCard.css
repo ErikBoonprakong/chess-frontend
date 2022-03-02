@@ -56,7 +56,7 @@ body {
 .play {
   width: 30%;
   align-items: center;
-  background-color: #7a9e9f;
+  background-color: #858585;
   color: white;
   padding: 8px 10px;
   margin: 8px 0;
@@ -69,4 +69,17 @@ body {
   display: flex;
   width: 100%;
   justify-content: center;
+  background-color: bisque;
+}
+
+.snap-chess {
+  margin-right: 30px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.previous-games {
+  background-color: bisque;
 }

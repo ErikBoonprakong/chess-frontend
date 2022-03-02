@@ -13,7 +13,7 @@ class Header extends React.Component {
   }
 
   render() {
-    if (!this.props.userData.user) return <h2>Logo</h2>;
+    if (!this.props.userData.user) return <div></div>;
     return (
       <div className="header">
         <nav className="navMenu">

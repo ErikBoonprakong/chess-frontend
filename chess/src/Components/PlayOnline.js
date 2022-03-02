@@ -184,7 +184,7 @@ class PlayOnline extends React.Component {
       );
     } else if (this.state.players.length < 2) {
       return (
-        <div>
+        <div className="loading">
           {" "}
           <ThemeProvider id="loading" theme={theme}>
             <div className="graphs" style={{ marginTop: "30vh" }}>
@@ -199,7 +199,9 @@ class PlayOnline extends React.Component {
 
   render() {
     return (
-      <div className="full-page">
+      <div className="game-chat full-page">
+      // Check CSS
+
         <div className="chat">
           <form onSubmit={(e) => this.sendMessage(e)}>
             <input
