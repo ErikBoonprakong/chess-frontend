@@ -105,3 +105,11 @@ select {
   border-radius: 4px;
   box-sizing: border-box;
 }
+
+.game-chat {
+  margin-left: 40%;
+}
+
+.loading {
+  margin-right: 600px;
+}

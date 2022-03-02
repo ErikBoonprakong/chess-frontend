@@ -44,18 +44,21 @@ class SavedGame extends React.Component {
         <ListItem alignItems="flex-start">
           <ListItemAvatar>
             {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /> */}
-            <Chessboard
-              className="chessboard-snapshot"
-              id="PlayVsRandom"
-              boardOrientation={this.orientation}
-              boardWidth={200}
-              position={this.props.options.game_fen}
-              customBoardStyle={{
-                borderRadius: "4px",
-                boxShadow: "0 5px 15px rgba(0, 0, 0, 0.5)",
-              }}
-            />
+            <div className="snap-chess">
+              <Chessboard
+                className="chessboard-snapshot"
+                id="PlayVsRandom"
+                boardOrientation={this.orientation}
+                boardWidth={200}
+                position={this.props.options.game_fen}
+                customBoardStyle={{
+                  borderRadius: "4px",
+                  boxShadow: "0 5px 15px rgba(0, 0, 0, 0.5)",
+                }}
+              />
+            </div>
           </ListItemAvatar>
+          {console.log(this.showDifficulty(this.props.options.difficulty))}
           <ListItemText
             primary={`Difficulty:
             ${this.showDifficulty(this.props.options.difficulty)}`}

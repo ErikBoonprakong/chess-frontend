@@ -2,11 +2,9 @@
   text-align: center;
 }
 
-.notHeader {
-  /* display: flex; */
-  /* align-items: center;
-  align-content: center; */
-  /* justify-content: center; */
+
+html {
+  background-color: bisque;
 }
 
 .App-logo {
