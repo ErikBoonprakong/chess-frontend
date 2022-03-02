@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import "@testing-library/jest-dom/extend-expect";
-import Leaderboard from "./Leaderboard";
+import Leaderboard from "../Leaderboard";
 
 describe("Leaderboard", () => {
   test("Leaderboard has a title", () => {

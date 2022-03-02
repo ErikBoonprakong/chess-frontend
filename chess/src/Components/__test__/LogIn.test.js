@@ -7,8 +7,12 @@ import {
   waitForElement,
 } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import { shallow } from "enzyme";
+import { configure } from "enzyme";
+import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import LogIn from "../LogIn";
 import ReactDOM from "react-dom";
+configure({ adapter: new Adapter() });
 
 describe("Login page form should include all elements", () => {
   test("Username form element must load", () => {
@@ -41,28 +45,44 @@ test("Register button must load", () => {
   expect(button).toBeInTheDocument();
 });
 
-// describe("handleChangeTest", () => {
-//   test("call onSubmit with the username and password when submitted", () => {
-//     const handleSubmit = jest.fn();
-//     const container = document.createElement("div");
-//     render(
-//       <Router>
-//         <LogIn />
-//       </Router>,
-//       container
-//     );
+describe("Log In", () => {
+  let wrapper;
+  let sessionCookie;
+  function getCookie(newCookie) {
+    sessionCookie = newCookie;
+  }
+  beforeEach(() => {
+    wrapper = shallow(
+      <LogIn newCookie={(newCookie) => getCookie(newCookie)} />
+    );
+  });
 
-//     const form = container.querySelectorAll("form");
-//     const { username, password } = form.elements;
-//     username.value = "chucknorris";
-//     password.value = "password";
+  it("should match the snapshot", () => {
+    expect(wrapper).toMatchSnapshot();
+  });
 
-//     form.dispatchEvent(new window.Event("submit"));
-
-//     expect(handleSubmit).toHaveBeenCalledTimes(1);
-//     expect(handleSubmit).toHaveBeenCalledWith({
-//       username: username.value,
-//       password: password.value,
-//     });
-//   });
-// });
+  describe("handleChangeTest", () => {
+    it("should call setState on username", () => {
+      const mockUsername = {
+        target: {
+          id: "username",
+          value: "test",
+        },
+      };
+      const mockPassword = {
+        target: {
+          id: "password",
+          value: "testtest",
+        },
+      };
+      const expected = {
+        username: "test",
+        password: "testtest",
+      };
+      wrapper.instance().handleChange(mockUsername);
+      wrapper.instance().handleChange(mockPassword);
+      expect(wrapper.state().username).toEqual(expected.username);
+      expect(wrapper.state().password).toEqual(expected.password);
+    });
+  });
+});
