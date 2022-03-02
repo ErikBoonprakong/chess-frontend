@@ -25,7 +25,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <div id="App" className="App">
         <Header
           className="App-header"
           newCookie={this.getCookie.bind(this)}

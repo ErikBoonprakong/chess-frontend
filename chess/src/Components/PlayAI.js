@@ -260,7 +260,7 @@ export default function PlayVsRandom(props) {
   //   );
   // }
   return (
-    <div className="play">
+    <div className="full-page">
       {" "}
       {!userColour ? (
         <div>
@@ -275,7 +275,7 @@ export default function PlayVsRandom(props) {
           </button>
         </div>
       ) : (
-        <div>
+        <div className="play">
           {" "}
           {message}
           {game.in_checkmate() ? (
