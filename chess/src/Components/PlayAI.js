@@ -6,7 +6,6 @@ import cookieObj from "./GetCookies";
 import { minimax } from "./ChessMLAlgorithm";
 import Networking from "./Networking";
 import { Redirect } from "react-router";
-import Dropdown from "react-dropdown";
 
 export default function PlayVsRandom(props) {
   const options = props.location.state.state;
@@ -19,6 +18,7 @@ export default function PlayVsRandom(props) {
 
   const chessboardRef = useRef();
   const [game, setGame] = useState(new Chess(fen));
+  console.log(fen);
   const [arrows, setArrows] = useState([]);
   const [boardOrientation, setBoardOrientation] = useState(
     options.usercolour === "w" ? "white" : "black"
@@ -74,6 +74,9 @@ export default function PlayVsRandom(props) {
   }
 
   async function onDrop(sourceSquare, targetSquare) {
+    console.log("in on drop");
+    console.log(game.ascii());
+    console.log(game.fen());
     const gameCopy = { ...game };
     const move = gameCopy.move({
       from: sourceSquare,

@@ -96,6 +96,17 @@ describe("CreateAccount", () => {
       expect(wrapper.state().password).toEqual(expected.password);
     });
   });
+
+  describe("handleSubmitTest", () => {
+    it("prevent default should be called when submitted", () => {
+      const mockPreventDefault = jest.fn();
+      const mockEvent = {
+        preventDefault: mockPreventDefault,
+      };
+      wrapper.instance().handleSubmit(mockEvent);
+      expect(mockPreventDefault).toHaveBeenCalled();
+    });
+  });
 });
 
 // describe("Buttons must be firing correctly", () => {
