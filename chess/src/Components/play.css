@@ -11,11 +11,15 @@
   /* justify-items: center; */
 }
 
+
 .App {
   background-color: bisque;
 }
 
-.full-page {
+
+
+.full-page-ai {
+
   display: flex;
   justify-content: center;
   background-color: bisque;
