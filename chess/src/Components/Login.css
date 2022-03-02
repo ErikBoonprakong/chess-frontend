@@ -1,12 +1,13 @@
 .body-div {
   height: 95vh;
   width: 100vw;
-  background-color: white;
+  /* background-color: grey; */
   position: absolute;
   place-content: center;
-  /* background-image: url("https://bernardmarr.com/img/How%20Much%20Data%20Is%20There%20In%20the%20World.png"); */
   position: absolute;
   background-position: center;
+  background-image: "chessbackground.jpeg";
+
   /* background-repeat: no-repeat; */
   background-size: cover;
   overflow-x: hidden;
@@ -25,7 +26,7 @@ h2 {
   margin-top: 5%;
   padding: 2% 2% 1% 2%;
   text-align: center;
-  background-color: #9c8f41f2;
+  background-color: rgb(33, 86, 90);
   background-color: 0.6;
   overflow-x: hidden;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
@@ -119,7 +120,7 @@ h2 {
   text-align: left;
 }
 
-.btn {
+/* .btn {
   color: white;
   width: 10%;
   border: 2px solid #000;
@@ -131,11 +132,23 @@ h2 {
   box-sizing: border-box;
   margin-bottom: 4%;
   background-color: #000;
-}
+} */
 
-.btn:hover {
+/* .btn:hover {
   background-color: rgb(43, 42, 42);
   color: white;
   transition: 1s;
   border: 2px solid rgb(43, 42, 42);
+} */
+
+input[type="checkbox"] {
+  background-color: #fff;
+  border: 5px grey;
+  margin: 0;
+  font: inherit;
+  width: 1.15em;
+  height: 1.15em;
+  /* border: 0.15em solid currentColor; */
+  border-radius: 0.15em;
+  /* transform: translateY(-0.075em); */
 }

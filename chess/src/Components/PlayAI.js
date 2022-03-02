@@ -18,20 +18,21 @@ export default function PlayVsRandom(props) {
 
   const chessboardRef = useRef();
   const [game, setGame] = useState(new Chess(fen));
+  console.log(fen);
   const [arrows, setArrows] = useState([]);
   const [boardOrientation, setBoardOrientation] = useState(
     options.usercolour === "w" ? "white" : "black"
   );
   const [currentTimeout, setCurrentTimeout] = useState(undefined);
   const [boardWidth, setBoardWidth] = useState(400);
-
+  const [inCheck, changeInCheck] = useState("");
   const [inCheckMate, checkMate] = useState("");
   const [message, changeMessage] = useState("");
   const [redirect, changeRedirect] = useState(false);
   const [userColour, changeColour] = useState(options.usercolour);
 
   const aiColour = userColour === "w" ? "b" : "w";
-  console.log(options.usercolour, userColour, boardOrientation, aiColour);
+
   function safeGameMutate(modify) {
     setGame((g) => {
       const update = { ...g };
@@ -42,24 +43,25 @@ export default function PlayVsRandom(props) {
 
   async function makeMove() {
     const possibleMoves = game.moves({ verbose: true });
-    console.log("in make move", options.difficulty);
+
     // exit if the game is over
     if (game.game_over() || game.in_draw() || possibleMoves.length === 0) {
       return;
     }
 
     const nextMove = moveToPlay(possibleMoves);
-    console.log(nextMove);
+
     safeGameMutate((game) => {
       game.move(nextMove);
     });
     if (game.in_checkmate() && inCheckMate === "") {
       checkMate(aiColour);
     }
+    if (game.in_check()) {
+      changeInCheck(`${cookieObject.user} is in check!`);
+    }
   }
   function moveToPlay(possibleMoves) {
-    console.log(depth);
-
     if (depth === 0) {
       const randomIndex = Math.floor(Math.random() * possibleMoves.length);
 
@@ -83,6 +85,9 @@ export default function PlayVsRandom(props) {
     setGame(gameCopy);
     if (game.in_checkmate() && inCheckMate === "") {
       checkMate(userColour);
+    }
+    if (game.in_check()) {
+      changeInCheck("");
     }
     // illegal move
     if (move === null) return false;
@@ -108,7 +113,6 @@ export default function PlayVsRandom(props) {
   }
 
   async function handleSaveGame() {
-    console.log(cookieObject);
     const response = await networking.saveGame(
       cookieObject.user_id,
       options.reset,
@@ -165,9 +169,10 @@ export default function PlayVsRandom(props) {
           {message}
           {game.in_checkmate() ? (
             <div> {`Checkmate! The winner is ${inCheckMate}!`}</div>
-          ) : (
-            <div> {`Stalemate!`}</div>
-          )}
+          ) : null}
+          {game.in_stalemate() ? <div> {`Stalemate!`}</div> : null}
+          {game.in_check() && options.inCheck ? <div> {inCheck}</div> : null}
+          {game.in_draw() ? <div> {`Draw!`}</div> : null}
           {redirect ? (
             <Redirect to="/home" />
           ) : (
@@ -184,10 +189,6 @@ export default function PlayVsRandom(props) {
                   borderRadius: "4px",
                   boxShadow: "0 5px 15px rgba(0, 0, 0, 0.5)",
                 }}
-                // customDarkSquareStyle={{ backgroundColor: "green" }}
-                // customLightSquareStyle={{ backgroundColor: "cream" }}
-                /// this code will be useful if we ever get to customisation
-
                 ref={chessboardRef}
               />
               <div className="buttons">
@@ -253,15 +254,6 @@ export default function PlayVsRandom(props) {
                   <button className="rc-button" onClick={handleSaveGame}>
                     Save game
                   </button>
-                </div>
-                <div className="chat-wrapper">
-                  <ul className="events"></ul>
-                  <div className="chat-from-wrapper">
-                    <form>
-                      <input className="chat" autoComplete="off" title="chat" />
-                      <button className="chat-button">Send</button>
-                    </form>
-                  </div>
                 </div>
               </div>
             </div>
