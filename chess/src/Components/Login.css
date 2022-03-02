@@ -162,3 +162,7 @@ input[type="checkbox"] {
   position: absolute;
   place-content: center;
 }
+
+.log-form {
+  background-color: bisque;
+}

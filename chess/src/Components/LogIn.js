@@ -46,7 +46,7 @@ class LogIn extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="log-form">
         {this.state.redirect ? (
           <Redirect to="/home" />
         ) : (
