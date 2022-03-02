@@ -10,7 +10,7 @@ class HomePage extends React.Component {
 
   render() {
     return (
-      <div className="bodyWrapperHome">
+      <div className="body-div">
         <div className="buttonWrapper middle">
           <Link to="/options">
             <button className="home-btn">

@@ -9,6 +9,10 @@
   border-bottom: 1px solid black;
 }
 
+.header {
+  background-color: #7a9e9f;
+}
+
 .user-position {
   display: flex;
   flex-wrap: wrap;
@@ -35,27 +39,19 @@
   padding: 22px 50px 15px 60px;
 }
 
-.header-btn {
-  width: 100%;
-  background-color: #5a5151;
-  border: 1px white solid;
-  /* margin: 0; */
-}
-
 .header-btn:hover {
   background-color: hsl(210, 4%, 55%);
 }
 
 .header-btn {
-  color: white;
+  color: #272727;
   /* width: 15%; */
-  border: 2px #272727;
   border-radius: 10px;
   outline: none;
   padding: 8px;
   box-sizing: border-box;
   margin-bottom: 4%;
-  background-color: #272727;
+  background-color: #b8d8d8;
   margin: 15px;
 }
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
