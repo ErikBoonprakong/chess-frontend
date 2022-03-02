@@ -3,10 +3,10 @@
 }
 
 .notHeader {
-  display: flex;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
+  /* display: flex; */
+  /* align-items: center;
+  align-content: center; */
+  /* justify-content: center; */
 }
 
 .App-logo {
