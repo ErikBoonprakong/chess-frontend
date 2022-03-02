@@ -184,9 +184,9 @@ class PlayOnline extends React.Component {
       );
     } else if (this.state.players.length < 2) {
       return (
-        <div>
+        <div className="loading">
           {" "}
-          <ThemeProvider theme={theme}>
+          <ThemeProvider id="loading" theme={theme}>
             <div className="graphs" style={{ marginTop: "30vh" }}>
               <CircularProgress size={100} />
             </div>

@@ -10,11 +10,11 @@
 }
 
 .header {
-  background-color: #7a9e9f;
-  height: 14%;
+  background-color: #9da3a3;
 }
 
 .user-position {
+  font-size: large;
   color: white;
   display: flex;
   flex-wrap: wrap;
@@ -22,10 +22,10 @@
   width: 100vw;
   width: 99.9%;
   margin: auto;
-  font-style: italic;
   font: lighter;
   font-family: sans-serif;
   padding-bottom: 10px;
+  margin-left: 40px;
 }
 
 .no-logon-header {
@@ -71,4 +71,19 @@ body {
 
 .navMenu {
   height: 5%;
+}
+
+.logo {
+  display: flex;
+}
+
+.logo img {
+  float: left;
+  margin: 10px;
+  width: 5%;
+  height: 4%;
+  border-radius: 5px;
+}
+
+p {
 }

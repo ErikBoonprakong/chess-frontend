@@ -20,25 +20,25 @@ class Header extends React.Component {
           {console.log(this.props.userData)}
 
           <div className="logo">
-            <img src={logo} alt="chess" />
+            <img src={logo} alt="chess"></img>
+            <span className="user-position">
+              <p>{this.props.userData.user}</p>
+            </span>
+            <Link to="/login">
+              <button
+                className="header-btn"
+                onClick={async () => {
+                  await this.Networking.logOut();
+                  this.props.newCookie(cookieObj());
+                }}
+              >
+                Logout
+              </button>
+            </Link>
+            <Link to="/home">
+              <button className="header-btn">Home</button>
+            </Link>
           </div>
-          <span className="user-position">
-            Signed in as: <p>{this.props.userData.user}</p>
-          </span>
-          <Link to="/login">
-            <button
-              className="header-btn"
-              onClick={async () => {
-                await this.Networking.logOut();
-                this.props.newCookie(cookieObj());
-              }}
-            >
-              Logout
-            </button>
-          </Link>
-          <Link to="/home">
-            <button className="header-btn">Home</button>
-          </Link>
 
           {/* <hr /> */}
           <div className="dot"></div>

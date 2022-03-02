@@ -29,6 +29,8 @@ export default function PlayVsRandom(props) {
   const [message, changeMessage] = useState("");
   const [redirect, changeRedirect] = useState(false);
   const [userColour, changeColour] = useState(options.usercolour);
+  const [lightSquareColour, changeLightSquareColour] = useState("beige");
+  const [darkSquareColour, changeDarkSquareColour] = useState("tan");
 
   const aiColour = userColour === "w" ? "b" : "w";
 
@@ -80,7 +82,7 @@ export default function PlayVsRandom(props) {
 
     setGame(gameCopy);
     if (game.in_checkmate() && inCheckMate === "") {
-      checkMate(userColour);
+      checkMate(cookieObject.user);
     }
     if (game.in_check()) {
       changeInCheck("");
@@ -144,18 +146,130 @@ export default function PlayVsRandom(props) {
     }
   }
 
+  // function renderColourButtons() {
+  //   return (
+  //     <div>
+  //       <button id="w" onClick={changeUserColour}>
+  //         Play white
+  //       </button>
+  //       <button id="b" onClick={changeUserColour}>
+  //         Play black
+  //       </button>
+  //       <button id="r" onClick={changeUserColour}>
+  //         Random
+  //       </button>
+  //     </div>
+  //   );
+  // }
+
+  function renderHintButtons() {
+    return (
+      <div>
+        <button
+          disabled={!options.reset}
+          className={options.reset ? "rc-button" : "disabled-btn"}
+          onClick={() => {
+            safeGameMutate((game) => {
+              game.reset();
+            });
+            // stop any current timeouts
+            clearTimeout(currentTimeout);
+          }}
+        >
+          reset
+        </button>
+
+        <button
+          disabled={!options.undo}
+          className={options.reset ? "rc-button" : "disabled-btn"}
+          onClick={() => {
+            safeGameMutate((game) => {
+              game.undo();
+              game.undo();
+            });
+            // stop any current timeouts
+            clearTimeout(currentTimeout);
+          }}
+        >
+          undo
+        </button>
+        <button
+          className={options.reset ? "rc-button" : "disabled-btn"}
+          disabled={!options.optimalMove}
+          onClick={getOptimalMoves}
+        >
+          Get Hints
+        </button>
+        <button
+          className="rc-button"
+          onClick={(e) => setBoardWidthButton(e)}
+          value="minus"
+        >
+          -
+        </button>
+        <button
+          className="rc-button"
+          onClick={() => {
+            setBoardOrientation((currentOrientation) =>
+              currentOrientation === "white" ? "black" : "white"
+            );
+          }}
+        >
+          flip board
+        </button>
+
+        <button
+          className="rc-button"
+          onClick={(e) => setBoardWidthButton(e)}
+          value="plus"
+        >
+          +
+        </button>
+      </div>
+    );
+  }
+
+  // function handleSquareColour(e) {
+  //   console.log(e.target.value, e.target.id);
+
+  //   if (e.target.value === "dark") {
+  //     console.log(e.target.value, e.target.id);
+  //     changeDarkSquareColour(e.target.id);
+  //   } else if (e.target.value === "light") {
+  //     changeLightSquareColour(e.target.id);
+  //   }
+  // }
+  // function renderColourButtons(lightOrDark) {
+  //   const colours = ["Green", "Blue", "Orange", "Red"];
+  //   const lightHex = ["#53a584", "#689ac2", "#c29b68", "#c26868"];
+  //   const darkHex = ["#1f5741", "#1b2a52", "#b65e17", "#7c0a0a"];
+  //   let colourHex = lightOrDark === "light" ? lightHex : darkHex;
+
+  //   let options = {};
+  //   colours.forEach((colour, i) => {
+  //     options[colour] = colourHex[i];
+  //   });
+  //   return (
+  //     <Dropdown
+  //       value={lightOrDark}
+  //       options={options}
+  //       onChange={handleSquareColour(lightOrDark)}
+  //       placeholder="Select an option"
+  //     />
+  //   );
+  // }
   return (
     <div className="play">
       {" "}
       {!userColour ? (
         <div>
-          <button id="w" onClick={changeUserColour}>
+          <button className="button" id="w" onClick={changeUserColour}>
             Play white
           </button>
-          <button id="b" onClick={changeUserColour}>
+          <button className="button" id="b" onClick={changeUserColour}>
             Play black
           </button>
-          <button id="r" onClick={changeUserColour}>
+          <button className="button" id="r" onClick={changeUserColour}>
             Random
           </button>
         </div>
@@ -185,69 +299,23 @@ export default function PlayVsRandom(props) {
                   borderRadius: "4px",
                   boxShadow: "0 5px 15px rgba(0, 0, 0, 0.5)",
                 }}
+                customDarkSquareStyle={{ backgroundColor: darkSquareColour }}
+                customLightSquareStyle={{ backgroundColor: lightSquareColour }}
                 ref={chessboardRef}
               />
               <div className="buttons">
-                <button
-                  disabled={!options.reset}
-                  className="rc-button"
-                  onClick={() => {
-                    safeGameMutate((game) => {
-                      game.reset();
-                    });
-                    // stop any current timeouts
-                    clearTimeout(currentTimeout);
-                  }}
-                >
-                  reset
-                </button>
-                <button
-                  className="rc-button"
-                  onClick={() => {
-                    setBoardOrientation((currentOrientation) =>
-                      currentOrientation === "white" ? "black" : "white"
-                    );
-                  }}
-                >
-                  flip board
-                </button>
-                <button
-                  disabled={!options.undo}
-                  className="rc-button"
-                  onClick={() => {
-                    safeGameMutate((game) => {
-                      game.undo();
-                      game.undo();
-                    });
-                    // stop any current timeouts
-                    clearTimeout(currentTimeout);
-                  }}
-                >
-                  undo
-                </button>
-                <button
-                  className="rc-button"
-                  disabled={!options.optimalMove}
-                  onClick={getOptimalMoves}
-                >
-                  Get Hints
-                </button>
+                {renderHintButtons()}
+                {/* <ul>
+                  <li>Custom light square colours</li>
+
+                  {renderColourButtons("light")}
+                </ul>
+                <ul>
+                  <li>Custom dark square colours</li>
+                  {renderColourButtons("dark")}
+                </ul> */}
                 <div>
-                  <button
-                    className="rc-button"
-                    onClick={(e) => setBoardWidthButton(e)}
-                    value="plus"
-                  >
-                    +
-                  </button>
-                  <button
-                    className="rc-button"
-                    onClick={(e) => setBoardWidthButton(e)}
-                    value="minus"
-                  >
-                    -
-                  </button>
-                  <button className="rc-button" onClick={handleSaveGame}>
+                  <button className="button" onClick={handleSaveGame}>
                     Save game
                   </button>
                 </div>
