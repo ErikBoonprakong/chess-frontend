@@ -121,3 +121,7 @@ select {
 .loading {
   margin-right: 600px;
 }
+.more-btn {
+  display: flex;
+  flex-direction: row;
+}
