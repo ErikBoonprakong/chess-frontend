@@ -71,6 +71,8 @@ export default function PlayVsRandom(props) {
 
   async function onDrop(sourceSquare, targetSquare) {
     console.log("in on drop");
+    console.log(game.ascii());
+    console.log(game.fen());
     const gameCopy = { ...game };
     const move = gameCopy.move({
       from: sourceSquare,

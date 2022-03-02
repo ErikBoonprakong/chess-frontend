@@ -7,7 +7,6 @@ import PlayAI from "./Components/PlayAI";
 import PlayOnline from "./Components/PlayOnline";
 import Leaderboard from "./Components/Leaderboard";
 import Header from "./Components/Header";
-
 import React from "react";
 import cookieObj from "./Components/GetCookies";
 import ChooseDifficulty from "./Components/ChooseDifficulty";
