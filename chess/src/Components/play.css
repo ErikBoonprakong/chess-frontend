@@ -34,7 +34,13 @@
   background-color: hsl(210, 4%, 55%);
 }
 
-.button {
+.chat {
+  border: 4px #7a9e9f;
+  width: 20%;
+  float: right;
+}
+
+input[type="submit"] {
   width: 60%;
   background-color: #7a9e9f;
   color: white;
@@ -56,6 +62,14 @@
   cursor: pointer;
 }
 
-#loading {
-  width: 1%;
+input[type="textarea"],
+select {
+  width: 80%;
+
+  padding: 8px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }

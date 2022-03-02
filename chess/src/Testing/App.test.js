@@ -40,23 +40,6 @@ describe("Create Account Page", () => {
   });
 });
 
-describe("HomePage", () => {
-  test("HomePage contains PlayAI button and contains link to options page", async () => {
-    render(
-      <BrowserRouter>
-        <HomePage />
-      </BrowserRouter>
-    );
-
-    const buttons = screen.getAllByRole("link");
-    for (let button of buttons) {
-      expect(button).toBeInTheDocument();
-    }
-
-    expect(buttons[0].href).toBe("http://localhost/options");
-  });
-});
-
 describe("Leaderboard", () => {
   test("Leaderboard page is rendered with a table", () => {
     const { container } = render(<Leaderboard />);

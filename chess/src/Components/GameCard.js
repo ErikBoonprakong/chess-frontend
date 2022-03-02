@@ -2,7 +2,6 @@ import React from "react";
 import Networking from "./Networking.js";
 import { Link, Redirect } from "react-router-dom";
 import cookieObj from "./GetCookies";
-import Alert from "react-bootstrap/Alert";
 import { Chessboard } from "react-chessboard";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -11,6 +10,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
+import "./GameCard.css";
 
 class SavedGame extends React.Component {
   constructor(props) {
@@ -91,7 +91,9 @@ class SavedGame extends React.Component {
             },
           }}
         >
-          <button id="play"> Play</button>
+          <div className="button-container">
+            <button className="play"> Play</button>
+          </div>
         </Link>
         <Divider variant="inset" />
       </div>
