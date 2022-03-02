@@ -11,15 +11,11 @@
   /* justify-items: center; */
 }
 
-
 .App {
   background-color: bisque;
 }
 
-
-
 .full-page-ai {
-
   display: flex;
   justify-content: center;
   background-color: bisque;
@@ -122,4 +118,8 @@ select {
 
 .loading {
   margin-right: 600px;
+}
+.more-btn {
+  display: flex;
+  flex-direction: row;
 }
