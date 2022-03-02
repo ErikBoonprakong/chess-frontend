@@ -2,6 +2,13 @@
   text-align: center;
 }
 
+.notHeader {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
