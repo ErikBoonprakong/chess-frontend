@@ -24,7 +24,7 @@ export default function PlayVsRandom(props) {
   );
   const [currentTimeout, setCurrentTimeout] = useState(undefined);
   const [boardWidth, setBoardWidth] = useState(400);
-
+  const [inCheck, changeInCheck] = useState("");
   const [inCheckMate, checkMate] = useState("");
   const [message, changeMessage] = useState("");
   const [redirect, changeRedirect] = useState(false);
@@ -49,12 +49,15 @@ export default function PlayVsRandom(props) {
     }
 
     const nextMove = moveToPlay(possibleMoves);
-    console.log(nextMove);
+
     safeGameMutate((game) => {
       game.move(nextMove);
     });
     if (game.in_checkmate() && inCheckMate === "") {
       checkMate(aiColour);
+    }
+    if (game.in_check()) {
+      changeInCheck(`${cookieObject.user} is in check!`);
     }
   }
   function moveToPlay(possibleMoves) {
@@ -78,6 +81,9 @@ export default function PlayVsRandom(props) {
     setGame(gameCopy);
     if (game.in_checkmate() && inCheckMate === "") {
       checkMate(userColour);
+    }
+    if (game.in_check()) {
+      changeInCheck("");
     }
     // illegal move
     if (move === null) return false;
@@ -103,7 +109,6 @@ export default function PlayVsRandom(props) {
   }
 
   async function handleSaveGame() {
-    console.log(cookieObject);
     const response = await networking.saveGame(
       cookieObject.user_id,
       options.reset,
@@ -162,6 +167,8 @@ export default function PlayVsRandom(props) {
             <div> {`Checkmate! The winner is ${inCheckMate}!`}</div>
           ) : null}
           {game.in_stalemate() ? <div> {`Stalemate!`}</div> : null}
+          {game.in_check() && options.inCheck ? <div> {inCheck}</div> : null}
+          {game.in_draw() ? <div> {`Draw!`}</div> : null}
           {redirect ? (
             <Redirect to="/home" />
           ) : (
@@ -178,10 +185,6 @@ export default function PlayVsRandom(props) {
                   borderRadius: "4px",
                   boxShadow: "0 5px 15px rgba(0, 0, 0, 0.5)",
                 }}
-                // customDarkSquareStyle={{ backgroundColor: "green" }}
-                // customLightSquareStyle={{ backgroundColor: "cream" }}
-                /// this code will be useful if we ever get to customisation
-
                 ref={chessboardRef}
               />
               <div className="buttons">
@@ -247,15 +250,6 @@ export default function PlayVsRandom(props) {
                   <button className="rc-button" onClick={handleSaveGame}>
                     Save game
                   </button>
-                </div>
-                <div className="chat-wrapper">
-                  <ul className="events"></ul>
-                  <div className="chat-from-wrapper">
-                    <form>
-                      <input className="chat" autoComplete="off" title="chat" />
-                      <button className="chat-button">Send</button>
-                    </form>
-                  </div>
                 </div>
               </div>
             </div>
