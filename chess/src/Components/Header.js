@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Networking from "./Networking";
 import cookieObj from "./GetCookies";
 import "./header.css";
+import logo from "./ChessYEM.jpeg";
 
 class Header extends React.Component {
   constructor(props) {
@@ -12,16 +13,15 @@ class Header extends React.Component {
   }
 
   render() {
-    if (!this.props.userData.user) return <h2>Logo</h2>;
+    if (!this.props.userData.user) return <div></div>;
     return (
       <div className="header">
         <nav className="navMenu">
           {console.log(this.props.userData)}
 
-          {/* <div className="logo">
-            <img src="chessLogo.png" alt="chess"></img>
-          </div> */}
-
+          <div className="logo">
+            <img src={logo} alt="chess" />
+          </div>
           <span className="user-position">
             Signed in as: <p>{this.props.userData.user}</p>
           </span>

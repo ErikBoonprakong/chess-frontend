@@ -4,7 +4,7 @@
   /* background-color: #4f6367; */
   position: absolute;
   place-content: center;
-  background-image: url("chessbackground.jpeg");
+  /* background-image: url("chessbackground.jpeg"); */
   position: absolute;
   background-position: center;
   /* background-repeat: no-repeat; */
@@ -41,4 +41,13 @@
   box-sizing: border-box;
   background-color: hsla(120, 3%, 35%, 0.589);
   margin-right: 10px;
+}
+
+.header img {
+  float: left;
+  width: 5%;
+  height: 3%;
+  background: #555;
+  border-radius: 7px;
+  margin: 10px;
 }

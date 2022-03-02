@@ -42,9 +42,6 @@ class ChooseDifficulty extends React.Component {
           />
         ) : (
           <div className="body-div">
-            <Link to="/home">
-              <button className="home-btn">Back to home</button>
-            </Link>
             <div className="create-account">
               <div className="login-form">
                 <ul>
