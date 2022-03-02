@@ -1,8 +1,7 @@
 import React from "react";
 import Networking from "./Networking.js";
-import { Link, Redirect } from "react-router-dom";
 import cookieObj from "./GetCookies";
-import SavedGame from "./SavedGame.js";
+import GameCard from "./GameCard";
 
 class SavedGames extends React.Component {
   constructor(props) {
@@ -26,7 +25,7 @@ class SavedGames extends React.Component {
   }
   displaySavedGames() {
     const gameComponents = this.state.savedGames.map((game) => {
-      return <SavedGame key={game.id} options={game} />;
+      return <GameCard key={game.id} options={game} />;
     });
     console.log(gameComponents);
     return gameComponents;

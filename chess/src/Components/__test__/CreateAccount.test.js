@@ -40,6 +40,16 @@ test("Register button must load", () => {
   expect(button).toBeInTheDocument();
 });
 
+test("Checkbox should be unchecked on load", () => {
+  render(
+    <Router>
+      <CreateAccount />
+    </Router>
+  );
+  const checkboxUnchecked = screen.getByTestId("unchecked");
+  expect(checkboxUnchecked).not.toBeChecked();
+});
+
 describe("CreateAccount", () => {
   let wrapper;
   let sessionCookie;
@@ -87,3 +97,24 @@ describe("CreateAccount", () => {
     });
   });
 });
+
+// describe("Buttons must be firing correctly", () => {
+//   test("Register button handleSubmit must fire", () => {
+//     handleSubmit = jest.fn();
+//     act(() => {
+//       render(
+//         <Router>
+//           <CreateAccount />
+//         </Router>,
+//         container
+//       );
+//     });
+
+//     const registerButton = document.querySelector(
+//       "[data-testid=register-input]"
+//     );
+//     expect(registerButton.innerHTML).toBe("Create Account");
+
+//     expect(this.handleSubmit).toHaveBeenCalledTimes(1);
+//   });
+// });

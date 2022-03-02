@@ -9,6 +9,7 @@
 .chat-wrapper {
   border: 4px solid black;
 }
+
 .rc-button {
   width: 25%;
   background-color: #7a9e9f;
@@ -35,6 +36,16 @@
 }
 
 .button {
+
+
+.chat {
+  border: 4px #7a9e9f;
+  width: 20%;
+  float: right;
+}
+
+input[type="submit"] {
+
   width: 60%;
   background-color: #7a9e9f;
   color: white;
@@ -44,6 +55,7 @@
   border-radius: 4px;
   cursor: pointer;
 }
+
 
 .button:hover {
   width: 60%;
@@ -58,4 +70,5 @@
 
 #loading {
   width: 1%;
+
 }
