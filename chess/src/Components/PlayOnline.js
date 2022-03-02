@@ -199,7 +199,7 @@ class PlayOnline extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="full-page">
         <div className="chat">
           <form onSubmit={(e) => this.sendMessage(e)}>
             <input
