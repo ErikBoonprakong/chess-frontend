@@ -199,8 +199,8 @@ class PlayOnline extends React.Component {
 
   render() {
     return (
+
       <div className="game-chat full-page">
-      // Check CSS
 
         <div className="chat">
           <form onSubmit={(e) => this.sendMessage(e)}>

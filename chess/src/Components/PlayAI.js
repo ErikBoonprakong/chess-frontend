@@ -290,7 +290,7 @@ export default function PlayVsRandom(props) {
           {redirect ? (
             <Redirect to="/home" />
           ) : (
-            <div>
+            <div className="boardAndButtons">
               <Chessboard
                 id="PlayVsRandom"
                 animationDuration={200}

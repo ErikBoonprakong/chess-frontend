@@ -30,33 +30,35 @@ class App extends React.Component {
           newCookie={this.getCookie.bind(this)}
           userData={this.state.cookie}
         />
-        <Switch>
-          <Route exact path="/">
-            <Redirect to="/login" />
-          </Route>
-          <Route path="/login">
-            <LogIn newCookie={this.getCookie.bind(this)} />
-          </Route>
-          <Route path="/register">
-            <CreateAccount newCookie={this.getCookie.bind(this)} />
-          </Route>
-          <Route path="/home">
-            <HomePage />
-          </Route>
-          <Route path="/options">
-            <ChooseDifficulty />
-          </Route>
-          <Route path="/playai">{(props) => <PlayAI {...props} />}</Route>
-          <Route path="/playonline">
-            <PlayOnline userData={this.state.cookie} />
-          </Route>
-          <Route path="/leaderboard">
-            <Leaderboard />
-          </Route>
-          <Route path="/savedgames">
-            <SavedGames />
-          </Route>
-        </Switch>
+        <div className="notHeader">
+          <Switch>
+            <Route exact path="/">
+              <Redirect to="/login" />
+            </Route>
+            <Route path="/login">
+              <LogIn newCookie={this.getCookie.bind(this)} />
+            </Route>
+            <Route path="/register">
+              <CreateAccount newCookie={this.getCookie.bind(this)} />
+            </Route>
+            <Route path="/home">
+              <HomePage />
+            </Route>
+            <Route path="/options">
+              <ChooseDifficulty />
+            </Route>
+            <Route path="/playai">{(props) => <PlayAI {...props} />}</Route>
+            <Route path="/playonline">
+              <PlayOnline userData={this.state.cookie} />
+            </Route>
+            <Route path="/leaderboard">
+              <Leaderboard />
+            </Route>
+            <Route path="/savedgames">
+              <SavedGames />
+            </Route>
+          </Switch>
+        </div>
       </div>
     );
   }
