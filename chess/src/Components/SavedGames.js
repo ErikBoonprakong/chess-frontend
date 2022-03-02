@@ -34,7 +34,7 @@ class SavedGames extends React.Component {
   render() {
     console.log(this.state.savedGames);
     return (
-      <div>
+      <div className="full-page">
         {this.state.savedGames.length ? this.displaySavedGames() : null}
       </div>
     );

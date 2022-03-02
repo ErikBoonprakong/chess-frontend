@@ -18,6 +18,7 @@ export default function PlayVsRandom(props) {
 
   const chessboardRef = useRef();
   const [game, setGame] = useState(new Chess(fen));
+  console.log(fen);
   const [arrows, setArrows] = useState([]);
   const [boardOrientation, setBoardOrientation] = useState(
     options.usercolour === "w" ? "white" : "black"
@@ -73,6 +74,9 @@ export default function PlayVsRandom(props) {
   }
 
   async function onDrop(sourceSquare, targetSquare) {
+    console.log("in on drop");
+    console.log(game.ascii());
+    console.log(game.fen());
     const gameCopy = { ...game };
     const move = gameCopy.move({
       from: sourceSquare,
@@ -259,7 +263,7 @@ export default function PlayVsRandom(props) {
   //   );
   // }
   return (
-    <div className="play">
+    <div className="full-page">
       {" "}
       {!userColour ? (
         <div>
@@ -274,7 +278,7 @@ export default function PlayVsRandom(props) {
           </button>
         </div>
       ) : (
-        <div>
+        <div className="play">
           {" "}
           {message}
           {game.in_checkmate() ? (
