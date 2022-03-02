@@ -11,12 +11,17 @@
   /* justify-items: center; */
 }
 
+.full-page {
+  display: flex;
+  justify-content: center;
+}
 .chat-wrapper {
   border: 4px solid black;
 }
 .rc-button {
   width: 25%;
   background-color: #7a9e9f;
+  /* background-color: #4e7e80; */
   color: white;
   padding: 8px 10px;
   /* margin: 8px; */
@@ -28,6 +33,7 @@
 .disabled-btn {
   width: 25%;
   background-color: #4e7e80;
+  background-color: hsl(210, 4%, 55%);
   color: white;
   padding: 8px 10px;
   margin: 8px;
@@ -37,7 +43,8 @@
 }
 
 .rc-button:hover {
-  background-color: hsl(210, 4%, 55%);
+  /* background-color: hsl(210, 4%, 55%); */
+  background-color: #4e7e80;
 }
 
 .chat {
@@ -62,10 +69,23 @@ input[type="submit"] {
   border-radius: 4px;
   cursor: pointer;
 }
+.button {
+  width: 60%;
+  /* background-color: #7a9e9f; */
+  /* background-color: #4e7e80; */
+  background-color: #459699;
+  color: white;
+  padding: 8px 10px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
 
 .button:hover {
   width: 60%;
-  background-color: #459699;
+  /* background-color: #459699; */
+  background-color: #4e7e80;
   color: white;
   padding: 8px 10px;
   margin: 8px 0;

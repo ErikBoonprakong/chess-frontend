@@ -81,7 +81,7 @@ class LogIn extends React.Component {
 
               <div className="buttons">
                 <input
-                  className="login-btn"
+                  className="login-btn-register-btn"
                   type="submit"
                   value="Login"
                 ></input>

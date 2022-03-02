@@ -5,13 +5,14 @@
   position: absolute;
   place-content: center;
   /* background-image: url("chessbackground.jpeg"); */
-  background-color: white;
+  background-color: #e9e9e9;
+  /* background-color: bisque; */
   position: absolute;
   background-position: center;
   /* background-repeat: no-repeat; */
   background-size: cover;
   overflow-x: hidden;
-  margin-top: 100px;
+  margin-top: 0px;
 }
 
 .buttonWrapper {
@@ -55,6 +56,8 @@ button.buttonWrapper {
 .difficulty-btn {
   width: 30%;
   background-color: #9da3a3;
+  /* background-color: bisque; */
+  /* background-color: #459699; */
   font-weight: 900;
   font-size: 24px;
   color: white;
@@ -69,6 +72,8 @@ button.buttonWrapper {
 .difficulty-btn:hover {
   width: 30%;
   background-color: #459699;
+  /* background-color: #9da3a3; */
+  /* background-color: bisque; */
   color: white;
   padding: 8px 10px;
   margin: 8px 0;
