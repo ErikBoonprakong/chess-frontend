@@ -268,10 +268,10 @@ export default function PlayVsRandom(props) {
       {!userColour ? (
         <div>
           <button className="button" id="w" onClick={changeUserColour}>
-            Play white
+            Play White
           </button>
           <button className="button" id="b" onClick={changeUserColour}>
-            Play black
+            Play Black
           </button>
           <button className="button" id="r" onClick={changeUserColour}>
             Random
