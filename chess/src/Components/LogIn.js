@@ -31,11 +31,14 @@ class LogIn extends React.Component {
     );
 
     this.setState({ cookies: cookieObj() });
-
     this.props.newCookie(this.state.cookies);
+
+    // Page only redirects to home page if cookies contains a user.
+
     if (this.state.cookies.user) {
       this.setState({ redirect: true, valid: true });
     } else {
+      // Error messages are set in the backend, retrieved from login post request.
       this.setState({ valid: false, error: response.message });
     }
   };
@@ -44,6 +47,7 @@ class LogIn extends React.Component {
     return <Alert variant="danger">{this.state.error}</Alert>;
   }
 
+  //Use conditional rendering and Redirect from React Router Dom to render the Login Page.
   render() {
     return (
       <div className="log-form">
@@ -85,6 +89,7 @@ class LogIn extends React.Component {
                   type="submit"
                   value="Login"
                 ></input>
+                {/* React Router Link to Create Account component if user does not have an account */}
                 <Link to="/register">
                   <button data-testid="register-btn" className="register-btn">
                     Create Account

@@ -12,7 +12,7 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import "./GameCard.css";
 
-class SavedGame extends React.Component {
+class GameCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,15 +24,16 @@ class SavedGame extends React.Component {
       this.props.options.usercolour === "w" ? "white" : "black";
   }
   showDifficulty(rating) {
+    //Props with difficulty passed from PlayAI component. Switch case statements so each saved game displays the difficulty in a user friendly manner.
     switch (rating) {
       case 0:
-        return " easy";
+        return " Easy";
       case 1:
-        return " medium";
+        return " Medium";
       case 2:
-        return " hard";
+        return " Hard";
       case 3:
-        return " really hard";
+        return " Really Hard";
       default:
         return "//";
     }
@@ -47,8 +48,10 @@ class SavedGame extends React.Component {
               <Chessboard
                 className="chessboard-snapshot"
                 id="PlayVsRandom"
+                //Color chosen by the user is used to determine the orientation of the board. Players pieces should be at the bottom.
                 boardOrientation={this.orientation}
                 boardWidth={200}
+                // Current state of the board passed from PlayAI so player can continue game from its saved state.
                 position={this.props.options.game_fen}
                 customBoardStyle={{
                   borderRadius: "4px",
@@ -103,4 +106,4 @@ class SavedGame extends React.Component {
   }
 }
 
-export default SavedGame;
+export default GameCard;

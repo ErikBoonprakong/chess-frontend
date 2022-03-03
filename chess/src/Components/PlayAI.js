@@ -155,68 +155,71 @@ export default function PlayAI(props) {
 
   function renderHintButtons() {
     return (
-      <div>
-        <button
-          disabled={!options.reset}
-          className={options.reset ? "rc-button" : "disabled-btn"}
-          onClick={() => {
-            safeGameMutate((game) => {
-              game.reset();
-            });
-            // stop any current timeouts
-            clearTimeout(currentTimeout);
-          }}
-        >
-          reset
-        </button>
+      <div className="hint-btn-div">
+        <div className="hint-btn">
+          <button
+            disabled={!options.reset}
+            className={options.reset ? "rc-button" : "disabled-btn"}
+            onClick={() => {
+              safeGameMutate((game) => {
+                game.reset();
+              });
+              // stop any current timeouts
+              clearTimeout(currentTimeout);
+            }}
+          >
+            reset
+          </button>
 
-        <button
-          disabled={!options.undo}
-          className={options.reset ? "rc-button" : "disabled-btn"}
-          onClick={() => {
-            safeGameMutate((game) => {
-              game.undo();
-              game.undo();
-            });
-            // stop any current timeouts
-            clearTimeout(currentTimeout);
-          }}
-        >
-          undo
-        </button>
-        <button
-          data-testid="get-hints"
-          className={options.reset ? "rc-button" : "disabled-btn"}
-          disabled={!options.optimalMove}
-          onClick={getOptimalMoves}
-        >
-          Get Hints
-        </button>
-        <button
-          className="rc-button"
-          onClick={(e) => setBoardWidthButton(e)}
-          value="minus"
-        >
-          -
-        </button>
-        <button
-          className="rc-button"
-          onClick={() => {
-            setBoardOrientation((currentOrientation) =>
-              currentOrientation === "white" ? "black" : "white"
-            );
-          }}
-        >
-          flip board
-        </button>
+          <button
+            disabled={!options.undo}
+            className={options.undo ? "rc-button" : "disabled-btn"}
+            onClick={() => {
+              safeGameMutate((game) => {
+                game.undo();
+                game.undo();
+              });
+              // stop any current timeouts
+              clearTimeout(currentTimeout);
+            }}
+          >
+            undo
+          </button>
+          <button
+            className={options.optimalMove ? "rc-button" : "disabled-btn"}
+            disabled={!options.optimalMove}
+            onClick={getOptimalMoves}
+          >
+            Get Hints
+          </button>
+        </div>
+        <div className="more-btn">
+          <button
+            className="rc-button"
+            onClick={(e) => setBoardWidthButton(e)}
+            value="minus"
+          >
+            -
+          </button>
+          <button
+            className="rc-button"
+            onClick={() => {
+              setBoardOrientation((currentOrientation) =>
+                currentOrientation === "white" ? "black" : "white"
+              );
+            }}
+          >
+            flip board
+          </button>
 
-        <button
-          className="rc-button"
-          onClick={(e) => setBoardWidthButton(e)}
-          value="plus"
-        >
-          +
-        </button>
+          <button
+            className="rc-button"
+            onClick={(e) => setBoardWidthButton(e)}
+            value="plus"
+          >
+            +
+          </button>
+        </div>
       </div>
     );
   }

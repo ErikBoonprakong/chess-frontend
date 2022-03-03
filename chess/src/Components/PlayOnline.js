@@ -29,10 +29,13 @@ class PlayOnline extends React.Component {
   }
 
   componentDidMount() {
+    // Socket.IO API means you can emit events and register listeners on the server and client side.
     this.socket = io("https://chessyem-websocket.herokuapp.com");
+    // LISTENER
     this.socket.on("new message", (msg) => {
       this.setState({ messageList: [...this.state.messageList, msg] });
     });
+    // EMIT EVENT
     this.socket.emit("join room", this.props.userData.user);
     this.socket.on("new move", (move) => {
       const moveIncrement = this.state.moveCounter + 1;
@@ -86,11 +89,12 @@ class PlayOnline extends React.Component {
   }
 
   handleChange(e) {
-    e.preventDefault();
+    e.preventDefault(); //Do we need this?
     this.setState({ chatMessage: e.target.value });
   }
 
   sendMessage(e) {
+    // Called on the event to prevent a browser refresh message is sent.
     e.preventDefault();
     let messageString =
       this.props.userData.user + ": " + this.state.chatMessage;
@@ -110,14 +114,14 @@ class PlayOnline extends React.Component {
       const move = gameCopy.move({
         from: sourceSquare,
         to: targetSquare,
-        promotion: "q", // always promote to a queen for example simplicity
+        promotion: "q", // Always promote to a queen for simplicity
       });
 
       if (move === null) return false;
       const newGameFen = gameCopy.fen();
 
+      //Client sends the new state of the chessboard to the server so that second client can receive new board.
       this.socket.emit("new move", newGameFen);
-      // const moveIncrement = this.state.moveCounter + 1;
       this.setState({ game: newGameFen });
 
       if (!this.state.endOfGame && gameCopy.in_checkmate()) {
@@ -125,6 +129,7 @@ class PlayOnline extends React.Component {
         this.setState({ endOfGame: true });
         await this.sendResults(this.props.userData.user, 1, 0, 0);
         await this.sendResults(opponentName, 0, 1, 0);
+        // Communicates with the server to display who has won after the endOfGame state becomes true.
         this.socket.emit("new message", `${this.props.userData.user} Wins`);
       }
       if (
@@ -134,6 +139,8 @@ class PlayOnline extends React.Component {
           gameCopy.in_threefold_repetition())
       ) {
         this.setState({ endOfGame: true });
+
+        //Sends results sends post request with details about match results to be added to the leaderboard.
         await this.sendResults(this.state.players[0], 0, 0, 1);
         await this.sendResults(this.state.players[1], 0, 0, 1);
 
@@ -164,7 +171,7 @@ class PlayOnline extends React.Component {
       return (
         <div className="play">
           <div>{`${this.state.players[0]} plays white, ${this.state.players[1]} plays black. `}</div>
-
+          {/* Renders the chessboard if there are 2 players in the room. */}
           <Chessboard
             id="PlayVsPlay"
             boardOrientation={
@@ -185,6 +192,7 @@ class PlayOnline extends React.Component {
       );
     } else if (this.state.players.length < 2) {
       return (
+        // Loading screen is rendered if the required amount of players are not in the room.
         <div className="loading">
           {" "}
           <ThemeProvider id="loading" theme={theme}>
