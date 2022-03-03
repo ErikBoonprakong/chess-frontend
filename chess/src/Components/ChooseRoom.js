@@ -4,7 +4,6 @@ import { Link, Redirect } from "react-router-dom";
 class ChooseRoom extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { bathroom: true, livingRoom: true };
   }
 
   render() {
@@ -22,7 +21,7 @@ class ChooseRoom extends React.Component {
           <button
             id="bathroom"
             value="bathroom"
-            disabled={!this.props.bathroom}
+            disabled={this.props.rooms.livingRoom >= 2}
           >
             Bathroom
           </button>
@@ -36,7 +35,7 @@ class ChooseRoom extends React.Component {
           <button
             id="livingRoom"
             value="livingRoom"
-            disabled={!this.props.livingRoom}
+            disabled={this.props.rooms.livingRoom >= 2}
           >
             Living Room
           </button>
