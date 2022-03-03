@@ -6,6 +6,7 @@ import cookieObj from "./GetCookies";
 import { minimax } from "./ChessMLAlgorithm";
 import Networking from "./Networking";
 import { Redirect } from "react-router";
+import Dropdown from "react-dropdown";
 
 export default function PlayVsRandom(props) {
   const options = props.location.state.state;
@@ -32,7 +33,8 @@ export default function PlayVsRandom(props) {
   const [userColour, changeColour] = useState(options.usercolour);
   const [lightSquareColour, changeLightSquareColour] = useState("beige");
   const [darkSquareColour, changeDarkSquareColour] = useState("tan");
-
+  const [secondLightSquare] = useState("#689ac2");
+  const [secondDarkColour] = useState("#1b2a52");
   const aiColour = userColour === "w" ? "b" : "w";
 
   function safeGameMutate(modify) {
@@ -237,16 +239,6 @@ export default function PlayVsRandom(props) {
     );
   }
 
-  // function handleSquareColour(e) {
-  //   console.log(e.target.value, e.target.id);
-
-  //   if (e.target.value === "dark") {
-  //     console.log(e.target.value, e.target.id);
-  //     changeDarkSquareColour(e.target.id);
-  //   } else if (e.target.value === "light") {
-  //     changeLightSquareColour(e.target.id);
-  //   }
-  // }
   // function renderColourButtons(lightOrDark) {
   //   const colours = ["Green", "Blue", "Orange", "Red"];
   //   const lightHex = ["#53a584", "#689ac2", "#c29b68", "#c26868"];
@@ -257,14 +249,15 @@ export default function PlayVsRandom(props) {
   //   colours.forEach((colour, i) => {
   //     options[colour] = colourHex[i];
   //   });
-  //   return (
-  //     <Dropdown
-  //       value={lightOrDark}
-  //       options={options}
-  //       onChange={handleSquareColour(lightOrDark)}
-  //       placeholder="Select an option"
-  //     />
-  //   );
+  //   console.log(options);
+  // return (
+  //   <Dropdown
+  //     value={lightOrDark}
+  //     options={options}
+  //     onChange={handleSquareColour(lightOrDark)}
+  //     placeholder="Select an option"
+  //   />
+  // );
   // }
   return (
     <div className="full-page-ai">
