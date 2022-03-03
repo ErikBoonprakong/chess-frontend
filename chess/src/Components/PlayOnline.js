@@ -80,17 +80,17 @@ class PlayOnline extends React.Component {
       this.props.userData.user,
       this.props.location.state.roomNumber
     );
-    this.socket.emit(
-      "new move",
-      "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
-      this.props.location.state.roomNumber
-    );
-    this.setState({
-      game: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
-      messageList: [],
-      white: "",
-      black: "",
-    });
+    // this.socket.emit(
+    //   "new move",
+    //   "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+    //   this.props.location.state.roomNumber
+    // );
+    // this.setState({
+    //   game: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+    //   messageList: [],
+    //   white: "",
+    //   black: "",
+    // });
   }
 
   displayMessages() {
@@ -204,10 +204,6 @@ class PlayOnline extends React.Component {
     const response = await this.networking.postResult(name, won, lost, draw);
 
     return response;
-  }
-
-  selectRoom(e) {
-    this.setState({ room: e.target.id });
   }
 
   displayPlayers() {

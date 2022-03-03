@@ -6,46 +6,38 @@ class ChooseRoom extends React.Component {
   constructor(props) {
     super(props);
     this.state = { rooms: [[], []] };
+    this.enterRoom = this.enterRoom.bind(this);
   }
 
   componentDidMount() {
     // this.socket = io("https://chessyem-websocket.herokuapp.com");
-    //   this.socket.emit("join lobby", this.props.userData.user);
-    //   this.socket.on("room list", (rooms) => {
-    //     this.setState({ rooms: rooms });
-    //     console.log(this.state.rooms);
-    //     this.rooms = rooms;
-    //   });
   }
 
-  // updateRooms() {
-  //   this.socket = io("https://chessyem-websocket.herokuapp.com");
-  //   this.socket.emit("join lobby", this.props.userData.user);
-  //   this.socket.on("room list", (rooms) => {
-  //     if (this.state.rooms !== rooms) {
-  //       this.setState({ rooms: rooms });
-  //       console.log(this.state.rooms);
-  //     }
-  //   });
-  // }
-
-  //   enterRoom(roomNumber) {
+  //   enterRoom = (roomNumber) => {
   //     this.socket = io("https://chessyem-websocket.herokuapp.com");
   //     this.socket.emit("join lobby", this.props.userData.user);
   //     this.socket.on("room list", (rooms) => {
   //       if (this.state.rooms !== rooms) {
   //         this.setState({ rooms: rooms });
-  //         if (rooms[roomNumber].length >= 2) {
-  //           console.log("room full");
-  //         } else {
-  //           console.log("redirect");
-  //         }
   //       }
+  //       //   if (rooms[roomNumber] >= 2) {
+  //       //     console.log("full");
+  //       //     return false;
+  //       //   } else {
+  //       //     console.log("redirect");
+  //       //     return true;
+  //       //   }
   //     });
-  //   }
+  //     if (this.state.rooms[roomNumber] >= 2) {
+  //       console.log("full");
+  //       return false;
+  //     } else {
+  //       console.log("redirect");
+  //       return true;
+  //     }
+  //   };
 
   render() {
-    // this.updateRooms();
     return (
       <div>
         <Link
@@ -61,7 +53,7 @@ class ChooseRoom extends React.Component {
             id="bathroom"
             value="bathroom"
             // disabled={this.state.rooms[0].length >= 2}
-            // onClick={this.enterRoom(0)}
+            onClick={() => this.enterRoom(0)}
           >
             Bathroom
           </button>
@@ -77,7 +69,7 @@ class ChooseRoom extends React.Component {
             value="livingRoom"
             // disabled={this.state.rooms[1].length >= 2}
             // onClick={console.log(this.state.rooms)}
-            // onClick={this.enterRoom(1)}
+            onClick={() => this.enterRoom(1)}
           >
             Living Room
           </button>
