@@ -225,25 +225,8 @@ class PlayOnline extends React.Component {
       this.state.game !==
         "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
     ) {
-      // this.socket.emit(
-      //   "new move",
-      //   "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
-      //   this.props.location.state.roomNumber
-      // );
-      console.log("less than 2 people");
-      // if (
-      //   this.state.game !==
-      //   "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-      // ) {
-      //   console.log("less than two players");
-      // this.setState({
-      //   game: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
-      //   messageList: [],
-      //   white: "",
-      //   black: "",
-      // });
-      // }
-
+      return <Redirect to="/chooseroom" />;
+    } else if (this.state.players.length < 2) {
       return (
         // Loading screen is rendered if the required amount of players are not in the room.
         <div className="loading">
