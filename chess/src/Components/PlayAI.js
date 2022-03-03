@@ -18,9 +18,11 @@ export default function PlayAI(props) {
   const networking = new Networking();
 
   const chessboardRef = useRef();
+
   const [game, setGame] = useState(
     props.location.chessboard ? props.location.chessboard : new Chess(fen)
   );
+
 
   const [arrows, setArrows] = useState([]);
   const [boardOrientation, setBoardOrientation] = useState(
