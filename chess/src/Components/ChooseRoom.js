@@ -5,7 +5,7 @@ import io from "socket.io-client";
 class ChooseRoom extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { rooms: [] };
+    this.state = { rooms: [[], []] };
   }
 
   componentDidMount() {
