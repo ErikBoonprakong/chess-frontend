@@ -16,24 +16,30 @@ import ChooseRoom from "./Components/ChooseRoom";
 class App extends React.Component {
   constructor() {
     super();
-    this.state = { cookie: cookieObj(), bathroom: true, livingRoom: true };
+    this.state = { cookie: cookieObj(), rooms: { bathroom: 0, livingRoom: 0 } };
   }
 
   getCookie(newCookie) {
     this.setState({ cookie: newCookie });
   }
 
-  disableFullRooms = async (roomName) => {
-    if (this.state[roomName]) {
-      await this.setState({ [roomName]: false });
-    }
-  };
+  // disableFullRooms = async (roomName) => {
+  //   if (this.state[roomName]) {
+  //     await this.setState({ [roomName]: false });
+  //   }
+  // };
 
-  enableRoom = async (roomName) => {
-    if (!this.state[roomName]) {
-      await this.setState({ [roomName]: true });
-    }
-  };
+  // enableRoom = async (roomName) => {
+  //   if (!this.state[roomName]) {
+  //     await this.setState({ [roomName]: true });
+  //   }
+  // };
+
+  playersInRooms(room, numberOfPlayers) {
+    const roomPeople = this.state.rooms;
+    roomPeople[room] = numberOfPlayers;
+    this.setState({ rooms: roomPeople });
+  }
 
   render() {
     return (
@@ -64,15 +70,17 @@ class App extends React.Component {
             <Route path="/chooseroom">
               <ChooseRoom
                 userData={this.state.cookie}
-                bathroom={this.state.bathroom}
-                livingRoom={this.state.livingRoom}
+                // bathroom={this.state.bathroom}
+                // livingRoom={this.state.livingRoom}
+                rooms={this.state.rooms}
               />
             </Route>
             <Route path="/playonline">
               {(props) => (
                 <PlayOnline
-                  disableRoom={(roomName) => this.disableFullRooms(roomName)}
-                  enableRoom={(roomName) => this.enableRoom(roomName)}
+                  playersInRooms={() => this.playersInRooms()}
+                  // disableRoom={(roomName) => this.disableFullRooms(roomName)}
+                  // enableRoom={(roomName) => this.enableRoom(roomName)}
                   userData={this.state.cookie}
                   {...props}
                 />

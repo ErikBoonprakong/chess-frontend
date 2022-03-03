@@ -23,7 +23,6 @@ export default function PlayAI(props) {
     props.location.chessboard ? props.location.chessboard : new Chess(fen)
   );
 
-
   const [arrows, setArrows] = useState([]);
   const [boardOrientation, setBoardOrientation] = useState(
     options.usercolour === "w" ? "white" : "black"
@@ -39,7 +38,7 @@ export default function PlayAI(props) {
   const [darkSquareColour, changeDarkSquareColour] = useState("tan");
 
   const aiColour = userColour === "w" ? "b" : "w";
-
+  console.log(userColour);
   function safeGameMutate(modify) {
     setGame((g) => {
       const update = { ...g };
@@ -156,6 +155,7 @@ export default function PlayAI(props) {
   }
 
   function renderHintButtons() {
+    console.log(game.fen());
     return (
       <div className="hint-btn-div">
         <div className="hint-btn">
@@ -170,7 +170,7 @@ export default function PlayAI(props) {
               clearTimeout(currentTimeout);
             }}
           >
-            reset
+            Reset
           </button>
 
           <button
@@ -185,15 +185,17 @@ export default function PlayAI(props) {
               clearTimeout(currentTimeout);
             }}
           >
-            undo
+            Undo
           </button>
-          <button
+          <input
+            type="button"
+            date-testid="get-hints-btn"
             className={options.optimalMove ? "rc-button" : "disabled-btn"}
             disabled={!options.optimalMove}
             onClick={getOptimalMoves}
           >
             Get Hints
-          </button>
+          </input>
         </div>
         <div className="more-btn">
           <button
@@ -211,7 +213,7 @@ export default function PlayAI(props) {
               );
             }}
           >
-            flip board
+            Flip Board
           </button>
 
           <button
@@ -244,7 +246,7 @@ export default function PlayAI(props) {
       ) : (
         <div className="play">
           {" "}
-          <div data-testid="play-ai-message">{message}</div>
+          {message ? <p data-testid="play-ai-message">{message}</p> : null}
           {game.in_checkmate() ? (
             <div> {`Checkmate! The winner is ${inCheckMate}!`}</div>
           ) : null}
