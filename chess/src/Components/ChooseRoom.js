@@ -8,7 +8,7 @@ class ChooseRoom extends React.Component {
     this.state = { rooms: [[], []] };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.socket = io("https://chessyem-websocket.herokuapp.com");
     this.socket.emit("join lobby", this.props.userData.user);
     this.socket.on("room list", (rooms) => {
