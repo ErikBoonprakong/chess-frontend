@@ -11,15 +11,24 @@ import React from "react";
 import cookieObj from "./Components/GetCookies";
 import ChooseDifficulty from "./Components/ChooseDifficulty";
 import SavedGames from "./Components/SavedGames";
+import ChooseRoom from "./Components/ChooseRoom";
 
 class App extends React.Component {
   constructor() {
     super();
-    this.state = { cookie: cookieObj() };
+    this.state = { cookie: cookieObj(), bathroom: true, livingRoom: true };
   }
 
   getCookie(newCookie) {
     this.setState({ cookie: newCookie });
+  }
+
+  disableFullRooms(roomName) {
+    if (this.state[roomName]) {
+      console.log("disableing room");
+      this.setState({ [roomName]: false });
+      console.log("room disabled");
+    }
   }
 
   render() {
@@ -48,8 +57,21 @@ class App extends React.Component {
               <ChooseDifficulty />
             </Route>
             <Route path="/playai">{(props) => <PlayAI {...props} />}</Route>
+            <Route path="/chooseroom">
+              <ChooseRoom
+                userData={this.state.cookie}
+                bathroom={this.state.bathroom}
+                livingRoom={this.state.livingRoom}
+              />
+            </Route>
             <Route path="/playonline">
-              <PlayOnline userData={this.state.cookie} />
+              {(props) => (
+                <PlayOnline
+                  disableRoom={(roomName) => this.disableFullRooms(roomName)}
+                  userData={this.state.cookie}
+                  {...props}
+                />
+              )}
             </Route>
             <Route path="/leaderboard">
               <Leaderboard />

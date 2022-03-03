@@ -17,7 +17,7 @@ class HomePage extends React.Component {
               <span>Play AI</span>
             </button>
           </Link>
-          <Link to="/playonline">
+          <Link to="/chooseroom">
             <button className="home-btn">
               <span>Play Online</span>
             </button>
