@@ -19,7 +19,6 @@ export default function PlayVsRandom(props) {
 
   const chessboardRef = useRef();
   const [game, setGame] = useState(new Chess(fen));
-  console.log(fen);
   const [arrows, setArrows] = useState([]);
   const [boardOrientation, setBoardOrientation] = useState(
     options.usercolour === "w" ? "white" : "black"
