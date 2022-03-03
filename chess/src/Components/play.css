@@ -11,15 +11,11 @@
   /* justify-items: center; */
 }
 
-
 .App {
   background-color: bisque;
 }
 
-
-
 .full-page-ai {
-
   display: flex;
   justify-content: center;
   background-color: bisque;
@@ -61,6 +57,8 @@
   border: 4px #7a9e9f;
   width: 20%;
   float: right;
+  margin-right: 200px;
+  margin-bottom: 500px;
 }
 
 input[type="submit"] {
@@ -116,4 +114,8 @@ select {
 
 .loading {
   margin-right: 600px;
+}
+.more-btn {
+  display: flex;
+  flex-direction: row;
 }

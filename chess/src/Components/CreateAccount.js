@@ -33,9 +33,11 @@ class CreateAccount extends React.Component {
       this.state.confirm
     );
     if (status === 200) {
+      //Redirects to login page if the user has created an account correctly.
       this.setState({ valid: true, redirect: true });
       this.props.newCookie(this.state.cookies);
     } else if (status === 400) {
+      //Retrieves error message from json if post request has return a 400 Bad Response.
       this.setState({
         valid: false,
         error: json.message,
@@ -44,10 +46,12 @@ class CreateAccount extends React.Component {
   }
 
   showPassword(e) {
+    //If the state of showPassword is true, the input type in the render function is changed from password to text with a ternary operator.
     this.setState({ showPassword: !this.state.showPassword });
   }
 
   getWarning(input) {
+    //Bootstrap Alert message contains error message from json, from the postUser request.
     return <Alert variant="danger">{this.state.error}</Alert>;
   }
 

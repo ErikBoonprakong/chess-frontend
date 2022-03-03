@@ -14,12 +14,14 @@ class Leaderboard extends React.Component {
   }
 
   async componentDidMount() {
+    //GET request in networking called to retrieve data to populate leaderboard.
     const scores = await this.Networking.getScores();
     await this.setState({ data: scores });
   }
 
   render() {
     console.log(this.state.data);
+    //Each object in the data array within the state is mapped to a table, which is then rendered in the form of a leaderboard.
     const leaderboard = this.state.data.map((person, i) => {
       return (
         <tr key={i}>
