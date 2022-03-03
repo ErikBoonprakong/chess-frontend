@@ -230,12 +230,12 @@ class PlayOnline extends React.Component {
       //   "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
       //   this.props.location.state.roomNumber
       // );
-      this.setState({
-        game: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
-        messageList: [],
-        white: "",
-        black: "",
-      });
+      // this.setState({
+      //   game: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      //   messageList: [],
+      //   white: "",
+      //   black: "",
+      // });
       return (
         // Loading screen is rendered if the required amount of players are not in the room.
         <div className="loading">
