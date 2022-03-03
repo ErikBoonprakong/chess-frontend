@@ -9,23 +9,20 @@ class ChooseRoom extends React.Component {
   }
 
   componentDidMount() {
-    // this.socket = io("https://chessyem-websocket.herokuapp.com");
-    //   this.socket.emit("join lobby", this.props.userData.user);
-    //   this.socket.on("room list", (rooms) => {
-    //     this.setState({ rooms: rooms });
-    //     console.log(this.state.rooms);
-    //     this.rooms = rooms;
-    //   });
+    this.socket = io("https://chessyem-websocket.herokuapp.com");
+    this.socket.emit("join lobby", this.props.userData.user);
+    this.socket.on("room list", (rooms) => {
+      this.setState({ rooms: rooms });
+      console.log(this.state.rooms);
+    });
   }
 
   // updateRooms() {
   //   this.socket = io("https://chessyem-websocket.herokuapp.com");
   //   this.socket.emit("join lobby", this.props.userData.user);
   //   this.socket.on("room list", (rooms) => {
-  //     if (this.state.rooms !== rooms) {
-  //       this.setState({ rooms: rooms });
-  //       console.log(this.state.rooms);
-  //     }
+  //     this.setState({ rooms: rooms });
+  //     console.log(this.state.rooms);
   //   });
   // }
 
@@ -60,7 +57,7 @@ class ChooseRoom extends React.Component {
           <button
             id="bathroom"
             value="bathroom"
-            // disabled={this.state.rooms[0].length >= 2}
+            disabled={this.state.rooms[0].length >= 2}
             // onClick={this.enterRoom(0)}
           >
             Bathroom

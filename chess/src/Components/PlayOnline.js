@@ -26,13 +26,6 @@ class PlayOnline extends React.Component {
       players: [],
       moveCounter: 0,
       room: "lobby",
-      // username: this.props.userData.user,
-      // connected: false,
-      // currentChat: { chatName: "lobby", receiverId: "" },
-      // connectedRooms: "lobby",
-      // allUsers: [],
-      // messages: "",
-      // message: "",
     };
     this.socketRef = React.createRef();
     this.currentUser = cookieObj();
@@ -43,8 +36,6 @@ class PlayOnline extends React.Component {
   componentDidMount() {
     // Socket.IO API means you can emit events and register listeners on the server and client side.
     this.socket = io("https://chessyem-websocket.herokuapp.com");
-    // console.log(this.props.location.state.roomNumber);
-    // this.socket = io("http://localhost:4000");
     // LISTENER
     this.socket.on("new message", (msg) => {
       this.setState({ messageList: [...this.state.messageList, msg] });
@@ -112,7 +103,7 @@ class PlayOnline extends React.Component {
   }
 
   handleChange(e) {
-    e.preventDefault(); //Do we need this?
+    e.preventDefault();
     this.setState({ chatMessage: e.target.value });
   }
 
