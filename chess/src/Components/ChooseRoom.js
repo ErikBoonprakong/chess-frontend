@@ -1,10 +1,23 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
+import io from "socket.io-client";
 
 class ChooseRoom extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { bathroom: true, livingRoom: true };
+    this.state = { rooms: [] };
+  }
+
+  componentDidMount() {
+    this.socket = io("https://chessyem-websocket.herokuapp.com");
+    this.socket.emit("join lobby", this.props.userData.user);
+  }
+
+  updateRoomList() {
+    this.socket.on("room list", (rooms) => {
+      this.setState({ rooms: rooms });
+      console.log(rooms);
+    });
   }
 
   render() {
@@ -22,7 +35,7 @@ class ChooseRoom extends React.Component {
           <button
             id="bathroom"
             value="bathroom"
-            disabled={!this.props.bathroom}
+            disabled={this.state.rooms[0].length >= 2}
           >
             Bathroom
           </button>
@@ -36,7 +49,7 @@ class ChooseRoom extends React.Component {
           <button
             id="livingRoom"
             value="livingRoom"
-            disabled={!this.props.livingRoom}
+            disabled={this.state.rooms[1].length >= 2}
           >
             Living Room
           </button>
