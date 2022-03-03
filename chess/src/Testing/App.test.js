@@ -6,6 +6,7 @@ import App from "../App";
 import Header from "../Components/Header.js";
 import HomePage from "../Components/HomePage";
 import Leaderboard from "../Components/Leaderboard";
+import PlayAI from "../Components/PlayAI";
 import {
   getRowByFirstCellText,
   getAllCells,
