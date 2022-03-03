@@ -239,6 +239,7 @@ class PlayOnline extends React.Component {
         </div>
       );
     } else if (this.state.players.length < 2) {
+      this.props.enableRoom(this.props.location.state.roomName);
       return (
         // Loading screen is rendered if the required amount of players are not in the room.
         <div className="loading">
