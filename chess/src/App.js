@@ -23,17 +23,17 @@ class App extends React.Component {
     this.setState({ cookie: newCookie });
   }
 
-  disableFullRooms(roomName) {
+  disableFullRooms = async (roomName) => {
     if (this.state[roomName]) {
-      this.setState({ [roomName]: false });
+      await this.setState({ [roomName]: false });
     }
-  }
+  };
 
-  enableRoom(roomName) {
+  enableRoom = async (roomName) => {
     if (!this.state[roomName]) {
-      this.setState({ [roomName]: true });
+      await this.setState({ [roomName]: true });
     }
-  }
+  };
 
   render() {
     return (
