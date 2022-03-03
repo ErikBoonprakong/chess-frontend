@@ -8,16 +8,29 @@ class ChooseRoom extends React.Component {
     this.state = { rooms: [[], []] };
   }
 
-  componentWillMount() {
+  componentDidMount() {
+    // this.socket = io("https://chessyem-websocket.herokuapp.com");
+    //   this.socket.emit("join lobby", this.props.userData.user);
+    //   this.socket.on("room list", (rooms) => {
+    //     this.setState({ rooms: rooms });
+    //     console.log(this.state.rooms);
+    //     this.rooms = rooms;
+    //   });
+  }
+
+  updateRooms() {
     this.socket = io("https://chessyem-websocket.herokuapp.com");
     this.socket.emit("join lobby", this.props.userData.user);
     this.socket.on("room list", (rooms) => {
-      this.setState({ rooms: rooms });
-      console.log(rooms);
+      if (this.state.rooms !== rooms) {
+        this.setState({ rooms: rooms });
+        console.log(this.state.rooms);
+      }
     });
   }
 
   render() {
+    this.updateRooms();
     return (
       <div>
         <Link
@@ -47,6 +60,7 @@ class ChooseRoom extends React.Component {
             id="livingRoom"
             value="livingRoom"
             disabled={this.state.rooms[1].length >= 2}
+            onClick={console.log(this.state.rooms)}
           >
             Living Room
           </button>
