@@ -19,7 +19,11 @@ class ChooseRoom extends React.Component {
             },
           }}
         >
-          <button id="bathroom" value="bathroom">
+          <button
+            id="bathroom"
+            value="bathroom"
+            disabled={!this.props.bathroom}
+          >
             Bathroom
           </button>
         </Link>
@@ -29,7 +33,11 @@ class ChooseRoom extends React.Component {
             state: { roomNumber: 1, roomName: "livingRoom" },
           }}
         >
-          <button id="livingRoom" value="livingRoom">
+          <button
+            id="livingRoom"
+            value="livingRoom"
+            disabled={!this.props.livingRoom}
+          >
             Living Room
           </button>
         </Link>

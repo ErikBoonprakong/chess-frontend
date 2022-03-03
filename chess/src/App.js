@@ -25,9 +25,13 @@ class App extends React.Component {
 
   disableFullRooms(roomName) {
     if (this.state[roomName]) {
-      console.log("disableing room");
       this.setState({ [roomName]: false });
-      console.log("room disabled");
+    }
+  }
+
+  enableRoom(roomName) {
+    if (!this.state[roomName]) {
+      this.setState({ [roomName]: true });
     }
   }
 
@@ -68,6 +72,7 @@ class App extends React.Component {
               {(props) => (
                 <PlayOnline
                   disableRoom={(roomName) => this.disableFullRooms(roomName)}
+                  enableRoom={(roomName) => this.enableRoom(roomName)}
                   userData={this.state.cookie}
                   {...props}
                 />
