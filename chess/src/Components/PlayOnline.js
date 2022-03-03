@@ -133,7 +133,7 @@ class PlayOnline extends React.Component {
       !this.state.endOfGame &&
       this.props.userData.user ===
         this.state.players[this.state.moveCounter % 2] &&
-      this.state.players.length === 2
+      this.state.players.length >= 2
     ) {
       const newGame = new Chess(this.state.game);
       const gameCopy = { ...newGame };
