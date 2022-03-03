@@ -18,19 +18,19 @@ class ChooseRoom extends React.Component {
     //   });
   }
 
-  updateRooms() {
-    this.socket = io("https://chessyem-websocket.herokuapp.com");
-    this.socket.emit("join lobby", this.props.userData.user);
-    this.socket.on("room list", (rooms) => {
-      if (this.state.rooms !== rooms) {
-        this.setState({ rooms: rooms });
-        console.log(this.state.rooms);
-      }
-    });
-  }
+  //   updateRooms() {
+  //     this.socket = io("https://chessyem-websocket.herokuapp.com");
+  //     this.socket.emit("join lobby", this.props.userData.user);
+  //     this.socket.on("room list", (rooms) => {
+  //       if (this.state.rooms !== rooms) {
+  //         this.setState({ rooms: rooms });
+  //         console.log(this.state.rooms);
+  //       }
+  //     });
+  //   }
 
   render() {
-    this.updateRooms();
+    // this.updateRooms();
     return (
       <div>
         <Link
