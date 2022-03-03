@@ -6,7 +6,6 @@ class ChooseRoom extends React.Component {
   constructor(props) {
     super(props);
     this.state = { rooms: [[], []] };
-    this.enterRoom = this.enterRoom.bind(this);
   }
 
   componentDidMount() {
