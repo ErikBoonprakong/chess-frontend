@@ -81,17 +81,6 @@ class PlayOnline extends React.Component {
       this.props.userData.user,
       this.props.location.state.roomNumber
     );
-    // this.socket.emit(
-    //   "new move",
-    //   "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
-    //   this.props.location.state.roomNumber
-    // );
-    // this.setState({
-    //   game: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
-    //   messageList: [],
-    //   white: "",
-    //   black: "",
-    // });
   }
 
   displayMessages() {
@@ -236,7 +225,17 @@ class PlayOnline extends React.Component {
         </div>
       );
     } else if (this.state.players.length < 2) {
-      this.props.enableRoom(this.props.location.state.roomName);
+      this.socket.emit(
+        "new move",
+        "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        this.props.location.state.roomNumber
+      );
+      this.setState({
+        game: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        messageList: [],
+        white: "",
+        black: "",
+      });
       return (
         // Loading screen is rendered if the required amount of players are not in the room.
         <div className="loading">
