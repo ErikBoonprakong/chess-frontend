@@ -198,10 +198,6 @@ class PlayOnline extends React.Component {
 
   displayPlayers() {
     if (this.state.players.length >= 2) {
-      this.props.disableRoom(this.props.location.state.roomName);
-      if (this.state.players.length > 2) {
-        <Redirect to="/chooseroom" />;
-      }
       return (
         <div className="play">
           <div>{`${this.state.players[0]} plays white, ${this.state.players[1]} plays black. `}</div>
