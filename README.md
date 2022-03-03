@@ -5,6 +5,7 @@
 - [Introduction](#introduction)
 - [Technologies](#technologies)
 - [Setup](#setup)
+- [Contributors](#contributors)
 
 ## Introduction
 
@@ -34,3 +35,11 @@ $ yarn start
 ```
 
 As well as this, there is a related backend Server which will also be required in order for the App to function properly. The backend repository for this project can be found [here](https://github.com/ErikBoonprakong/chess-backend/blob/main/Procfile). We recommend cloning both repositories to your local machine.
+
+## Contributors
+
+The Developers that worked on this project are:
+
+Project Manager & Engineer: [Yassin Serroukh](https://github.com/yassinserroukh)<br/>
+Architect & Engineer: [Erik Boonprakong](https://github.com/ErikBoonprakong)<br/>
+Quality Assurance & Engineer: [Megan Watson](https://github.com/megwat)<br/>

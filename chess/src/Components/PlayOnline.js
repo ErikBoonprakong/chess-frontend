@@ -206,10 +206,6 @@ class PlayOnline extends React.Component {
     return response;
   }
 
-  selectRoom(e) {
-    this.setState({ room: e.target.id });
-  }
-
   displayPlayers() {
     if (this.state.players.length >= 2) {
       this.props.disableRoom(this.props.location.state.roomName);
