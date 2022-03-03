@@ -1,10 +1,41 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
+import io from "socket.io-client";
 
 class ChooseRoom extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { rooms: [[], []] };
+    this.enterRoom = this.enterRoom.bind(this);
   }
+
+  componentDidMount() {
+    // this.socket = io("https://chessyem-websocket.herokuapp.com");
+  }
+
+  //   enterRoom = (roomNumber) => {
+  //     this.socket = io("https://chessyem-websocket.herokuapp.com");
+  //     this.socket.emit("join lobby", this.props.userData.user);
+  //     this.socket.on("room list", (rooms) => {
+  //       if (this.state.rooms !== rooms) {
+  //         this.setState({ rooms: rooms });
+  //       }
+  //       //   if (rooms[roomNumber] >= 2) {
+  //       //     console.log("full");
+  //       //     return false;
+  //       //   } else {
+  //       //     console.log("redirect");
+  //       //     return true;
+  //       //   }
+  //     });
+  //     if (this.state.rooms[roomNumber] >= 2) {
+  //       console.log("full");
+  //       return false;
+  //     } else {
+  //       console.log("redirect");
+  //       return true;
+  //     }
+  //   };
 
   render() {
     return (
@@ -21,7 +52,8 @@ class ChooseRoom extends React.Component {
           <button
             id="bathroom"
             value="bathroom"
-            disabled={this.props.rooms.livingRoom >= 2}
+            // disabled={this.state.rooms[0].length >= 2}
+            onClick={() => this.enterRoom(0)}
           >
             Bathroom
           </button>
@@ -35,7 +67,9 @@ class ChooseRoom extends React.Component {
           <button
             id="livingRoom"
             value="livingRoom"
-            disabled={this.props.rooms.livingRoom >= 2}
+            // disabled={this.state.rooms[1].length >= 2}
+            // onClick={console.log(this.state.rooms)}
+            onClick={() => this.enterRoom(1)}
           >
             Living Room
           </button>
