@@ -3,6 +3,14 @@ import { Link, Redirect } from "react-router-dom";
 import io from "socket.io-client";
 
 class ChooseRoom extends React.Component {
+
+
+  constructor(props) {
+    super(props);
+    this.state = { rooms: [[], []] };
+  }
+
+
   render() {
     return (
       <div>
@@ -25,12 +33,18 @@ class ChooseRoom extends React.Component {
             state: { roomNumber: 1, roomName: "livingRoom" },
           }}
         >
-          <button
-            id="livingRoom"
-            value="livingRoom"
-            onClick={() => this.enterRoom(1)}
-          >
+          <button id="livingRoom" value="livingRoom">
             Living Room
+          </button>
+        </Link>
+        <Link
+          to={{
+            pathname: "/playonline",
+            state: { roomNumber: 2, roomName: "diningRoom" },
+          }}
+        >
+          <button id="diningRoom" value="diningRoom">
+            Dining Room
           </button>
         </Link>
       </div>
