@@ -61,12 +61,6 @@
   margin-bottom: 500px;
 }
 
-.boardAndButtons {
-  /* display: flex;
-  align-self: center; */
-  /* margin-left: 10%; */
-}
-
 input[type="submit"] {
   width: 60%;
   background-color: #858585;

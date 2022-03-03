@@ -7,6 +7,9 @@ import Networking from "./Networking";
 import theme from "./Theme.js";
 import { CircularProgress, ThemeProvider } from "@mui/material";
 import "./play.css";
+import immer from "immer";
+import { Redirect } from "react-router-dom";
+
 class PlayOnline extends React.Component {
   constructor(props) {
     super(props);
@@ -21,7 +24,16 @@ class PlayOnline extends React.Component {
       playerError: "",
       players: [],
       moveCounter: 0,
+      room: "lobby",
+      // username: this.props.userData.user,
+      // connected: false,
+      // currentChat: { chatName: "lobby", receiverId: "" },
+      // connectedRooms: "lobby",
+      // allUsers: [],
+      // messages: "",
+      // message: "",
     };
+    this.socketRef = React.createRef();
     this.currentUser = cookieObj();
     this.networking = new Networking();
     this.players = [];
@@ -30,12 +42,18 @@ class PlayOnline extends React.Component {
   componentDidMount() {
     // Socket.IO API means you can emit events and register listeners on the server and client side.
     this.socket = io("https://chessyem-websocket.herokuapp.com");
+    // console.log(this.props.location.state.roomNumber);
+    // this.socket = io("http://localhost:4000");
     // LISTENER
     this.socket.on("new message", (msg) => {
       this.setState({ messageList: [...this.state.messageList, msg] });
     });
     // EMIT EVENT
-    this.socket.emit("join room", this.props.userData.user);
+    this.socket.emit(
+      "enter room",
+      this.props.userData.user,
+      this.props.location.state.roomNumber
+    );
     this.socket.on("new move", (move) => {
       const moveIncrement = this.state.moveCounter + 1;
       this.setState({ game: move, moveCounter: moveIncrement });
@@ -57,10 +75,15 @@ class PlayOnline extends React.Component {
   }
 
   componentWillUnmount() {
-    this.socket.emit("leave room", this.props.userData.user);
+    this.socket.emit(
+      "leave room",
+      this.props.userData.user,
+      this.props.location.state.roomNumber
+    );
     this.socket.emit(
       "new move",
-      "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+      "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      this.props.location.state.roomNumber
     );
     this.setState({
       game: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
@@ -97,7 +120,11 @@ class PlayOnline extends React.Component {
     e.preventDefault();
     let messageString =
       this.props.userData.user + ": " + this.state.chatMessage;
-    this.socket.emit("new message", messageString);
+    this.socket.emit(
+      "new message",
+      messageString,
+      this.props.location.state.roomNumber
+    );
     this.setState({ chatMessage: "" });
   }
 
@@ -120,7 +147,12 @@ class PlayOnline extends React.Component {
       const newGameFen = gameCopy.fen();
 
       //Client sends the new state of the chessboard to the server so that second client can receive new board.
-      this.socket.emit("new move", newGameFen);
+      this.socket.emit(
+        "new move",
+        newGameFen,
+        this.props.location.state.roomNumber
+      );
+      // const moveIncrement = this.state.moveCounter + 1;
       this.setState({ game: newGameFen });
 
       if (!this.state.endOfGame && gameCopy.in_checkmate()) {
@@ -129,7 +161,11 @@ class PlayOnline extends React.Component {
         await this.sendResults(this.props.userData.user, 1, 0, 0);
         await this.sendResults(opponentName, 0, 1, 0);
         // Communicates with the server to display who has won after the endOfGame state becomes true.
-        this.socket.emit("new message", `${this.props.userData.user} Wins`);
+        this.socket.emit(
+          "new message",
+          `${this.props.userData.user} Wins`,
+          this.props.location.state.roomNumber
+        );
       }
       if (
         !this.endOfGame &&
@@ -143,7 +179,11 @@ class PlayOnline extends React.Component {
         await this.sendResults(this.state.players[0], 0, 0, 1);
         await this.sendResults(this.state.players[1], 0, 0, 1);
 
-        this.socket.emit("new message", "Draw");
+        this.socket.emit(
+          "new message",
+          "Draw",
+          this.props.location.state.roomNumber
+        );
       }
     } else {
       if (
@@ -165,8 +205,17 @@ class PlayOnline extends React.Component {
 
     return response;
   }
+
+  selectRoom(e) {
+    this.setState({ room: e.target.id });
+  }
+
   displayPlayers() {
-    if (this.state.players.length === 2) {
+    if (this.state.players.length >= 2) {
+      this.props.disableRoom(this.props.location.state.roomName);
+      if (this.state.players.length > 2) {
+        <Redirect to="/chooseroom" />;
+      }
       return (
         <div className="play">
           <div>{`${this.state.players[0]} plays white, ${this.state.players[1]} plays black. `}</div>
