@@ -225,11 +225,11 @@ class PlayOnline extends React.Component {
         </div>
       );
     } else if (this.state.players.length < 2) {
-      this.socket.emit(
-        "new move",
-        "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
-        this.props.location.state.roomNumber
-      );
+      // this.socket.emit(
+      //   "new move",
+      //   "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      //   this.props.location.state.roomNumber
+      // );
       this.setState({
         game: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
         messageList: [],
