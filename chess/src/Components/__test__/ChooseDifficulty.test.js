@@ -12,11 +12,12 @@ describe("ChooseDifficulty", () => {
       </BrowserRouter>
     );
 
-    const checkboxes = screen.getByRole("checkbox");
+    const checkboxes = screen.queryAllByText("checkbox");
+    checkboxes.forEach((checkbox) => {
+      fireEvent.click(checkbox);
 
-    fireEvent.click(checkboxes);
-
-    // Expect
-    expect(checkboxes).toHaveStyle({ backgroundColor: "blue" });
+      // Expect
+      expect(checkbox).toHaveStyle({ backgroundColor: "blue" });
+    });
   });
 });
