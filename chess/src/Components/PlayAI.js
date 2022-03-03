@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import Chess from "chess.js";
+import * as Chess from "chess.js";
+
 import "./play.css";
 import { Chessboard } from "react-chessboard";
 import cookieObj from "./GetCookies";
@@ -7,18 +8,20 @@ import { minimax } from "./ChessMLAlgorithm";
 import Networking from "./Networking";
 import { Redirect } from "react-router";
 
-export default function PlayVsRandom(props) {
+export default function PlayAI(props) {
   const options = props.location.state.state;
   const depth = parseInt(options.difficulty);
   const fen = props.location.state.fen;
-
+  console.log(props);
   const cookieObject = cookieObj();
 
   const networking = new Networking();
 
   const chessboardRef = useRef();
-  const [game, setGame] = useState(new Chess(fen));
-  console.log(fen);
+  const [game, setGame] = useState(
+    props.location.chessboard ? props.location.chessboard : new Chess(fen)
+  );
+
   const [arrows, setArrows] = useState([]);
   const [boardOrientation, setBoardOrientation] = useState(
     options.usercolour === "w" ? "white" : "black"
@@ -150,22 +153,6 @@ export default function PlayVsRandom(props) {
     }
   }
 
-  // function renderColourButtons() {
-  //   return (
-  //     <div>
-  //       <button id="w" onClick={changeUserColour}>
-  //         Play white
-  //       </button>
-  //       <button id="b" onClick={changeUserColour}>
-  //         Play black
-  //       </button>
-  //       <button id="r" onClick={changeUserColour}>
-  //         Random
-  //       </button>
-  //     </div>
-  //   );
-  // }
-
   function renderHintButtons() {
     return (
       <div>
@@ -198,6 +185,7 @@ export default function PlayVsRandom(props) {
           undo
         </button>
         <button
+          data-testid="get-hints"
           className={options.reset ? "rc-button" : "disabled-btn"}
           disabled={!options.optimalMove}
           onClick={getOptimalMoves}
@@ -233,35 +221,6 @@ export default function PlayVsRandom(props) {
     );
   }
 
-  // function handleSquareColour(e) {
-  //   console.log(e.target.value, e.target.id);
-
-  //   if (e.target.value === "dark") {
-  //     console.log(e.target.value, e.target.id);
-  //     changeDarkSquareColour(e.target.id);
-  //   } else if (e.target.value === "light") {
-  //     changeLightSquareColour(e.target.id);
-  //   }
-  // }
-  // function renderColourButtons(lightOrDark) {
-  //   const colours = ["Green", "Blue", "Orange", "Red"];
-  //   const lightHex = ["#53a584", "#689ac2", "#c29b68", "#c26868"];
-  //   const darkHex = ["#1f5741", "#1b2a52", "#b65e17", "#7c0a0a"];
-  //   let colourHex = lightOrDark === "light" ? lightHex : darkHex;
-
-  //   let options = {};
-  //   colours.forEach((colour, i) => {
-  //     options[colour] = colourHex[i];
-  //   });
-  //   return (
-  //     <Dropdown
-  //       value={lightOrDark}
-  //       options={options}
-  //       onChange={handleSquareColour(lightOrDark)}
-  //       placeholder="Select an option"
-  //     />
-  //   );
-  // }
   return (
     <div className="full-page-ai">
       {" "}
@@ -280,7 +239,7 @@ export default function PlayVsRandom(props) {
       ) : (
         <div className="play">
           {" "}
-          {message}
+          <div data-testid="play-ai-message">{message}</div>
           {game.in_checkmate() ? (
             <div> {`Checkmate! The winner is ${inCheckMate}!`}</div>
           ) : null}

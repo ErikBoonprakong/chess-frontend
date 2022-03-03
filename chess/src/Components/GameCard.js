@@ -43,7 +43,6 @@ class SavedGame extends React.Component {
       <div className="previous-games">
         <ListItem alignItems="flex-start">
           <ListItemAvatar>
-            {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /> */}
             <div className="snap-chess">
               <Chessboard
                 className="chessboard-snapshot"

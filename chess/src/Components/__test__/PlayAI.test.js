@@ -9,35 +9,41 @@ import ReactDOM from "react-dom";
 import PlayAI from "../PlayAI";
 import ChooseDifficulty from "../ChooseDifficulty";
 // import * as Chess from "chess.js";
+
 import { useEffect, useRef, useState } from "react";
-import Chess from "chess.js";
+// import Chess from "chess.js";
 import { Chessboard } from "react-chessboard";
 import cookieObj from "../GetCookies";
 import { minimax } from "../ChessMLAlgorithm";
 import Networking from "../Networking";
 import { Redirect } from "react-router";
-configure({ adapter: new Adapter() });
 
+const Chess = require("chess.js").Chess;
+
+configure({ adapter: new Adapter() });
 describe("Play Against AI", () => {
   let wrapper;
   let sessionCookie;
   function getCookie(newCookie) {
     sessionCookie = newCookie;
   }
+  const game = new Chess(
+    "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+  );
   let props = {
     location: {
       state: {
         state: {
           difficulty: "1",
           inCheck: 1,
-          optimalMove: 0,
+          optimalMove: 1,
           reset: 0,
           submit: true,
           undo: 0,
-          userColour: null,
+          userColour: "w",
         },
       },
-      fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      chessboard: game,
     },
   };
   // rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
@@ -51,21 +57,46 @@ describe("Play Against AI", () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  describe("PlayAI test", () => {
-    it("should notify me when I'm in check, if the option is enabled", async () => {
-      const mockColour = {
-        target: { id: "w" },
-      };
-      const mockDifficulty = {
-        target: { value: "1" },
-      };
-      const inCheckHint = {
-        target: { id: "inCheck" },
-      };
-      await ChooseDifficultyWrapper.handleOptions(inCheckHint);
-      ChooseDifficultyWrapper.handleSubmit(mockDifficulty);
-      wrapper.changeUserColour(mockColour);
-      console.log(wrapper.state());
-    });
+  it("Get hints button disabled if the used doesn't choose to have hints.", () => {
+    // expect(getByText(/Click me/i).closest('button')).toBeDisabled();
+    const button = screen.getByText("Get Hints");
+    expect(button).toBeDisabled();
+  });
+});
+
+describe("PlayAI test", () => {
+  let wrapper;
+  let sessionCookie;
+  function getCookie(newCookie) {
+    sessionCookie = newCookie;
+  }
+  const game = new Chess(
+    "rnb1kbnr/pppp1ppp/8/4p3/5PPq/8/PPPPP2P/RNBQKBNR w KQkq - 1 3"
+  );
+  let checkProps = {
+    location: {
+      state: {
+        state: {
+          difficulty: "1",
+          inCheck: 1,
+          optimalMove: 1,
+          reset: 0,
+          submit: true,
+          undo: 0,
+          userColour: "w",
+        },
+      },
+      chessboard: game,
+    },
+  };
+
+  beforeEach(() => {
+    wrapper = shallow(<PlayAI {...checkProps} />);
+  });
+  it("should notify me when I'm in check, if the option is enabled", async () => {
+    const messageDiv = screen.getByText("is in check!");
+    expect(messageDiv).toBeTruthy();
+    // getByTestId("play-ai-message");
+    // expect(messageDiv).toContain("is in check!");
   });
 });

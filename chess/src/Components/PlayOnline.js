@@ -1,7 +1,8 @@
 import React from "react";
 import io from "socket.io-client";
 import { Chessboard } from "react-chessboard";
-import * as Chess from "chess.js";
+// import * as Chess from "chess.js";
+import Chess from "chess.js";
 import cookieObj from "./GetCookies";
 import Networking from "./Networking";
 import theme from "./Theme.js";
@@ -199,9 +200,7 @@ class PlayOnline extends React.Component {
 
   render() {
     return (
-
       <div className="game-chat full-page">
-
         <div className="chat">
           <form onSubmit={(e) => this.sendMessage(e)}>
             <input
