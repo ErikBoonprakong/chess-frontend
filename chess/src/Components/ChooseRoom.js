@@ -11,9 +11,6 @@ class ChooseRoom extends React.Component {
   componentDidMount() {
     this.socket = io("https://chessyem-websocket.herokuapp.com");
     this.socket.emit("join lobby", this.props.userData.user);
-  }
-
-  updateRoomList() {
     this.socket.on("room list", (rooms) => {
       this.setState({ rooms: rooms });
       console.log(rooms);
