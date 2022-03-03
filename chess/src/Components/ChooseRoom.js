@@ -18,16 +18,31 @@ class ChooseRoom extends React.Component {
     //   });
   }
 
-  //   updateRooms() {
-  //     this.socket = io("https://chessyem-websocket.herokuapp.com");
-  //     this.socket.emit("join lobby", this.props.userData.user);
-  //     this.socket.on("room list", (rooms) => {
-  //       if (this.state.rooms !== rooms) {
-  //         this.setState({ rooms: rooms });
-  //         console.log(this.state.rooms);
-  //       }
-  //     });
-  //   }
+  // updateRooms() {
+  //   this.socket = io("https://chessyem-websocket.herokuapp.com");
+  //   this.socket.emit("join lobby", this.props.userData.user);
+  //   this.socket.on("room list", (rooms) => {
+  //     if (this.state.rooms !== rooms) {
+  //       this.setState({ rooms: rooms });
+  //       console.log(this.state.rooms);
+  //     }
+  //   });
+  // }
+
+  enterRoom(roomNumber) {
+    this.socket = io("https://chessyem-websocket.herokuapp.com");
+    this.socket.emit("join lobby", this.props.userData.user);
+    this.socket.on("room list", (rooms) => {
+      if (this.state.rooms !== rooms) {
+        this.setState({ rooms: rooms });
+        if (rooms[roomNumber].length >= 2) {
+          console.log("room full");
+        } else {
+          console.log("redirect");
+        }
+      }
+    });
+  }
 
   render() {
     // this.updateRooms();
@@ -45,7 +60,8 @@ class ChooseRoom extends React.Component {
           <button
             id="bathroom"
             value="bathroom"
-            disabled={this.state.rooms[0].length >= 2}
+            // disabled={this.state.rooms[0].length >= 2}
+            onClick={this.enterRoom(0)}
           >
             Bathroom
           </button>
@@ -59,8 +75,9 @@ class ChooseRoom extends React.Component {
           <button
             id="livingRoom"
             value="livingRoom"
-            disabled={this.state.rooms[1].length >= 2}
-            onClick={console.log(this.state.rooms)}
+            // disabled={this.state.rooms[1].length >= 2}
+            // onClick={console.log(this.state.rooms)}
+            onClick={this.enterRoom(1)}
           >
             Living Room
           </button>
