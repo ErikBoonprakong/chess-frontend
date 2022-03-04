@@ -7,7 +7,7 @@ class ChooseRoom extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { rooms: [[], []] };
+    this.state = { rooms: [[], [], []] };
   }
 
 
@@ -44,6 +44,16 @@ class ChooseRoom extends React.Component {
           }}
         >
           <button id="diningRoom" value="diningRoom" className="room-btn">
+            Dining Room
+          </button>
+        </Link>
+        <Link
+          to={{
+            pathname: "/playonline",
+            state: { roomNumber: 3, roomName: "basement" },
+          }}
+        >
+          <button id="basement" value="basement">
             Dining Room
           </button>
         </Link>
