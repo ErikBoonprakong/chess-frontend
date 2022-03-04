@@ -17,8 +17,6 @@ class Header extends React.Component {
     return (
       <div className="header">
         <nav className="navMenu">
-          {console.log(this.props.userData)}
-
           <div className="logo">
             <img src={logo} alt="chess"></img>
             <span className="user-position">
@@ -40,7 +38,6 @@ class Header extends React.Component {
             </Link>
           </div>
 
-          {/* <hr /> */}
           <div className="dot"></div>
         </nav>
       </div>

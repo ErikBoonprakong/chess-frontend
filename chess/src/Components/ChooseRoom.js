@@ -1,11 +1,13 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
-import io from "socket.io-client";
+import "./ChooseRoom.css";
 
 class ChooseRoom extends React.Component {
+
+
   render() {
     return (
-      <div>
+      <div className="room-container">
         <Link
           to={{
             pathname: "/playonline",

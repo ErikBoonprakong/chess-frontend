@@ -27,12 +27,11 @@ class SavedGames extends React.Component {
     const gameComponents = this.state.savedGames.map((game) => {
       return <GameCard key={game.id} options={game} />;
     });
-    console.log(gameComponents);
+
     return gameComponents;
   }
 
   render() {
-    console.log(this.state.savedGames);
     return (
       <div className="full-page-of-saved-games">
         {this.state.savedGames.length ? this.displaySavedGames() : null}

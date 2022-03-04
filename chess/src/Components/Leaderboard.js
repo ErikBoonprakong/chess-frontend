@@ -20,7 +20,6 @@ class Leaderboard extends React.Component {
   }
 
   render() {
-    console.log(this.state.data);
     //Each object in the data array within the state is mapped to a table, which is then rendered in the form of a leaderboard.
     const leaderboard = this.state.data.map((person, i) => {
       return (
