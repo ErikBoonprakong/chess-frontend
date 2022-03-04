@@ -40,6 +40,8 @@ class GameCard extends React.Component {
   }
 
   render() {
+    const lastPlayed = this.props.options.created_at;
+    const substring = lastPlayed.substring(0, 10);
     return (
       <div className="previous-games">
         <ListItem alignItems="flex-start">
@@ -74,7 +76,7 @@ class GameCard extends React.Component {
                 ></Typography>
 
                 <ul>
-                  <li>Last played: {this.props.options.created_at}</li>
+                  <li>Last played: {substring}</li>
                   <li>Show hints: {this.props.options.hints ? "yes" : "no"}</li>
                   <li>
                     Reset board: {this.props.options.reset ? "yes" : "no"}
