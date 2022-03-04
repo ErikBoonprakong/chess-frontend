@@ -3,11 +3,6 @@ import { Link, Redirect } from "react-router-dom";
 import io from "socket.io-client";
 
 class ChooseRoom extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { rooms: [[], [], []] };
-  }
-
   render() {
     return (
       <div>
