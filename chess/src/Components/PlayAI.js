@@ -23,7 +23,6 @@ export default function PlayAI(props) {
     props.location.chessboard ? props.location.chessboard : new Chess(fen)
   );
 
-
   const [arrows, setArrows] = useState([]);
   const [boardOrientation, setBoardOrientation] = useState(
     options.usercolour === "w" ? "white" : "black"

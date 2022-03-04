@@ -9,7 +9,7 @@ import theme from "./Theme.js";
 import { CircularProgress, ThemeProvider } from "@mui/material";
 import "./play.css";
 import immer from "immer";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 class PlayOnline extends React.Component {
   constructor(props) {
@@ -218,6 +218,11 @@ class PlayOnline extends React.Component {
               boxShadow: "0 5px 15px rgba(0, 0, 0, 0.5)",
             }}
           />
+          <div className="leave-room">
+            <Link to="/chooseroom">
+              <button className="leave-btn">Leave Room</button>
+            </Link>
+          </div>
         </div>
       );
     } else if (
