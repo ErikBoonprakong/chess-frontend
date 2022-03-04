@@ -35,7 +35,7 @@ describe("HomePage", () => {
     expect(buttons[0].href).toBe("http://localhost/options");
   });
 
-  test("HomePage contains Play Online button and contains link to multiplayer page", async () => {
+  test("HomePage contains Play Online button and contains link to chooseroom page", async () => {
     render(
       <BrowserRouter>
         <HomePage />
@@ -47,7 +47,7 @@ describe("HomePage", () => {
       expect(button).toBeInTheDocument();
     }
 
-    expect(buttons[1].href).toBe("http://localhost/playonline");
+    expect(buttons[1].href).toBe("http://localhost/chooseroom");
   });
 
   test("HomePage contains Saved games button and contains link to page with saved games", async () => {
