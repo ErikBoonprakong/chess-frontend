@@ -128,8 +128,6 @@ describe("PlayAI test", () => {
     );
     const messageDiv = screen.queryAllByAltText("p");
     expect(messageDiv).toBeTruthy();
-    // getByTestId("play-ai-message");
-    // expect(messageDiv).toContain("is in check!");
   });
 
   it("All buttons are enabled if the user chooses all hints.", () => {

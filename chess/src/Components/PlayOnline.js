@@ -236,7 +236,7 @@ class PlayOnline extends React.Component {
         // Loading screen is rendered if the required amount of players are not in the room.
         <div className="loading">
           {" "}
-          <ThemeProvider id="loading" theme={theme}>
+          <ThemeProvider theme={theme}>
             <div className="graphs" style={{ marginTop: "30vh" }}>
               <CircularProgress size={100} />
             </div>
