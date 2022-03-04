@@ -18,9 +18,6 @@ class App extends React.Component {
     super();
     this.state = {
       cookie: cookieObj(),
-      bathroom: true,
-      livingRoom: true,
-      diningRoom: true,
     };
   }
 
@@ -55,12 +52,7 @@ class App extends React.Component {
             </Route>
             <Route path="/playai">{(props) => <PlayAI {...props} />}</Route>
             <Route path="/chooseroom">
-              <ChooseRoom
-                userData={this.state.cookie}
-                bathroom={this.state.bathroom}
-                livingRoom={this.state.livingRoom}
-                diningRoom={this.state.diningRoom}
-              />
+              <ChooseRoom userData={this.state.cookie} />
             </Route>
             <Route path="/playonline">
               {(props) => (
