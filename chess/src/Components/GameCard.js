@@ -1,14 +1,14 @@
 import React from "react";
 import Networking from "./Networking.js";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import cookieObj from "./GetCookies";
 import { Chessboard } from "react-chessboard";
-import List from "@mui/material/List";
+
 import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Avatar from "@mui/material/Avatar";
+
 import Typography from "@mui/material/Typography";
 import "./GameCard.css";
 
@@ -60,7 +60,7 @@ class GameCard extends React.Component {
               />
             </div>
           </ListItemAvatar>
-          {console.log(this.showDifficulty(this.props.options.difficulty))}
+
           <ListItemText
             primary={`Difficulty:
             ${this.showDifficulty(this.props.options.difficulty)}`}
@@ -72,7 +72,7 @@ class GameCard extends React.Component {
                   variant="body2"
                   color="text.primary"
                 ></Typography>
-                {/* {" — I'll be in your neighborhood doing errands this…"} */}
+
                 <ul>
                   <li>Last played: {this.props.options.created_at}</li>
                   <li>Show hints: {this.props.options.hints ? "yes" : "no"}</li>

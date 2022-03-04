@@ -1,18 +1,18 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import Networking from "./Networking";
-import Alert from "react-bootstrap/Alert";
+
 import "./Login.css";
 import "./ChooseDifficulty.css";
 
 class ChooseDifficulty extends React.Component {
   constructor(props) {
     super(props);
+    // Each key in the state is given a truthy or falsy value - this whole state isn passed to PlatAI
     this.state = {
       reset: 0,
       undo: 0,
       inCheck: 0,
-
       optimalMove: 0,
       difficulty: 0,
       userColour: null,
@@ -37,7 +37,7 @@ class ChooseDifficulty extends React.Component {
               pathname: "/playai",
               state: {
                 state: this.state,
-                fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+                fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", ///Passes down an initialised by default
               },
             }}
           />
@@ -56,12 +56,10 @@ class ChooseDifficulty extends React.Component {
                         name="check_hint"
                       ></input>
                       <label htmlFor="undo">
-                        {" "}
                         Let me know when I am in check.
                       </label>
                     </li>
                     <li>
-                      {" "}
                       <input
                         onClick={(e) => this.handleOptions(e)}
                         type="checkbox"

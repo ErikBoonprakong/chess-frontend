@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import * as Chess from "chess.js";
 
 import "./play.css";
@@ -12,7 +12,7 @@ export default function PlayAI(props) {
   const options = props.location.state.state;
   const depth = parseInt(options.difficulty);
   const fen = props.location.state.fen;
-  console.log(props);
+
   const cookieObject = cookieObj();
 
   const networking = new Networking();
@@ -22,7 +22,6 @@ export default function PlayAI(props) {
   const [game, setGame] = useState(
     props.location.chessboard ? props.location.chessboard : new Chess(fen)
   );
-
 
   const [arrows, setArrows] = useState([]);
   const [boardOrientation, setBoardOrientation] = useState(
@@ -35,8 +34,8 @@ export default function PlayAI(props) {
   const [message, changeMessage] = useState("");
   const [redirect, changeRedirect] = useState(false);
   const [userColour, changeColour] = useState(options.usercolour);
-  const [lightSquareColour, changeLightSquareColour] = useState("beige");
-  const [darkSquareColour, changeDarkSquareColour] = useState("tan");
+  const [lightSquareColour] = useState("beige");
+  const [darkSquareColour] = useState("tan");
 
   const aiColour = userColour === "w" ? "b" : "w";
 
@@ -79,9 +78,6 @@ export default function PlayAI(props) {
   }
 
   async function onDrop(sourceSquare, targetSquare) {
-    console.log("in on drop");
-    console.log(game.ascii());
-    console.log(game.fen());
     const gameCopy = { ...game };
     const move = gameCopy.move({
       from: sourceSquare,
@@ -273,15 +269,7 @@ export default function PlayAI(props) {
               />
               <div className="buttons">
                 {renderHintButtons()}
-                {/* <ul>
-                  <li>Custom light square colours</li>
 
-                  {renderColourButtons("light")}
-                </ul>
-                <ul>
-                  <li>Custom dark square colours</li>
-                  {renderColourButtons("dark")}
-                </ul> */}
                 <div>
                   <button className="button" onClick={handleSaveGame}>
                     Save game
