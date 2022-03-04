@@ -119,3 +119,15 @@ select {
   display: flex;
   flex-direction: row;
 }
+.leave-btn:hover {
+  background-color: hsl(210, 4%, 55%);
+}
+
+.leave-btn {
+  border-radius: 5px;
+
+  padding: 8px;
+
+  background-color: #7a9e9f;
+  margin: 15px;
+}
