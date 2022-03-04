@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
-import io from "socket.io-client";
+import "./ChooseRoom.css";
 
 class ChooseRoom extends React.Component {
 
@@ -13,7 +13,7 @@ class ChooseRoom extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="room-container">
         <Link
           to={{
             pathname: "/playonline",
@@ -23,7 +23,7 @@ class ChooseRoom extends React.Component {
             },
           }}
         >
-          <button id="bathroom" value="bathroom">
+          <button id="bathroom" value="bathroom" className="room-btn">
             Bathroom
           </button>
         </Link>
@@ -33,7 +33,7 @@ class ChooseRoom extends React.Component {
             state: { roomNumber: 1, roomName: "livingRoom" },
           }}
         >
-          <button id="livingRoom" value="livingRoom">
+          <button id="livingRoom" value="livingRoom" className="room-btn">
             Living Room
           </button>
         </Link>
@@ -43,7 +43,7 @@ class ChooseRoom extends React.Component {
             state: { roomNumber: 2, roomName: "diningRoom" },
           }}
         >
-          <button id="diningRoom" value="diningRoom">
+          <button id="diningRoom" value="diningRoom" className="room-btn">
             Dining Room
           </button>
         </Link>
