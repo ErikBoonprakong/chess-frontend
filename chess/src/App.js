@@ -16,24 +16,17 @@ import ChooseRoom from "./Components/ChooseRoom";
 class App extends React.Component {
   constructor() {
     super();
-    this.state = { cookie: cookieObj(), bathroom: true, livingRoom: true };
+    this.state = {
+      cookie: cookieObj(),
+      bathroom: true,
+      livingRoom: true,
+      diningRoom: true,
+    };
   }
 
   getCookie(newCookie) {
     this.setState({ cookie: newCookie });
   }
-
-  disableFullRooms = async (roomName) => {
-    if (this.state[roomName]) {
-      await this.setState({ [roomName]: false });
-    }
-  };
-
-  enableRoom = async (roomName) => {
-    if (!this.state[roomName]) {
-      await this.setState({ [roomName]: true });
-    }
-  };
 
   render() {
     return (
@@ -66,16 +59,12 @@ class App extends React.Component {
                 userData={this.state.cookie}
                 bathroom={this.state.bathroom}
                 livingRoom={this.state.livingRoom}
+                diningRoom={this.state.diningRoom}
               />
             </Route>
             <Route path="/playonline">
               {(props) => (
-                <PlayOnline
-                  disableRoom={(roomName) => this.disableFullRooms(roomName)}
-                  enableRoom={(roomName) => this.enableRoom(roomName)}
-                  userData={this.state.cookie}
-                  {...props}
-                />
+                <PlayOnline userData={this.state.cookie} {...props} />
               )}
             </Route>
             <Route path="/leaderboard">
