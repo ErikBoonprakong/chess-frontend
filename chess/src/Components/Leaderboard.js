@@ -7,9 +7,7 @@ class Leaderboard extends React.Component {
     super(props);
     this.Networking = new Networking();
     this.state = {
-      data: [
-        { userId: 1, name: "Erik", points: 30, wins: 10, lose: 0, draw: 0 },
-      ],
+      data: [],
     };
   }
 

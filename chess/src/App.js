@@ -18,9 +18,6 @@ class App extends React.Component {
     super();
     this.state = {
       cookie: cookieObj(),
-      bathroom: true,
-      livingRoom: true,
-      diningRoom: true,
     };
   }
 

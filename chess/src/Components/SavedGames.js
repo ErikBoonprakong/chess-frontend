@@ -16,6 +16,7 @@ class SavedGames extends React.Component {
 
   async componentDidMount() {
     const savedGames = await this.getListOfSavedGames(this.cookies.user_id);
+    //Output the games from the latest saved
     const savedGamesReverse = savedGames.reverse();
     await this.setState({ savedGames: savedGamesReverse });
   }
@@ -34,6 +35,7 @@ class SavedGames extends React.Component {
   render() {
     return (
       <div className="full-page-of-saved-games">
+        {/* Conditional rendering */}
         {this.state.savedGames.length ? this.displaySavedGames() : null}
       </div>
     );
