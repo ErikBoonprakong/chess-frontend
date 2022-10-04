@@ -33,4 +33,4 @@ $ yarn install
 $ yarn start
 ```
 
-As well as this, there is a related backend Server which will also be required in order for the App to function properly. The backend repository for this project can be found [here](https://github.com/ErikBoonprakong/chess-backend/blob/main/Procfile). We recommend cloning both repositories to your local machine
+As well as this, there is a related backend Server which will also be required in order for the App to function properly. The backend repository for this project can be found [here](https://github.com/ErikBoonprakong/chess-backend/blob/main/Procfile). We recommend cloning both repositories to your local machine.
