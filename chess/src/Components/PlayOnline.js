@@ -42,7 +42,7 @@ class PlayOnline extends React.Component {
 
   componentDidMount() {
     // Socket.IO API means you can emit events and register listeners on the server and client side.
-    this.socket = io("https://chessyem-websocket.herokuapp.com");
+    this.socket = io("https://chess-websocket.herokuapp.com");
     // console.log(this.props.location.state.roomNumber);
     // this.socket = io("http://localhost:4000");
     // LISTENER
