@@ -1,5 +1,5 @@
-const API_URL = "https://chess-server.herokuapp.com";
 // const API_URL = "http://localhost:8080";
+const API_URL = "https://chess-server.herokuapp.com";
 // const API_URL = process.env.REACT_APP_API_URL;
 
 class Networking {
@@ -18,6 +18,7 @@ class Networking {
     });
 
     let json = await response.json();
+    console.log(json);
     return { json, status: response.status };
   }
 
@@ -44,12 +45,17 @@ class Networking {
   }
 
   async logOut() {
+    const sessionId = document.cookie.split(";")[0].split("sessionId=")[1]
+    console.log(sessionId)
     let response = await fetch(`${API_URL}/sessions`, {
       method: "DELETE",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        sessionId: sessionId,
+      }),
     });
     let json = await response.json();
     document.cookie = `sessionId=`;
@@ -107,7 +113,6 @@ class Networking {
   async getScores() {
     const response = await fetch(`${API_URL}/saves`);
     let scores = await response.json();
-    console.log(scores);
     return scores;
   }
 
